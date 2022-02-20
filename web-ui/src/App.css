@@ -1,0 +1,42 @@
+:root {
+  --background-colour: #0078D7;
+  --default-text-colour: #FFFFFF;
+  --table-header-bg-colour: #0063B1;
+}
+
+body {
+  background-color: var(--background-colour);
+  font-size: 16px;
+  color: var(--default-text-colour);
+}
+
+.App {
+  width: 95%;
+  margin: 0 auto;
+}
+
+h1 {
+  border: 1px solid;
+  border-radius: 0.25em;
+  padding: 4px;
+}
+
+h3:nth-child(odd) {
+  border-bottom: 1px solid
+}
+
+table {
+  border: 1px solid var(--default-text-colour);
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+th, td {
+  border: 1px solid var(--default-text-colour);
+  padding: 3px;
+}
+
+th {
+  background-color: var(--table-header-bg-colour);
+}
+
