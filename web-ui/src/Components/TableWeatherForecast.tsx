@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ForecastElement,
   ThreeHourlyForecast,
   WeatherForecastResponse,
 } from "./WeatherForecastResponse";
+import sampleResponseJson from "../sampleResponse.json";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);
@@ -20,7 +21,7 @@ const ThreeHourlyForecastTable = function ThreeHourlyForecastTable(props: {
       <thead>
         <tr>
           {forecastElements.map((element) => (
-            <th>
+            <th key={`th-${element.type}`}>
               {element.type}
               <br />
               {element.units}
@@ -31,7 +32,7 @@ const ThreeHourlyForecastTable = function ThreeHourlyForecastTable(props: {
       <tbody>
         <tr>
           {forecastElements.map((element) => (
-            <td>{element.value}</td>
+            <td key={`td-${element.type}`}>{element.value}</td>
           ))}
         </tr>
       </tbody>
@@ -46,14 +47,14 @@ const WeatherForecastDay = function WeatherForecastDay(props: {
 
   return (
     <>
-      {threeHourlyForecasts.map((threeHourlyForecast) => {
+      {threeHourlyForecasts.map((threeHourlyForecast, index) => {
         return (
-          <>
+          <React.Fragment key={`${threeHourlyForecast.start}-${index}`}>
             <h3>{`${threeHourlyForecast.start} - ${threeHourlyForecast.end}`}</h3>
             <ThreeHourlyForecastTable
               forecastElements={threeHourlyForecast.forecastElements}
             />
-          </>
+          </React.Fragment>
         );
       })}
     </>
@@ -65,19 +66,20 @@ const TableWeatherForecast = function TableWeatherForecast() {
     useState<WeatherForecastResponse | null>(null);
 
   useEffect(() => {
-    const getWeatherForecast = async () => {
-      const forecastCall = await fetch(
-        "https://localhost:5001/weatherforecast"
-      );
-      let forecast: WeatherForecastResponse | null = null;
-      if (forecastCall.status === 200) {
-        forecast = await forecastCall.json();
-        if (forecast) {
-          setWeatherForecastData(forecast);
-        }
-      }
-    };
-    void getWeatherForecast();
+    // const getWeatherForecast = async () => {
+    //   const forecastCall = await fetch(
+    //     "https://localhost:5001/weatherforecast"
+    //   );
+    //   let forecast: WeatherForecastResponse | null = null;
+    //   if (forecastCall.status === 200) {
+    //     forecast = await forecastCall.json();
+    //     if (forecast) {
+    //       setWeatherForecastData(forecast);
+    //     }
+    //   }
+    // };
+    // void getWeatherForecast();
+    setWeatherForecastData(sampleResponseJson);
   }, []);
 
   return (
@@ -89,9 +91,9 @@ const TableWeatherForecast = function TableWeatherForecast() {
               weatherForecastData.dateTimeOfForecast
             )}`}
           </h2>
-          {weatherForecastData.dayData.map((day) => {
+          {weatherForecastData.dayData.map((day, index) => {
             return (
-              <div>
+              <div key={`${day.date}-${index}`}>
                 <h3>{new Date(day.date).toLocaleDateString()}</h3>
                 <WeatherForecastDay
                   threeHourlyForecasts={day.threeHourlyForecasts}
