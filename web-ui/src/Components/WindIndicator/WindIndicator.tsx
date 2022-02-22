@@ -125,12 +125,9 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
         />
       </svg>
       <div
+        className="windSpeeds"
         style={{
-          float: "left",
           marginTop: compact ? "0" : "30px",
-          borderTop: "1px solid white",
-          borderBottom: "1px solid white",
-          padding: "5px",
         }}
       >
         <div>{`${speed} mph`}</div>

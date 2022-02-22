@@ -6,6 +6,7 @@ import {
 } from "./WeatherForecastResponse";
 import sampleResponseJson from "../sampleResponse.json";
 import WindIndicator from "./WindIndicator/WindIndicator";
+import TemperatureWidget from "./TemperatureWidget/temperatureWidget";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);
@@ -21,18 +22,23 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
 
   const time = new Date().getHours();
   const startTime = new Date(`1970-01-01T${start}`).getHours();
-  const endTime = new Date(`1970-01-01T${end}`).getHours();
+  let endTime = new Date(`1970-01-01T${end}`).getHours();
+  if (endTime === 0) {
+    endTime = 24;
+  }
+
+  const useCompactComponents = !(today && time >= startTime && time < endTime);
 
   const windInformation = {
     speed:
       forecastElements.find((e) => e.type === "Wind Speed")?.value ??
-      "Not available",
+      "Not found",
     gustSpeed:
       forecastElements.find((e) => e.type === "Wind Gust")?.value ??
-      "Not available",
+      "Not found",
     windDirection:
       forecastElements.find((e) => e.type === "Wind Direction")?.value ??
-      "Not available",
+      "Not found",
   };
 
   const weatherType =
@@ -51,22 +57,35 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
     bgColor = "#111111";
   }
 
+  const temperature =
+    forecastElements.find((e) => e.type === "Temperature")?.value ??
+    "Not found";
+  const temperatureUnit =
+    forecastElements.find((e) => e.type === "Temperature")?.units ?? "C";
+
+  const feelsLikeTemperature =
+    forecastElements.find((e) => e.type === "Feels Like Temperature")?.value ??
+    "C";
+
   return (
     <div
+      className="forecast"
       style={{
         backgroundColor: bgColor,
-        padding: "5px",
-        border: "1px solid #EEEEEE",
-        borderRadius: "0.5em",
-        margin: "2px 0",
       }}
     >
       <h3 className="dataH3">{`${start} - ${end}: ${weatherType}`}</h3>
+      <TemperatureWidget
+        unit={temperatureUnit}
+        temperature={temperature}
+        feelsLikeTemperature={feelsLikeTemperature}
+        compact={useCompactComponents}
+      />
       <WindIndicator
         speed={windInformation.speed}
         gustSpeed={windInformation.gustSpeed}
         windDirection={windInformation.windDirection}
-        compact={!(today && time >= startTime && time < endTime)}
+        compact={useCompactComponents}
       />
     </div>
   );
@@ -103,20 +122,20 @@ const WeatherForecast = function WeatherForecast() {
     useState<WeatherForecastResponse | null>(null);
 
   useEffect(() => {
-    // const getWeatherForecast = async () => {
-    //   const forecastCall = await fetch(
-    //     "https://localhost:5001/weatherforecast"
-    //   );
-    //   let forecast: WeatherForecastResponse | null = null;
-    //   if (forecastCall.status === 200) {
-    //     forecast = await forecastCall.json();
-    //     if (forecast) {
-    //       setWeatherForecastData(forecast);
-    //     }
-    //   }
-    // };
-    // void getWeatherForecast();
-    setWeatherForecastData(sampleResponseJson);
+    const getWeatherForecast = async () => {
+      const forecastCall = await fetch(
+        "https://localhost:5001/weatherforecast"
+      );
+      let forecast: WeatherForecastResponse | null = null;
+      if (forecastCall.status === 200) {
+        forecast = await forecastCall.json();
+        if (forecast) {
+          setWeatherForecastData(forecast);
+        }
+      }
+    };
+    void getWeatherForecast();
+    // setWeatherForecastData(sampleResponseJson);
   }, []);
 
   return (

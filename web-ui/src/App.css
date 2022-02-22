@@ -1,6 +1,8 @@
 :root {
   --background-colour: #0078D7;
   --default-text-colour: #FFFFFF;
+  --forecast-border: #EEEEEE;
+  --temperature-widget-text-colour: #222222;
   --table-header-bg-colour: #0063B1;
 }
 
@@ -24,8 +26,47 @@ h1 {
   padding: 4px;
 }
 
+.forecast {
+  padding: 5px;
+  border: 1px solid var(--forecast-border);
+  border-radius: 0.5em;
+  margin: 2px 0;
+  overflow: auto;
+
+}
+
+.forecast div {
+  float: left;
+  overflow: auto;
+  margin-right: 10px;
+}
+
 .dataH3 {
   margin: 0 0 3px 0;
+}
+
+.temperatureWidget {
+  padding: 10px;
+  border-radius: 0.5em;
+  border: 3px solid;
+  background-color: var(--default-text-colour);
+  color: var(--temperature-widget-text-colour);
+  width: fit-content;
+}
+
+.temperatureWidget div, .windSpeeds div {
+  float: none;
+}
+
+.smallText {
+  font-size: 0.75em;
+}
+
+.windSpeeds {
+  float: left;
+  border-top: 1px solid var(--default-text-colour);
+  border-bottom: 1px solid var(--default-text-colour);
+  padding: 5px;
 }
 
 table {
