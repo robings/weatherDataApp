@@ -35,18 +35,40 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
       "Not available",
   };
 
+  const weatherType =
+    forecastElements.find((e) => e.type === "Weather Type")?.value ?? "";
+
+  const cloudyRegex = new RegExp("cloudy");
+  const rainRegex = new RegExp("rain");
+  const nightRegex = new RegExp("night");
+  let bgColor =
+    cloudyRegex.test(weatherType.toLocaleLowerCase()) ||
+    rainRegex.test(weatherType.toLocaleLowerCase())
+      ? "#767676"
+      : "#0078D7";
+
+  if (nightRegex.test(weatherType.toLocaleLowerCase())) {
+    bgColor = "#111111";
+  }
+
   return (
-    <>
-      <h3>{`${start} - ${end}`}</h3>
+    <div
+      style={{
+        backgroundColor: bgColor,
+        padding: "5px",
+        border: "1px solid #EEEEEE",
+        borderRadius: "0.5em",
+        margin: "2px 0",
+      }}
+    >
+      <h3 className="dataH3">{`${start} - ${end}: ${weatherType}`}</h3>
       <WindIndicator
         speed={windInformation.speed}
         gustSpeed={windInformation.gustSpeed}
         windDirection={windInformation.windDirection}
-        compact={
-          !(today && time >= startTime && time <= endTime && time === startTime)
-        }
+        compact={!(today && time >= startTime && time < endTime)}
       />
-    </>
+    </div>
   );
 };
 

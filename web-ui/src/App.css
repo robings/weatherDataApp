@@ -24,8 +24,8 @@ h1 {
   padding: 4px;
 }
 
-h3:nth-child(odd) {
-  border-bottom: 1px solid
+.dataH3 {
+  margin: 0 0 3px 0;
 }
 
 table {
