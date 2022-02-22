@@ -1,6 +1,6 @@
 export const appStrings = {
   windIndicator: {
     title: "Wind",
-    gust: "gusts",
+    gust: "Gusting",
   },
 };

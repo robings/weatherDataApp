@@ -4,6 +4,7 @@ interface WindIndicatorProps {
   speed: string;
   gustSpeed: string;
   windDirection: string;
+  compact: boolean;
 }
 
 const compassDirectionMap: Array<{ direction: string; bearingAngle: number }> =
@@ -27,7 +28,7 @@ const compassDirectionMap: Array<{ direction: string; bearingAngle: number }> =
   ];
 
 const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
-  const { speed, gustSpeed, windDirection } = props;
+  const { speed, gustSpeed, windDirection, compact } = props;
 
   const transformDegrees =
     compassDirectionMap.find((d) => d.direction === windDirection)
@@ -35,10 +36,10 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
 
   return (
     <div className="component">
-      <h3>{appStrings.windIndicator.title}</h3>
       <svg
-        width="100"
-        height="100"
+        id="compass"
+        width={compact ? "50" : "100"}
+        height={compact ? "50" : "100"}
         viewBox="0 0 100 100"
         style={{ fontSize: "20", float: "left" }}
       >
@@ -52,25 +53,65 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
             fill="#0063B1"
           />
         </g>
+        <g id="compassCrossLayerOne" transform="rotate(45 50 50)">
+          <path
+            d="M 50 25 L 55 45 L 75 50 L 55 55 L 50 75 L 45 55 L 25 50 L 45 45 Z"
+            fill="#BDC3C7"
+            stroke="#95A5A6"
+            strokeWidth={1}
+          />
+          <line
+            x1="50"
+            y1="25"
+            x2="50"
+            y2="75"
+            stroke="#95A5A6"
+            strokeWidth={1}
+          />
+          <line
+            x1="25"
+            y1="50"
+            x2="75"
+            y2="50"
+            stroke="#95A5A6"
+            strokeWidth={1}
+          />
+        </g>
         <g id="compassCross">
           <path
             d="M 50 20 L 55 45 L 80 50 L 55 55 L 50 80 L 45 55 L 20 50 L 45 45 Z"
-            fill="#000000"
+            fill="#BDC3C7"
             stroke="#F7630C"
+            strokeWidth={1}
+          />
+          <line
+            x1="50"
+            y1="21"
+            x2="50"
+            y2="79"
+            stroke="#95A5A6"
+            strokeWidth={1}
+          />
+          <line
+            x1="21"
+            y1="50"
+            x2="79"
+            y2="50"
+            stroke="#95A5A6"
             strokeWidth={1}
           />
         </g>
         <g id="text">
-          <text x="50" y="20" text-anchor="middle" fill="currentColor">
+          <text x="50" y="20" textAnchor="middle" fill="currentColor">
             N
           </text>
-          <text x="88" y="57" text-anchor="middle" fill="currentColor">
+          <text x="88" y="57" textAnchor="middle" fill="currentColor">
             E
           </text>
-          <text x="50" y="96" text-anchor="middle" fill="currentColor">
+          <text x="50" y="96" textAnchor="middle" fill="currentColor">
             S
           </text>
-          <text x="12" y="57" text-anchor="middle" fill="currentColor">
+          <text x="12" y="57" textAnchor="middle" fill="currentColor">
             W
           </text>
         </g>
@@ -82,19 +123,19 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
           strokeWidth={1}
           transform={`rotate(${transformDegrees} 50 50)`}
         />
-        <text
-          x="50"
-          y="65"
-          text-anchor="middle"
-          fill="currentColor"
-          style={{ fontSize: "40" }}
-        >
-          {speed}
-        </text>
       </svg>
       <div
-        style={{ float: "left", paddingTop: "70px" }}
-      >{`${appStrings.windIndicator.gust}: ${gustSpeed} mph`}</div>
+        style={{
+          float: "left",
+          marginTop: compact ? "0" : "30px",
+          borderTop: "1px solid white",
+          borderBottom: "1px solid white",
+          padding: "5px",
+        }}
+      >
+        <div>{`${speed} mph`}</div>
+        <div>{`${appStrings.windIndicator.gust}: ${gustSpeed} mph`}</div>
+      </div>
     </div>
   );
 };
