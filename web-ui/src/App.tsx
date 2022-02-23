@@ -3,7 +3,6 @@ import "./App.css";
 import TableWeatherForecast from "./Components/TableWeatherForecast";
 import WeatherForecast from "./Components/WeatherForecast";
 import { ReactComponent as Sun } from "./svg/sun.svg";
-import { ReactComponent as HeavyRain } from "./svg/heavyRain.svg";
 
 const App = function App() {
   return (
@@ -11,7 +10,6 @@ const App = function App() {
       <header>
         <Sun />
         <h1>Weather Forecast</h1>
-        <HeavyRain />
       </header>
       <Routes>
         <Route path="/" element={<WeatherForecast />} />

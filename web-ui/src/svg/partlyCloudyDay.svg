@@ -1,0 +1,47 @@
+<svg id="sun" width="100" height="100" viewBox="0 0 100 100">
+  <circle
+    r="49"
+    cx="50"
+    cy="50"
+    strokeWidth="3"
+    stroke="#111111"
+    fill="#FFB900"
+  />
+  <g id="eyes">
+    <path
+      d="M 20 40 L 32 30 L 46 39"
+      stroke="#111111"
+      fill="transparent"
+      strokeWidth="3"
+    />
+    <path
+      d="M 54 38 L 66 28 L 80 37"
+      stroke="#111111"
+      fill="transparent"
+      strokeWidth="3"
+    />
+  </g>
+  <g id="mouth">
+    <path
+      d="M 30 55 C 45 65 65 65 80 50 C 65 88 45 88 30 55"
+      stroke="#111111"
+      strokeWidth="3"
+      fill="#EEEEEE"
+    />
+  </g>
+  <g id="cloud">
+    <path
+      d="M 16 92 C 1 87 1 72 16 67 C 21 47 51 47 56 67 C 71 72 71 87 56 92 L 16 92"
+      stroke="#111111"
+      strokeWidth="3"
+      fill="#FFFFFF"
+    />
+    <g id="eyes">
+      <circle r="5" cx="26" cy="67" stroke="#111111" strokeWidth="3" fill="#FFFFFF" />
+      <circle r="5" cx="46" cy="66" stroke="#111111" strokeWidth="3" fill="#FFFFFF" />
+      <circle r="2" cx="27" cy="66" fill="#111111" />
+      <circle r="2" cx="47" cy="65" fill="#111111" />
+    </g>
+    <line x1="31" y1="81" x2="47" y2="80" stroke="#111111" strokeWidth="3" />
+  </g>
+</svg>

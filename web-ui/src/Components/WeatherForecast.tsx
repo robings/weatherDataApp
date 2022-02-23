@@ -11,10 +11,33 @@ import { ReactComponent as Sun } from "../svg/sun.svg";
 import { ReactComponent as Cloud } from "../svg/cloud.svg";
 import { ReactComponent as LightRain } from "../svg/lightRain.svg";
 import { ReactComponent as HeavyRain } from "../svg/heavyRain.svg";
+import { ReactComponent as ClearNight } from "../svg/clearNight.svg";
+import { ReactComponent as PartlyCloudyNight } from "../svg/partlyCloudyNight.svg";
+import { ReactComponent as PartlyCloudyDay } from "../svg/partlyCloudyDay.svg";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);
   return `${dateAsDate.toLocaleDateString()} ${dateAsDate.toLocaleTimeString()}`;
+};
+
+const cloudyRegex = new RegExp("cloudy");
+const rainRegex = new RegExp("rain");
+const nightRegex = new RegExp("night");
+const lightRainRegex = new RegExp("light rain");
+const heavyRainRegex = new RegExp("heavy rain");
+const clearNightRegex = new RegExp("clear night");
+
+const determineWeatherSvg = (weatherType: string): JSX.Element => {
+  const weatherTypeLC = weatherType.toLocaleLowerCase();
+  if (weatherTypeLC === "sunny day") return <Sun />;
+  if (weatherTypeLC === "partly cloudy (day)") return <PartlyCloudyDay />;
+  if (weatherTypeLC === "partly cloudy (night)") return <PartlyCloudyNight />;
+  if (cloudyRegex.test(weatherTypeLC)) return <Cloud />;
+  if (lightRainRegex.test(weatherTypeLC)) return <LightRain />;
+  if (heavyRainRegex.test(weatherTypeLC)) return <HeavyRain />;
+  if (clearNightRegex.test(weatherTypeLC)) return <ClearNight />;
+
+  return <></>;
 };
 
 const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
@@ -48,12 +71,6 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
   const weatherType =
     forecastElements.find((e) => e.type === "Weather Type")?.value ?? "";
 
-  const cloudyRegex = new RegExp("cloudy");
-  const rainRegex = new RegExp("rain");
-  const nightRegex = new RegExp("night");
-  const lightRainRegex = new RegExp("light rain");
-  const heavyRainRegex = new RegExp("heavy rain");
-
   let bgColor =
     cloudyRegex.test(weatherType.toLocaleLowerCase()) ||
     rainRegex.test(weatherType.toLocaleLowerCase())
@@ -83,10 +100,7 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
     >
       <div>
         <h3 className="dataH3">{`${start} - ${end}: ${weatherType}`}</h3>
-        {weatherType === "Sunny day" && <Sun />}
-        {cloudyRegex.test(weatherType.toLocaleLowerCase()) && <Cloud />}
-        {lightRainRegex.test(weatherType.toLocaleLowerCase()) && <LightRain />}
-        {heavyRainRegex.test(weatherType.toLocaleLowerCase()) && <HeavyRain />}
+        {determineWeatherSvg(weatherType)}
       </div>
       <TemperatureWidget
         unit={temperatureUnit}

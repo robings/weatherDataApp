@@ -6,8 +6,10 @@
     fill="#EEEEEE"
   />
   <g id="eyes">
-    <circle r="3" cx="40" cy="41" stroke="#111111" strokeWidth="3" fill="#EEEEEE" />
-    <circle r="3" cx="60" cy="40" stroke="#111111" strokeWidth="3" fill="#EEEEEE" />
+    <circle r="5" cx="40" cy="41" stroke="#111111" strokeWidth="3" fill="#EEEEEE" />
+    <circle r="5" cx="60" cy="40" stroke="#111111" strokeWidth="3" fill="#EEEEEE" />
+    <circle r="2" cx="39" cy="42" fill="#111111" />
+    <circle r="2" cx="59" cy="41" fill="#111111" />
   </g>
   <path
     d="M 45 55 C 50 50 49 50 61 54"
