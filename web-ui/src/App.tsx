@@ -2,18 +2,22 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import TableWeatherForecast from "./Components/TableWeatherForecast";
 import WeatherForecast from "./Components/WeatherForecast";
+import { ReactComponent as Sun } from "./svg/sun.svg";
+import { ReactComponent as HeavyRain } from "./svg/heavyRain.svg";
 
 const App = function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
+        <Sun />
         <h1>Weather Forecast</h1>
-        <Routes>
-          <Route path="/" element={<WeatherForecast />} />
-          <Route path="/table" element={<TableWeatherForecast />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+        <HeavyRain />
       </header>
+      <Routes>
+        <Route path="/" element={<WeatherForecast />} />
+        <Route path="/table" element={<TableWeatherForecast />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </div>
   );
 };

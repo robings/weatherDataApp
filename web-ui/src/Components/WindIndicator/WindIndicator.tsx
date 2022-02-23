@@ -43,16 +43,14 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
         viewBox="0 0 100 100"
         style={{ fontSize: "20", float: "left" }}
       >
-        <g id="compassRing">
-          <circle
-            r="49"
-            cx="50"
-            cy="50"
-            strokeWidth={1}
-            stroke="currentColor"
-            fill="#0063B1"
-          />
-        </g>
+        <circle
+          r="49"
+          cx="50"
+          cy="50"
+          strokeWidth={1}
+          stroke="currentColor"
+          fill="#0063B1"
+        />
         <g id="compassCrossLayerOne" transform="rotate(45 50 50)">
           <path
             d="M 50 25 L 55 45 L 75 50 L 55 55 L 50 75 L 45 55 L 25 50 L 45 45 Z"

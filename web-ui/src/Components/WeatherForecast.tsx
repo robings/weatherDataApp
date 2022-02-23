@@ -7,6 +7,10 @@ import {
 import sampleResponseJson from "../sampleResponse.json";
 import WindIndicator from "./WindIndicator/WindIndicator";
 import TemperatureWidget from "./TemperatureWidget/temperatureWidget";
+import { ReactComponent as Sun } from "../svg/sun.svg";
+import { ReactComponent as Cloud } from "../svg/cloud.svg";
+import { ReactComponent as LightRain } from "../svg/lightRain.svg";
+import { ReactComponent as HeavyRain } from "../svg/heavyRain.svg";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);
@@ -47,6 +51,9 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
   const cloudyRegex = new RegExp("cloudy");
   const rainRegex = new RegExp("rain");
   const nightRegex = new RegExp("night");
+  const lightRainRegex = new RegExp("light rain");
+  const heavyRainRegex = new RegExp("heavy rain");
+
   let bgColor =
     cloudyRegex.test(weatherType.toLocaleLowerCase()) ||
     rainRegex.test(weatherType.toLocaleLowerCase())
@@ -74,7 +81,13 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
         backgroundColor: bgColor,
       }}
     >
-      <h3 className="dataH3">{`${start} - ${end}: ${weatherType}`}</h3>
+      <div>
+        <h3 className="dataH3">{`${start} - ${end}: ${weatherType}`}</h3>
+        {weatherType === "Sunny day" && <Sun />}
+        {cloudyRegex.test(weatherType.toLocaleLowerCase()) && <Cloud />}
+        {lightRainRegex.test(weatherType.toLocaleLowerCase()) && <LightRain />}
+        {heavyRainRegex.test(weatherType.toLocaleLowerCase()) && <HeavyRain />}
+      </div>
       <TemperatureWidget
         unit={temperatureUnit}
         temperature={temperature}
@@ -122,20 +135,20 @@ const WeatherForecast = function WeatherForecast() {
     useState<WeatherForecastResponse | null>(null);
 
   useEffect(() => {
-    const getWeatherForecast = async () => {
-      const forecastCall = await fetch(
-        "https://localhost:5001/weatherforecast"
-      );
-      let forecast: WeatherForecastResponse | null = null;
-      if (forecastCall.status === 200) {
-        forecast = await forecastCall.json();
-        if (forecast) {
-          setWeatherForecastData(forecast);
-        }
-      }
-    };
-    void getWeatherForecast();
-    // setWeatherForecastData(sampleResponseJson);
+    // const getWeatherForecast = async () => {
+    //   const forecastCall = await fetch(
+    //     "https://localhost:5001/weatherforecast"
+    //   );
+    //   let forecast: WeatherForecastResponse | null = null;
+    //   if (forecastCall.status === 200) {
+    //     forecast = await forecastCall.json();
+    //     if (forecast) {
+    //       setWeatherForecastData(forecast);
+    //     }
+    //   }
+    // };
+    // void getWeatherForecast();
+    setWeatherForecastData(sampleResponseJson);
   }, []);
 
   return (

@@ -16,14 +16,28 @@ body {
   width: 95%;
   margin: 0 auto;
 }
-.component {
-  overflow: auto;
-}
 
-h1 {
-  border: 1px solid;
+header {
+  margin-top: 5px;
+  overflow: auto;
+  border-bottom: 1px solid;
   border-radius: 0.25em;
   padding: 4px;
+}
+
+header svg {
+  float: left;
+  width: 50px;
+  height: 50px;
+}
+
+header h1 {
+  padding: 4px 4px 4px 55px;
+  margin: 0;
+}
+
+.component {
+  overflow: auto;
 }
 
 .forecast {
@@ -41,8 +55,23 @@ h1 {
   margin-right: 10px;
 }
 
+.forecast div:first-child {
+  float: none;
+}
+
+.forecast div:first-child > * {
+  float: left;
+}
+
+.forecast div:first-child svg {
+  width: 32px;
+  height: 32px;
+  margin:  0 0 3px 3px;
+}
+
 .dataH3 {
   margin: 0 0 3px 0;
+  padding-top: 3px;
 }
 
 .temperatureWidget {
