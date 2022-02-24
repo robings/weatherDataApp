@@ -1,372 +1,26 @@
 {
-  "dateTimeOfForecast": "2022-02-22T09:00:00Z",
-  "locationId": "310150",
-  "location": "SWINDONTEST",
+  "dateTimeOfForecast": "2022-02-24T09:00:00Z",
+  "locationId": "TESTID",
+  "location": "TESTPLACE",
   "dayData": [
-    {
-      "date": "2022-02-22Z",
-      "threeHourlyForecasts": [
-        {
-          "start": "06:00",
-          "end": "09:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "6" },
-            { "type": "Wind Gust", "units": "mph", "value": "25" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "93" },
-            {
-              "type": "Precipitation Probability",
-              "units": "%",
-              "value": "21"
-            },
-            { "type": "Wind Speed", "units": "mph", "value": "13" },
-            { "type": "Temperature", "units": "C", "value": "9" },
-            { "type": "Visibility", "units": "", "value": "Moderate 4-10 km" },
-            { "type": "Weather Type", "units": "", "value": "Cloudy" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        },
-        {
-          "start": "09:00",
-          "end": "12:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "WSW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "6" },
-            { "type": "Wind Gust", "units": "mph", "value": "29" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "81" },
-            {
-              "type": "Precipitation Probability",
-              "units": "%",
-              "value": "67"
-            },
-            { "type": "Wind Speed", "units": "mph", "value": "20" },
-            { "type": "Temperature", "units": "C", "value": "10" },
-            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
-            { "type": "Weather Type", "units": "", "value": "Light rain" },
-            { "type": "Max UV Index", "units": "", "value": "1" }
-          ]
-        },
-        {
-          "start": "12:00",
-          "end": "15:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "W" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "6" },
-            { "type": "Wind Gust", "units": "mph", "value": "36" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "91" },
-            {
-              "type": "Precipitation Probability",
-              "units": "%",
-              "value": "75"
-            },
-            { "type": "Wind Speed", "units": "mph", "value": "20" },
-            { "type": "Temperature", "units": "C", "value": "10" },
-            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
-            {
-              "type": "Weather Type",
-              "units": "",
-              "value": "Light rain shower (day)"
-            },
-            { "type": "Max UV Index", "units": "", "value": "1" }
-          ]
-        },
-        {
-          "start": "15:00",
-          "end": "18:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "WNW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "7" },
-            { "type": "Wind Gust", "units": "mph", "value": "31" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "61" },
-            { "type": "Precipitation Probability", "units": "%", "value": "9" },
-            { "type": "Wind Speed", "units": "mph", "value": "18" },
-            { "type": "Temperature", "units": "C", "value": "10" },
-            { "type": "Visibility", "units": "", "value": "Excellent < 40 km" },
-            { "type": "Weather Type", "units": "", "value": "Cloudy" },
-            { "type": "Max UV Index", "units": "", "value": "1" }
-          ]
-        },
-        {
-          "start": "18:00",
-          "end": "21:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "W" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "5" },
-            { "type": "Wind Gust", "units": "mph", "value": "20" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "68" },
-            { "type": "Precipitation Probability", "units": "%", "value": "0" },
-            { "type": "Wind Speed", "units": "mph", "value": "9" },
-            { "type": "Temperature", "units": "C", "value": "7" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Clear night" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        },
-        {
-          "start": "21:00",
-          "end": "00:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "WSW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "2" },
-            { "type": "Wind Gust", "units": "mph", "value": "20" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "84" },
-            { "type": "Precipitation Probability", "units": "%", "value": "0" },
-            { "type": "Wind Speed", "units": "mph", "value": "9" },
-            { "type": "Temperature", "units": "C", "value": "5" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Clear night" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        }
-      ]
-    },
-    {
-      "date": "2022-02-23Z",
-      "threeHourlyForecasts": [
-        {
-          "start": "00:00",
-          "end": "03:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "WSW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "2" },
-            { "type": "Wind Gust", "units": "mph", "value": "18" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "92" },
-            { "type": "Precipitation Probability", "units": "%", "value": "0" },
-            { "type": "Wind Speed", "units": "mph", "value": "9" },
-            { "type": "Temperature", "units": "C", "value": "5" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Clear night" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        },
-        {
-          "start": "03:00",
-          "end": "06:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "1" },
-            { "type": "Wind Gust", "units": "mph", "value": "18" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "93" },
-            { "type": "Precipitation Probability", "units": "%", "value": "0" },
-            { "type": "Wind Speed", "units": "mph", "value": "9" },
-            { "type": "Temperature", "units": "C", "value": "4" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Clear night" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        },
-        {
-          "start": "06:00",
-          "end": "09:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "0" },
-            { "type": "Wind Gust", "units": "mph", "value": "20" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "92" },
-            { "type": "Precipitation Probability", "units": "%", "value": "1" },
-            { "type": "Wind Speed", "units": "mph", "value": "9" },
-            { "type": "Temperature", "units": "C", "value": "4" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Clear night" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        },
-        {
-          "start": "09:00",
-          "end": "12:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SSW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "2" },
-            { "type": "Wind Gust", "units": "mph", "value": "20" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "85" },
-            { "type": "Precipitation Probability", "units": "%", "value": "4" },
-            { "type": "Wind Speed", "units": "mph", "value": "11" },
-            { "type": "Temperature", "units": "C", "value": "6" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Cloudy" },
-            { "type": "Max UV Index", "units": "", "value": "1" }
-          ]
-        },
-        {
-          "start": "12:00",
-          "end": "15:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "6" },
-            { "type": "Wind Gust", "units": "mph", "value": "31" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "67" },
-            {
-              "type": "Precipitation Probability",
-              "units": "%",
-              "value": "31"
-            },
-            { "type": "Wind Speed", "units": "mph", "value": "18" },
-            { "type": "Temperature", "units": "C", "value": "9" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Cloudy" },
-            { "type": "Max UV Index", "units": "", "value": "2" }
-          ]
-        },
-        {
-          "start": "15:00",
-          "end": "18:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "6" },
-            { "type": "Wind Gust", "units": "mph", "value": "29" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "74" },
-            {
-              "type": "Precipitation Probability",
-              "units": "%",
-              "value": "45"
-            },
-            { "type": "Wind Speed", "units": "mph", "value": "16" },
-            { "type": "Temperature", "units": "C", "value": "9" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Light rain" },
-            { "type": "Max UV Index", "units": "", "value": "1" }
-          ]
-        },
-        {
-          "start": "18:00",
-          "end": "21:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "4" },
-            { "type": "Wind Gust", "units": "mph", "value": "29" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "83" },
-            { "type": "Precipitation Probability", "units": "%", "value": "5" },
-            { "type": "Wind Speed", "units": "mph", "value": "16" },
-            { "type": "Temperature", "units": "C", "value": "8" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Cloudy" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        },
-        {
-          "start": "21:00",
-          "end": "00:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "3" },
-            { "type": "Wind Gust", "units": "mph", "value": "31" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "86" },
-            { "type": "Precipitation Probability", "units": "%", "value": "6" },
-            { "type": "Wind Speed", "units": "mph", "value": "16" },
-            { "type": "Temperature", "units": "C", "value": "7" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Cloudy" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        }
-      ]
-    },
     {
       "date": "2022-02-24Z",
       "threeHourlyForecasts": [
         {
-          "start": "00:00",
-          "end": "03:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "3" },
-            { "type": "Wind Gust", "units": "mph", "value": "31" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "88" },
-            {
-              "type": "Precipitation Probability",
-              "units": "%",
-              "value": "18"
-            },
-            { "type": "Wind Speed", "units": "mph", "value": "18" },
-            { "type": "Temperature", "units": "C", "value": "7" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Cloudy" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        },
-        {
-          "start": "03:00",
-          "end": "06:00",
-          "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "3" },
-            { "type": "Wind Gust", "units": "mph", "value": "34" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "87" },
-            {
-              "type": "Precipitation Probability",
-              "units": "%",
-              "value": "83"
-            },
-            { "type": "Wind Speed", "units": "mph", "value": "18" },
-            { "type": "Temperature", "units": "C", "value": "7" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
-            { "type": "Weather Type", "units": "", "value": "Heavy rain" },
-            { "type": "Max UV Index", "units": "", "value": "0" }
-          ]
-        },
-        {
           "start": "06:00",
           "end": "09:00",
           "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "W" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "0" },
-            { "type": "Wind Gust", "units": "mph", "value": "27" },
+            { "type": "Wind Direction", "units": "compass", "value": "WSW" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "3" },
+            { "type": "Wind Gust", "units": "mph", "value": "29" },
             { "type": "Screen Relative Humidity", "units": "%", "value": "90" },
             {
               "type": "Precipitation Probability",
               "units": "%",
-              "value": "83"
+              "value": "90"
             },
-            { "type": "Wind Speed", "units": "mph", "value": "16" },
-            { "type": "Temperature", "units": "C", "value": "5" },
+            { "type": "Wind Speed", "units": "mph", "value": "11" },
+            { "type": "Temperature", "units": "C", "value": "6" },
             { "type": "Visibility", "units": "", "value": "Moderate 4-10 km" },
             { "type": "Weather Type", "units": "", "value": "Heavy rain" },
             { "type": "Max UV Index", "units": "", "value": "0" }
@@ -376,23 +30,23 @@
           "start": "09:00",
           "end": "12:00",
           "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "W" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "-1" },
-            { "type": "Wind Gust", "units": "mph", "value": "29" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "82" },
+            { "type": "Wind Direction", "units": "compass", "value": "WSW" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "-10" },
+            { "type": "Wind Gust", "units": "mph", "value": "22" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "87" },
             {
               "type": "Precipitation Probability",
               "units": "%",
-              "value": "38"
+              "value": "93"
             },
-            { "type": "Wind Speed", "units": "mph", "value": "16" },
-            { "type": "Temperature", "units": "C", "value": "4" },
-            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
+            { "type": "Temperature", "units": "C", "value": "-4" },
             {
-              "type": "Weather Type",
+              "type": "Visibility",
               "units": "",
-              "value": "Light rain shower (day)"
+              "value": "Very good 20-40 km"
             },
+            { "type": "Weather Type", "units": "", "value": "Light rain" },
             { "type": "Max UV Index", "units": "", "value": "1" }
           ]
         },
@@ -401,16 +55,16 @@
           "end": "15:00",
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "W" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "0" },
-            { "type": "Wind Gust", "units": "mph", "value": "36" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "63" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "-7" },
+            { "type": "Wind Gust", "units": "mph", "value": "31" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "76" },
             {
               "type": "Precipitation Probability",
               "units": "%",
-              "value": "39"
+              "value": "59"
             },
-            { "type": "Wind Speed", "units": "mph", "value": "20" },
-            { "type": "Temperature", "units": "C", "value": "5" },
+            { "type": "Wind Speed", "units": "mph", "value": "18" },
+            { "type": "Temperature", "units": "C", "value": "-4" },
             {
               "type": "Visibility",
               "units": "",
@@ -419,7 +73,7 @@
             {
               "type": "Weather Type",
               "units": "",
-              "value": "Light rain shower (day)"
+              "value": "Heavy rain shower (day)"
             },
             { "type": "Max UV Index", "units": "", "value": "2" }
           ]
@@ -429,17 +83,13 @@
           "end": "18:00",
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "W" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "1" },
-            { "type": "Wind Gust", "units": "mph", "value": "38" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "52" },
-            { "type": "Precipitation Probability", "units": "%", "value": "8" },
-            { "type": "Wind Speed", "units": "mph", "value": "20" },
-            { "type": "Temperature", "units": "C", "value": "6" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
+            { "type": "Feels Like Temperature", "units": "C", "value": "0" },
+            { "type": "Wind Gust", "units": "mph", "value": "31" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "55" },
+            { "type": "Precipitation Probability", "units": "%", "value": "6" },
+            { "type": "Wind Speed", "units": "mph", "value": "18" },
+            { "type": "Temperature", "units": "C", "value": "5" },
+            { "type": "Visibility", "units": "", "value": "Excellent < 40 km" },
             { "type": "Weather Type", "units": "", "value": "Sunny day" },
             { "type": "Max UV Index", "units": "", "value": "1" }
           ]
@@ -450,10 +100,10 @@
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "WSW" },
             { "type": "Feels Like Temperature", "units": "C", "value": "-1" },
-            { "type": "Wind Gust", "units": "mph", "value": "34" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "66" },
-            { "type": "Precipitation Probability", "units": "%", "value": "4" },
-            { "type": "Wind Speed", "units": "mph", "value": "18" },
+            { "type": "Wind Gust", "units": "mph", "value": "27" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "63" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
             { "type": "Temperature", "units": "C", "value": "4" },
             {
               "type": "Visibility",
@@ -469,12 +119,12 @@
           "end": "00:00",
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "WSW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "-1" },
-            { "type": "Wind Gust", "units": "mph", "value": "34" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "70" },
-            { "type": "Precipitation Probability", "units": "%", "value": "2" },
-            { "type": "Wind Speed", "units": "mph", "value": "18" },
-            { "type": "Temperature", "units": "C", "value": "4" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "-3" },
+            { "type": "Wind Gust", "units": "mph", "value": "31" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "82" },
+            { "type": "Precipitation Probability", "units": "%", "value": "1" },
+            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Temperature", "units": "C", "value": "2" },
             {
               "type": "Visibility",
               "units": "",
@@ -497,14 +147,10 @@
             { "type": "Feels Like Temperature", "units": "C", "value": "-1" },
             { "type": "Wind Gust", "units": "mph", "value": "31" },
             { "type": "Screen Relative Humidity", "units": "%", "value": "74" },
-            { "type": "Precipitation Probability", "units": "%", "value": "0" },
-            { "type": "Wind Speed", "units": "mph", "value": "18" },
+            { "type": "Precipitation Probability", "units": "%", "value": "1" },
+            { "type": "Wind Speed", "units": "mph", "value": "16" },
             { "type": "Temperature", "units": "C", "value": "4" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
+            { "type": "Visibility", "units": "", "value": "Excellent < 40 km" },
             { "type": "Weather Type", "units": "", "value": "Clear night" },
             { "type": "Max UV Index", "units": "", "value": "0" }
           ]
@@ -515,16 +161,12 @@
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "W" },
             { "type": "Feels Like Temperature", "units": "C", "value": "-2" },
-            { "type": "Wind Gust", "units": "mph", "value": "29" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "74" },
-            { "type": "Precipitation Probability", "units": "%", "value": "1" },
-            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Wind Gust", "units": "mph", "value": "27" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "79" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
             { "type": "Temperature", "units": "C", "value": "3" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
+            { "type": "Visibility", "units": "", "value": "Excellent < 40 km" },
             { "type": "Weather Type", "units": "", "value": "Clear night" },
             { "type": "Max UV Index", "units": "", "value": "0" }
           ]
@@ -535,10 +177,10 @@
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "W" },
             { "type": "Feels Like Temperature", "units": "C", "value": "-2" },
-            { "type": "Wind Gust", "units": "mph", "value": "27" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "75" },
-            { "type": "Precipitation Probability", "units": "%", "value": "1" },
-            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Wind Gust", "units": "mph", "value": "25" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "83" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "11" },
             { "type": "Temperature", "units": "C", "value": "3" },
             {
               "type": "Visibility",
@@ -557,9 +199,9 @@
             { "type": "Feels Like Temperature", "units": "C", "value": "1" },
             { "type": "Wind Gust", "units": "mph", "value": "22" },
             { "type": "Screen Relative Humidity", "units": "%", "value": "75" },
-            { "type": "Precipitation Probability", "units": "%", "value": "1" },
-            { "type": "Wind Speed", "units": "mph", "value": "13" },
-            { "type": "Temperature", "units": "C", "value": "5" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "11" },
+            { "type": "Temperature", "units": "C", "value": "4" },
             {
               "type": "Visibility",
               "units": "",
@@ -575,17 +217,17 @@
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "NW" },
             { "type": "Feels Like Temperature", "units": "C", "value": "4" },
-            { "type": "Wind Gust", "units": "mph", "value": "29" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "58" },
-            { "type": "Precipitation Probability", "units": "%", "value": "2" },
-            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Wind Gust", "units": "mph", "value": "22" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "56" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
             { "type": "Temperature", "units": "C", "value": "8" },
+            { "type": "Visibility", "units": "", "value": "Excellent < 40 km" },
             {
-              "type": "Visibility",
+              "type": "Weather Type",
               "units": "",
-              "value": "Very good 20-40 km"
+              "value": "Partly cloudy (day)"
             },
-            { "type": "Weather Type", "units": "", "value": "Sunny day" },
             { "type": "Max UV Index", "units": "", "value": "2" }
           ]
         },
@@ -594,12 +236,12 @@
           "end": "18:00",
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "NW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "5" },
-            { "type": "Wind Gust", "units": "mph", "value": "25" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "54" },
-            { "type": "Precipitation Probability", "units": "%", "value": "2" },
-            { "type": "Wind Speed", "units": "mph", "value": "13" },
-            { "type": "Temperature", "units": "C", "value": "8" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "6" },
+            { "type": "Wind Gust", "units": "mph", "value": "18" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "49" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "9" },
+            { "type": "Temperature", "units": "C", "value": "9" },
             {
               "type": "Visibility",
               "units": "",
@@ -613,13 +255,13 @@
           "start": "18:00",
           "end": "21:00",
           "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "WNW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "3" },
-            { "type": "Wind Gust", "units": "mph", "value": "11" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "75" },
-            { "type": "Precipitation Probability", "units": "%", "value": "3" },
-            { "type": "Wind Speed", "units": "mph", "value": "7" },
-            { "type": "Temperature", "units": "C", "value": "5" },
+            { "type": "Wind Direction", "units": "compass", "value": "WSW" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "4" },
+            { "type": "Wind Gust", "units": "mph", "value": "9" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "70" },
+            { "type": "Precipitation Probability", "units": "%", "value": "1" },
+            { "type": "Wind Speed", "units": "mph", "value": "4" },
+            { "type": "Temperature", "units": "C", "value": "6" },
             {
               "type": "Visibility",
               "units": "",
@@ -633,12 +275,12 @@
           "start": "21:00",
           "end": "00:00",
           "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "WNW" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "0" },
+            { "type": "Wind Direction", "units": "compass", "value": "SW" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "1" },
             { "type": "Wind Gust", "units": "mph", "value": "11" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "84" },
-            { "type": "Precipitation Probability", "units": "%", "value": "3" },
-            { "type": "Wind Speed", "units": "mph", "value": "7" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "85" },
+            { "type": "Precipitation Probability", "units": "%", "value": "1" },
+            { "type": "Wind Speed", "units": "mph", "value": "4" },
             { "type": "Temperature", "units": "C", "value": "3" },
             {
               "type": "Visibility",
@@ -658,12 +300,12 @@
           "start": "00:00",
           "end": "03:00",
           "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "SSE" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "0" },
+            { "type": "Wind Direction", "units": "compass", "value": "SSW" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "1" },
             { "type": "Wind Gust", "units": "mph", "value": "9" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "84" },
-            { "type": "Precipitation Probability", "units": "%", "value": "2" },
-            { "type": "Wind Speed", "units": "mph", "value": "7" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "86" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "4" },
             { "type": "Temperature", "units": "C", "value": "3" },
             {
               "type": "Visibility",
@@ -683,12 +325,12 @@
           "end": "06:00",
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "S" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "-2" },
-            { "type": "Wind Gust", "units": "mph", "value": "11" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "88" },
-            { "type": "Precipitation Probability", "units": "%", "value": "3" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "-1" },
+            { "type": "Wind Gust", "units": "mph", "value": "16" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "83" },
+            { "type": "Precipitation Probability", "units": "%", "value": "1" },
             { "type": "Wind Speed", "units": "mph", "value": "7" },
-            { "type": "Temperature", "units": "C", "value": "1" },
+            { "type": "Temperature", "units": "C", "value": "3" },
             {
               "type": "Visibility",
               "units": "",
@@ -707,22 +349,18 @@
           "end": "09:00",
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "S" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "-2" },
-            { "type": "Wind Gust", "units": "mph", "value": "13" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "89" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "-1" },
+            { "type": "Wind Gust", "units": "mph", "value": "18" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "88" },
             { "type": "Precipitation Probability", "units": "%", "value": "4" },
             { "type": "Wind Speed", "units": "mph", "value": "9" },
-            { "type": "Temperature", "units": "C", "value": "2" },
+            { "type": "Temperature", "units": "C", "value": "3" },
             {
               "type": "Visibility",
               "units": "",
               "value": "Very good 20-40 km"
             },
-            {
-              "type": "Weather Type",
-              "units": "",
-              "value": "Partly cloudy (night)"
-            },
+            { "type": "Weather Type", "units": "", "value": "Cloudy" },
             { "type": "Max UV Index", "units": "", "value": "0" }
           ]
         },
@@ -730,18 +368,14 @@
           "start": "09:00",
           "end": "12:00",
           "forecastElements": [
-            { "type": "Wind Direction", "units": "compass", "value": "S" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "1" },
-            { "type": "Wind Gust", "units": "mph", "value": "18" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "84" },
-            { "type": "Precipitation Probability", "units": "%", "value": "2" },
+            { "type": "Wind Direction", "units": "compass", "value": "SSE" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "2" },
+            { "type": "Wind Gust", "units": "mph", "value": "20" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "83" },
+            { "type": "Precipitation Probability", "units": "%", "value": "1" },
             { "type": "Wind Speed", "units": "mph", "value": "11" },
-            { "type": "Temperature", "units": "C", "value": "4" },
-            {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
-            },
+            { "type": "Temperature", "units": "C", "value": "5" },
+            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
             {
               "type": "Weather Type",
               "units": "",
@@ -756,10 +390,175 @@
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "S" },
             { "type": "Feels Like Temperature", "units": "C", "value": "5" },
+            { "type": "Wind Gust", "units": "mph", "value": "31" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "60" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Temperature", "units": "C", "value": "8" },
+            {
+              "type": "Visibility",
+              "units": "",
+              "value": "Very good 20-40 km"
+            },
+            { "type": "Weather Type", "units": "", "value": "Sunny day" },
+            { "type": "Max UV Index", "units": "", "value": "2" }
+          ]
+        },
+        {
+          "start": "15:00",
+          "end": "18:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "S" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "5" },
             { "type": "Wind Gust", "units": "mph", "value": "29" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "64" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "56" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Temperature", "units": "C", "value": "8" },
+            {
+              "type": "Visibility",
+              "units": "",
+              "value": "Very good 20-40 km"
+            },
+            { "type": "Weather Type", "units": "", "value": "Sunny day" },
+            { "type": "Max UV Index", "units": "", "value": "1" }
+          ]
+        },
+        {
+          "start": "18:00",
+          "end": "21:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "SSE" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "1" },
+            { "type": "Wind Gust", "units": "mph", "value": "25" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "73" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
+            { "type": "Temperature", "units": "C", "value": "5" },
+            {
+              "type": "Visibility",
+              "units": "",
+              "value": "Very good 20-40 km"
+            },
+            { "type": "Weather Type", "units": "", "value": "Clear night" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        },
+        {
+          "start": "21:00",
+          "end": "00:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "SE" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "0" },
+            { "type": "Wind Gust", "units": "mph", "value": "29" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "75" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Temperature", "units": "C", "value": "4" },
+            {
+              "type": "Visibility",
+              "units": "",
+              "value": "Very good 20-40 km"
+            },
+            { "type": "Weather Type", "units": "", "value": "Clear night" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-02-27Z",
+      "threeHourlyForecasts": [
+        {
+          "start": "00:00",
+          "end": "03:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "SSE" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "-1" },
+            { "type": "Wind Gust", "units": "mph", "value": "31" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "74" },
+            { "type": "Precipitation Probability", "units": "%", "value": "0" },
+            { "type": "Wind Speed", "units": "mph", "value": "18" },
+            { "type": "Temperature", "units": "C", "value": "4" },
+            {
+              "type": "Visibility",
+              "units": "",
+              "value": "Very good 20-40 km"
+            },
+            { "type": "Weather Type", "units": "", "value": "Clear night" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        },
+        {
+          "start": "03:00",
+          "end": "06:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "SSE" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "-2" },
+            { "type": "Wind Gust", "units": "mph", "value": "29" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "80" },
             { "type": "Precipitation Probability", "units": "%", "value": "1" },
             { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Temperature", "units": "C", "value": "3" },
+            {
+              "type": "Visibility",
+              "units": "",
+              "value": "Very good 20-40 km"
+            },
+            { "type": "Weather Type", "units": "", "value": "Clear night" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        },
+        {
+          "start": "06:00",
+          "end": "09:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "SSE" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "-2" },
+            { "type": "Wind Gust", "units": "mph", "value": "27" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "85" },
+            { "type": "Precipitation Probability", "units": "%", "value": "4" },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
+            { "type": "Temperature", "units": "C", "value": "3" },
+            {
+              "type": "Visibility",
+              "units": "",
+              "value": "Very good 20-40 km"
+            },
+            { "type": "Weather Type", "units": "", "value": "Clear night" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        },
+        {
+          "start": "09:00",
+          "end": "12:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "SSE" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "1" },
+            { "type": "Wind Gust", "units": "mph", "value": "22" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "82" },
+            { "type": "Precipitation Probability", "units": "%", "value": "4" },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
+            { "type": "Temperature", "units": "C", "value": "5" },
+            {
+              "type": "Visibility",
+              "units": "",
+              "value": "Very good 20-40 km"
+            },
+            { "type": "Weather Type", "units": "", "value": "Sunny day" },
+            { "type": "Max UV Index", "units": "", "value": "1" }
+          ]
+        },
+        {
+          "start": "12:00",
+          "end": "15:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "S" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "5" },
+            { "type": "Wind Gust", "units": "mph", "value": "25" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "71" },
+            { "type": "Precipitation Probability", "units": "%", "value": "3" },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
             { "type": "Temperature", "units": "C", "value": "8" },
             {
               "type": "Visibility",
@@ -779,11 +578,11 @@
           "end": "18:00",
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "S" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "5" },
-            { "type": "Wind Gust", "units": "mph", "value": "29" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "58" },
-            { "type": "Precipitation Probability", "units": "%", "value": "3" },
-            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "7" },
+            { "type": "Wind Gust", "units": "mph", "value": "22" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "72" },
+            { "type": "Precipitation Probability", "units": "%", "value": "7" },
+            { "type": "Wind Speed", "units": "mph", "value": "11" },
             { "type": "Temperature", "units": "C", "value": "9" },
             {
               "type": "Visibility",
@@ -799,22 +598,18 @@
           "end": "21:00",
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "S" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "2" },
-            { "type": "Wind Gust", "units": "mph", "value": "22" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "73" },
-            { "type": "Precipitation Probability", "units": "%", "value": "1" },
-            { "type": "Wind Speed", "units": "mph", "value": "13" },
-            { "type": "Temperature", "units": "C", "value": "5" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "4" },
+            { "type": "Wind Gust", "units": "mph", "value": "20" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "84" },
+            { "type": "Precipitation Probability", "units": "%", "value": "5" },
+            { "type": "Wind Speed", "units": "mph", "value": "11" },
+            { "type": "Temperature", "units": "C", "value": "7" },
             {
               "type": "Visibility",
               "units": "",
               "value": "Very good 20-40 km"
             },
-            {
-              "type": "Weather Type",
-              "units": "",
-              "value": "Partly cloudy (night)"
-            },
+            { "type": "Weather Type", "units": "", "value": "Cloudy" },
             { "type": "Max UV Index", "units": "", "value": "0" }
           ]
         },
@@ -823,22 +618,175 @@
           "end": "00:00",
           "forecastElements": [
             { "type": "Wind Direction", "units": "compass", "value": "S" },
-            { "type": "Feels Like Temperature", "units": "C", "value": "0" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "3" },
+            { "type": "Wind Gust", "units": "mph", "value": "20" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "93" },
+            { "type": "Precipitation Probability", "units": "%", "value": "5" },
+            { "type": "Wind Speed", "units": "mph", "value": "11" },
+            { "type": "Temperature", "units": "C", "value": "6" },
+            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
+            { "type": "Weather Type", "units": "", "value": "Cloudy" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-02-28Z",
+      "threeHourlyForecasts": [
+        {
+          "start": "00:00",
+          "end": "03:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "S" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "2" },
+            { "type": "Wind Gust", "units": "mph", "value": "22" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "93" },
+            { "type": "Precipitation Probability", "units": "%", "value": "8" },
+            { "type": "Wind Speed", "units": "mph", "value": "11" },
+            { "type": "Temperature", "units": "C", "value": "6" },
+            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
+            { "type": "Weather Type", "units": "", "value": "Cloudy" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        },
+        {
+          "start": "03:00",
+          "end": "06:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "S" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "3" },
             { "type": "Wind Gust", "units": "mph", "value": "25" },
-            { "type": "Screen Relative Humidity", "units": "%", "value": "81" },
-            { "type": "Precipitation Probability", "units": "%", "value": "1" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "93" },
+            {
+              "type": "Precipitation Probability",
+              "units": "%",
+              "value": "11"
+            },
             { "type": "Wind Speed", "units": "mph", "value": "13" },
-            { "type": "Temperature", "units": "C", "value": "4" },
+            { "type": "Temperature", "units": "C", "value": "7" },
+            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
+            { "type": "Weather Type", "units": "", "value": "Cloudy" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        },
+        {
+          "start": "06:00",
+          "end": "09:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "S" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "4" },
+            { "type": "Wind Gust", "units": "mph", "value": "25" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "94" },
             {
-              "type": "Visibility",
-              "units": "",
-              "value": "Very good 20-40 km"
+              "type": "Precipitation Probability",
+              "units": "%",
+              "value": "19"
             },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
+            { "type": "Temperature", "units": "C", "value": "7" },
+            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
+            { "type": "Weather Type", "units": "", "value": "Cloudy" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        },
+        {
+          "start": "09:00",
+          "end": "12:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "S" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "5" },
+            { "type": "Wind Gust", "units": "mph", "value": "27" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "93" },
             {
-              "type": "Weather Type",
-              "units": "",
-              "value": "Partly cloudy (night)"
+              "type": "Precipitation Probability",
+              "units": "%",
+              "value": "55"
             },
+            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Temperature", "units": "C", "value": "8" },
+            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
+            { "type": "Weather Type", "units": "", "value": "Light rain" },
+            { "type": "Max UV Index", "units": "", "value": "1" }
+          ]
+        },
+        {
+          "start": "12:00",
+          "end": "15:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "SSW" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "6" },
+            { "type": "Wind Gust", "units": "mph", "value": "29" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "91" },
+            {
+              "type": "Precipitation Probability",
+              "units": "%",
+              "value": "60"
+            },
+            { "type": "Wind Speed", "units": "mph", "value": "16" },
+            { "type": "Temperature", "units": "C", "value": "9" },
+            { "type": "Visibility", "units": "", "value": "Moderate 4-10 km" },
+            { "type": "Weather Type", "units": "", "value": "Light rain" },
+            { "type": "Max UV Index", "units": "", "value": "1" }
+          ]
+        },
+        {
+          "start": "15:00",
+          "end": "18:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "SSW" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "7" },
+            { "type": "Wind Gust", "units": "mph", "value": "27" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "90" },
+            {
+              "type": "Precipitation Probability",
+              "units": "%",
+              "value": "58"
+            },
+            { "type": "Wind Speed", "units": "mph", "value": "13" },
+            { "type": "Temperature", "units": "C", "value": "10" },
+            { "type": "Visibility", "units": "", "value": "Moderate 4-10 km" },
+            { "type": "Weather Type", "units": "", "value": "Light rain" },
+            { "type": "Max UV Index", "units": "", "value": "1" }
+          ]
+        },
+        {
+          "start": "18:00",
+          "end": "21:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "SW" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "6" },
+            { "type": "Wind Gust", "units": "mph", "value": "22" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "92" },
+            {
+              "type": "Precipitation Probability",
+              "units": "%",
+              "value": "77"
+            },
+            { "type": "Wind Speed", "units": "mph", "value": "11" },
+            { "type": "Temperature", "units": "C", "value": "9" },
+            { "type": "Visibility", "units": "", "value": "Moderate 4-10 km" },
+            { "type": "Weather Type", "units": "", "value": "Heavy rain" },
+            { "type": "Max UV Index", "units": "", "value": "0" }
+          ]
+        },
+        {
+          "start": "21:00",
+          "end": "00:00",
+          "forecastElements": [
+            { "type": "Wind Direction", "units": "compass", "value": "W" },
+            { "type": "Feels Like Temperature", "units": "C", "value": "5" },
+            { "type": "Wind Gust", "units": "mph", "value": "18" },
+            { "type": "Screen Relative Humidity", "units": "%", "value": "94" },
+            {
+              "type": "Precipitation Probability",
+              "units": "%",
+              "value": "51"
+            },
+            { "type": "Wind Speed", "units": "mph", "value": "9" },
+            { "type": "Temperature", "units": "C", "value": "8" },
+            { "type": "Visibility", "units": "", "value": "Good 10-20 km" },
+            { "type": "Weather Type", "units": "", "value": "Light rain" },
             { "type": "Max UV Index", "units": "", "value": "0" }
           ]
         }

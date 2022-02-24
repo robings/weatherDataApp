@@ -62,16 +62,28 @@ describe("temperatureWidget", () => {
       ).toBeInTheDocument();
     });
 
-    const testTemps = ["0", "9", "16", "30", "45"];
-    test.each(testTemps)(
-      "displays expected rectangle for temperature",
-      (temp) => {
+    // const testTemps = ["0", "9", "16", "30", "45", "-1", "-10"];
+
+    const positiveStartXPos = "125";
+    const scaleTo1Deg = 4;
+    const testScenarios = [
+      ["0", positiveStartXPos, "0"],
+      ["9", positiveStartXPos, `${scaleTo1Deg * 9}`],
+      ["16", positiveStartXPos, `${scaleTo1Deg * 16}`],
+      ["30", positiveStartXPos, `${scaleTo1Deg * 30}`],
+      ["45", positiveStartXPos, `${scaleTo1Deg * 45}`],
+      ["-1", "121", `${scaleTo1Deg}`],
+      ["-10", "85", `${scaleTo1Deg * 10}`],
+    ];
+    test.each(testScenarios)(
+      "displays expected rectangle for temperature %p",
+      (temp, expectedStartXPos, expectedRectangleLength) => {
         const { container } = renderTemperatureWidget(false, temp);
-        const expectedRectangleLength = `${(200 / 50) * parseInt(temp)}`;
 
         // the attribute of part of the svg is important to check it is working.
         // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
         const temperatureReadout = container.querySelector("#tempIndicator");
+        expect(temperatureReadout).toHaveAttribute("x", expectedStartXPos);
         expect(temperatureReadout).toHaveAttribute(
           "width",
           expectedRectangleLength
@@ -79,22 +91,22 @@ describe("temperatureWidget", () => {
       }
     );
 
-    test.each(testTemps)(
-      "displays expected rectangle for feels like temperature",
-      (temp) => {
-        const { container } = renderTemperatureWidget(false, undefined, temp);
-        const expectedRectangleLength = `${(200 / 50) * parseInt(temp)}`;
+    // test.each(testTemps)(
+    //   "displays expected rectangle for feels like temperature",
+    //   (temp) => {
+    //     const { container } = renderTemperatureWidget(false, undefined, temp);
+    //     const expectedRectangleLength = `${(200 / 50) * parseInt(temp)}`;
 
-        // the attribute of part of the svg is important to check it is working.
-        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-        const temperatureReadout = container.querySelector(
-          "#feelsLikeTempIndicator"
-        );
-        expect(temperatureReadout).toHaveAttribute(
-          "width",
-          expectedRectangleLength
-        );
-      }
-    );
+    //     // the attribute of part of the svg is important to check it is working.
+    //     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    //     const temperatureReadout = container.querySelector(
+    //       "#feelsLikeTempIndicator"
+    //     );
+    //     expect(temperatureReadout).toHaveAttribute(
+    //       "width",
+    //       expectedRectangleLength
+    //     );
+    //   }
+    // );
   });
 });

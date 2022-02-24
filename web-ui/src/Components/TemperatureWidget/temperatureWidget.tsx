@@ -35,6 +35,22 @@ const TemperatureWidget = function TemperatureWidget(
   const temperatureColour = determineTemperatureColour(temperature);
   const feelsLikeTemperatureColour =
     determineTemperatureColour(feelsLikeTemperature);
+  const temperatureXPos =
+    parseInt(temperature, 10) < 0
+      ? 125 - parseInt(temperature, 10) * (200 / 50) * -1
+      : 125;
+  const feelsLikeTemperatureXPos =
+    parseInt(feelsLikeTemperature, 10) < 0
+      ? 125 - parseInt(feelsLikeTemperature, 10) * (200 / 50) * -1
+      : 125;
+  const temperatureWidth =
+    parseInt(temperature, 10) < 0
+      ? (200 / 50) * parseInt(temperature, 10) * -1
+      : (200 / 50) * parseInt(temperature, 10);
+  const feelsLikeTemperatureWidth =
+    parseInt(feelsLikeTemperature, 10) < 0
+      ? (200 / 50) * parseInt(feelsLikeTemperature, 10) * -1
+      : (200 / 50) * parseInt(feelsLikeTemperature, 10);
 
   return (
     <>
@@ -56,31 +72,31 @@ const TemperatureWidget = function TemperatureWidget(
           <div className="smallText">{`(feels like ${feelsLikeTemperature}°${unit})`}</div>
           <svg
             id="thermometer"
-            width="215"
+            width="330"
             height="30"
-            viewBox="0 0 215 30"
+            viewBox="0 0 330 30"
             style={{ fontSize: "7" }}
           >
             <rect
               id="feelsLikeTempIndicator"
-              x="5"
+              x={feelsLikeTemperatureXPos}
               y="10"
               height="3"
-              width={(200 / 50) * parseInt(feelsLikeTemperature)}
+              width={feelsLikeTemperatureWidth}
               fill={feelsLikeTemperatureColour}
             />
             <rect
               id="tempIndicator"
-              x="5"
+              x={temperatureXPos}
               y="2"
               height="7"
-              width={(200 / 50) * parseInt(temperature)}
+              width={temperatureWidth}
               fill={temperatureColour}
             />
             <line
               x1="5"
               y1="14.5"
-              x2="205"
+              x2="325"
               y2="14.5"
               stroke="#000000"
               strokeWidth="1"
@@ -111,7 +127,7 @@ const TemperatureWidget = function TemperatureWidget(
             />
             <line
               x1="125.5"
-              y1="15"
+              y1="2"
               x2="125.5"
               y2="18"
               stroke="#000000"
@@ -126,29 +142,62 @@ const TemperatureWidget = function TemperatureWidget(
               strokeWidth="1"
             />
             <line
-              x1="204.5"
+              x1="205.5"
               y1="15"
-              x2="204.5"
+              x2="205.5"
+              y2="18"
+              stroke="#000000"
+              strokeWidth="1"
+            />
+            <line
+              x1="245.5"
+              y1="15"
+              x2="245.5"
+              y2="18"
+              stroke="#000000"
+              strokeWidth="1"
+            />
+            <line
+              x1="285.5"
+              y1="15"
+              x2="285.5"
+              y2="18"
+              stroke="#000000"
+              strokeWidth="1"
+            />
+            <line
+              x1="324.5"
+              y1="15"
+              x2="324.5"
               y2="18"
               stroke="#000000"
               strokeWidth="1"
             />
             <text x="5" y="25" textAnchor="middle" fill="currentColor">
-              0
+              -30
             </text>
             <text x="45" y="25" textAnchor="middle" fill="currentColor">
-              10
+              -20
             </text>
             <text x="85" y="25" textAnchor="middle" fill="currentColor">
-              20
+              -10
             </text>
             <text x="125" y="25" textAnchor="middle" fill="currentColor">
-              30
+              0
             </text>
             <text x="165" y="25" textAnchor="middle" fill="currentColor">
-              40
+              10
             </text>
             <text x="205" y="25" textAnchor="middle" fill="currentColor">
+              20
+            </text>
+            <text x="245" y="25" textAnchor="middle" fill="currentColor">
+              30
+            </text>
+            <text x="285" y="25" textAnchor="middle" fill="currentColor">
+              40
+            </text>
+            <text x="325" y="25" textAnchor="middle" fill="currentColor">
               50
             </text>
           </svg>
