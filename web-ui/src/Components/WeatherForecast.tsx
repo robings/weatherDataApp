@@ -9,6 +9,8 @@ import WindIndicator from "./WindIndicator/WindIndicator";
 import TemperatureWidget from "./TemperatureWidget/TemperatureWidget";
 import { Link } from "react-router-dom";
 import WeatherSVG from "./WeatherSVG/WeatherSVG";
+import { ReactComponent as VisibilitySVG } from "../svg/visibility.svg";
+import { ReactComponent as PrecipitationSVG } from "../svg/precipitation.svg";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);
@@ -70,6 +72,17 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
     forecastElements.find((e) => e.type === "Feels Like Temperature")?.value ??
     "C";
 
+  const visiblity =
+    forecastElements.find((e) => e.type === "Visibility")?.value ?? "Unknown";
+
+  const precipitationProbability = forecastElements.find(
+    (e) => e.type === "Precipitation Probability"
+  );
+
+  const uvIndex =
+    forecastElements.find((e) => e.type === "Max UV Index")?.value ??
+    "Not found";
+
   return (
     <div
       className="forecast"
@@ -93,6 +106,18 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
         windDirection={windInformation.windDirection}
         compact={useCompactComponents}
       />
+      <div className="otherInfo">
+        <div>
+          <VisibilitySVG style={{ width: "20px", height: "20px" }} />
+          {visiblity}
+        </div>
+        <div>
+          <PrecipitationSVG style={{ width: "32px", height: "32px" }} />
+          {precipitationProbability?.value ?? "Not found"}
+          {precipitationProbability?.units ?? ""}
+        </div>
+        <div>UV Index: {uvIndex}</div>
+      </div>
     </div>
   );
 };
@@ -128,20 +153,19 @@ const WeatherForecast = function WeatherForecast() {
     useState<WeatherForecastResponse | null>(null);
 
   useEffect(() => {
-    // const getWeatherForecast = async () => {
-    //   const forecastCall = await fetch(
-    //     "https://localhost:5001/weatherforecast"
-    //   );
-    //   let forecast: WeatherForecastResponse | null = null;
-    //   if (forecastCall.status === 200) {
-    //     forecast = await forecastCall.json();
-    //     if (forecast) {
-    //       setWeatherForecastData(forecast);
-    //     }
-    //   }
-    // };
-    // void getWeatherForecast();
-    setWeatherForecastData(sampleResponseJson);
+    const getWeatherForecast = async () => {
+      const forecastCall = await fetch(
+        "https://localhost:5001/weatherforecast"
+      );
+      let forecast: WeatherForecastResponse | null = null;
+      if (forecastCall.status === 200) {
+        forecast = await forecastCall.json();
+        if (forecast) {
+          setWeatherForecastData(forecast);
+        }
+      }
+    };
+    void getWeatherForecast();
   }, []);
 
   return (
