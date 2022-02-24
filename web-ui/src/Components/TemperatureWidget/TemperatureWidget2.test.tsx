@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import TemperatureWidget from "./temperatureWidget";
+import TemperatureWidget from "./TemperatureWidget2";
 
 describe("temperatureWidget", () => {
   const testTemp = "16";
@@ -61,8 +61,6 @@ describe("temperatureWidget", () => {
         )
       ).toBeInTheDocument();
     });
-
-    // const testTemps = ["0", "9", "16", "30", "45", "-1", "-10"];
 
     const positiveStartXPos = "125";
     const scaleTo1Deg = 4;

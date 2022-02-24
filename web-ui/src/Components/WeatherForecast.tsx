@@ -6,7 +6,7 @@ import {
 } from "./WeatherForecastResponse";
 import sampleResponseJson from "../sampleResponse.json";
 import WindIndicator from "./WindIndicator/WindIndicator";
-import TemperatureWidget from "./TemperatureWidget/temperatureWidget";
+import TemperatureWidget from "./TemperatureWidget/TemperatureWidget2";
 import { ReactComponent as Sun } from "../svg/sun.svg";
 import { ReactComponent as Cloud } from "../svg/cloud.svg";
 import { ReactComponent as LightRain } from "../svg/lightRain.svg";
