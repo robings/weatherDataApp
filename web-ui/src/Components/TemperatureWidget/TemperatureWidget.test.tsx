@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import TemperatureWidget from "./TemperatureWidget2";
+import TemperatureWidget from "./TemperatureWidget";
 
 describe("temperatureWidget", () => {
   const testTemp = "16";
