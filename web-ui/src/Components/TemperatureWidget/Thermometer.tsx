@@ -13,22 +13,23 @@ const Thermometer = function Thermometer(props: ThermometerProps) {
     feelsLikeTemperatureColour,
   } = props;
 
+  const temperatureAsNumber = parseInt(temperature, 10);
+  const feelsLikeTemperatureAsNumber = parseInt(feelsLikeTemperature, 10);
+
   const temperatureXPos =
-    parseInt(temperature, 10) < 0
-      ? 125 - parseInt(temperature, 10) * (200 / 50) * -1
-      : 125;
+    temperatureAsNumber < 0 ? 125 - temperatureAsNumber * (200 / 50) * -1 : 125;
   const feelsLikeTemperatureXPos =
-    parseInt(feelsLikeTemperature, 10) < 0
-      ? 125 - parseInt(feelsLikeTemperature, 10) * (200 / 50) * -1
+    feelsLikeTemperatureAsNumber < 0
+      ? 125 - feelsLikeTemperatureAsNumber * (200 / 50) * -1
       : 125;
   const temperatureWidth =
-    parseInt(temperature, 10) < 0
-      ? (200 / 50) * parseInt(temperature, 10) * -1
-      : (200 / 50) * parseInt(temperature, 10);
+    temperatureAsNumber < 0
+      ? (200 / 50) * temperatureAsNumber * -1
+      : (200 / 50) * temperatureAsNumber;
   const feelsLikeTemperatureWidth =
-    parseInt(feelsLikeTemperature, 10) < 0
-      ? (200 / 50) * parseInt(feelsLikeTemperature, 10) * -1
-      : (200 / 50) * parseInt(feelsLikeTemperature, 10);
+    feelsLikeTemperatureAsNumber < 0
+      ? (200 / 50) * feelsLikeTemperatureAsNumber * -1
+      : (200 / 50) * feelsLikeTemperatureAsNumber;
 
   return (
     <svg

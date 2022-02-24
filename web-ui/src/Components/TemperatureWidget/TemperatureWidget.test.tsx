@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { temperatureColours } from "../../constants/temperatureColours";
 import TemperatureWidget from "./TemperatureWidget";
 
 describe("temperatureWidget", () => {
@@ -41,6 +42,45 @@ describe("temperatureWidget", () => {
         )
       ).toBeInTheDocument();
     });
+
+    const tempScenarios = [
+      ["0", temperatureColours.subZero],
+      ["9", temperatureColours.cold],
+      ["16", temperatureColours.warm],
+      ["25", temperatureColours.hot],
+      ["45", temperatureColours.veryHot],
+      ["-1", temperatureColours.subZero],
+      ["-10", temperatureColours.subZero],
+    ];
+    test.each(tempScenarios)(
+      "displays border with colour relevant to temperature %p",
+      (temp, expectedColour) => {
+        const { container } = renderTemperatureWidget(true, temp);
+
+        // the attribute is important to check it is working.
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        const temperatureWidget = container.querySelector(".temperatureWidget");
+        expect(temperatureWidget).toHaveAttribute(
+          "style",
+          `border-color: ${expectedColour.toLocaleLowerCase()};`
+        );
+      }
+    );
+
+    test.each(tempScenarios)(
+      "displays border with colour relevant to feels like temperature %p",
+      (temp, expectedColour) => {
+        const { container } = renderTemperatureWidget(true, undefined, temp);
+
+        // the attribute is important to check it is working.
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        const temperatureWidget = container.querySelector(".smallText");
+        expect(temperatureWidget).toHaveAttribute(
+          "style",
+          `border-top: 1px solid ${expectedColour};`
+        );
+      }
+    );
   });
 
   describe("in non-compact mode", () => {
@@ -65,17 +105,22 @@ describe("temperatureWidget", () => {
     const positiveStartXPos = "125";
     const scaleTo1Deg = 4;
     const testScenarios = [
-      ["0", positiveStartXPos, "0"],
-      ["9", positiveStartXPos, `${scaleTo1Deg * 9}`],
-      ["16", positiveStartXPos, `${scaleTo1Deg * 16}`],
-      ["30", positiveStartXPos, `${scaleTo1Deg * 30}`],
-      ["45", positiveStartXPos, `${scaleTo1Deg * 45}`],
-      ["-1", "121", `${scaleTo1Deg}`],
-      ["-10", "85", `${scaleTo1Deg * 10}`],
+      ["0", positiveStartXPos, "0", temperatureColours.subZero],
+      ["9", positiveStartXPos, `${scaleTo1Deg * 9}`, temperatureColours.cold],
+      ["16", positiveStartXPos, `${scaleTo1Deg * 16}`, temperatureColours.warm],
+      ["30", positiveStartXPos, `${scaleTo1Deg * 30}`, temperatureColours.hot],
+      [
+        "45",
+        positiveStartXPos,
+        `${scaleTo1Deg * 45}`,
+        temperatureColours.veryHot,
+      ],
+      ["-1", "121", `${scaleTo1Deg}`, temperatureColours.subZero],
+      ["-10", "85", `${scaleTo1Deg * 10}`, temperatureColours.subZero],
     ];
     test.each(testScenarios)(
       "displays expected rectangle for temperature %p",
-      (temp, expectedStartXPos, expectedRectangleLength) => {
+      (temp, expectedStartXPos, expectedRectangleLength, expectedColour) => {
         const { container } = renderTemperatureWidget(false, temp);
 
         // the attribute of part of the svg is important to check it is working.
@@ -86,12 +131,13 @@ describe("temperatureWidget", () => {
           "width",
           expectedRectangleLength
         );
+        expect(temperatureReadout).toHaveAttribute("fill", expectedColour);
       }
     );
 
     test.each(testScenarios)(
       "displays expected rectangle for feels like temperature %p",
-      (temp, expectedStartXPos, expectedRectangleLength) => {
+      (temp, expectedStartXPos, expectedRectangleLength, expectedColour) => {
         const { container } = renderTemperatureWidget(false, undefined, temp);
 
         // the attribute of part of the svg is important to check it is working.
@@ -106,6 +152,10 @@ describe("temperatureWidget", () => {
         expect(feelsLikeTemperatureReadout).toHaveAttribute(
           "width",
           expectedRectangleLength
+        );
+        expect(feelsLikeTemperatureReadout).toHaveAttribute(
+          "fill",
+          expectedColour
         );
       }
     );
