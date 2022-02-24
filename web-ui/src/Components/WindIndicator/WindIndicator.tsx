@@ -1,4 +1,4 @@
-import { appStrings } from "../../app.strings";
+import { appStrings } from "../../constants/app.strings";
 
 interface WindIndicatorProps {
   speed: string;

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { appStrings } from "../../app.strings";
+import { appStrings } from "../../constants/app.strings";
 import WindIndicator from "./WindIndicator";
 
 describe("wind indicator", () => {

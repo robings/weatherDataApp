@@ -1,3 +1,4 @@
+import { temperatureColours } from "../../constants/temperatureColours";
 import Thermometer from "./Thermometer";
 
 interface TemperatureWidgetProps {
@@ -11,22 +12,22 @@ const determineTemperatureColour = (temperature: string): string => {
   const temperatureAsNumber: number = parseInt(temperature);
 
   if (temperatureAsNumber <= 0) {
-    return "#00B7C3";
+    return temperatureColours.subZero;
   }
 
   if (temperatureAsNumber <= 10) {
-    return "#00CC6A";
+    return temperatureColours.cold;
   }
 
   if (temperatureAsNumber <= 20) {
-    return "#FFB900";
+    return temperatureColours.warm;
   }
 
   if (temperatureAsNumber <= 30) {
-    return "#F7630C";
+    return temperatureColours.hot;
   }
 
-  return "#E81123";
+  return temperatureColours.veryHot;
 };
 
 const TemperatureWidget = function TemperatureWidget(
