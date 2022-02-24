@@ -91,22 +91,25 @@ describe("temperatureWidget", () => {
       }
     );
 
-    // test.each(testTemps)(
-    //   "displays expected rectangle for feels like temperature",
-    //   (temp) => {
-    //     const { container } = renderTemperatureWidget(false, undefined, temp);
-    //     const expectedRectangleLength = `${(200 / 50) * parseInt(temp)}`;
+    test.each(testScenarios)(
+      "displays expected rectangle for feels like temperature %p",
+      (temp, expectedStartXPos, expectedRectangleLength) => {
+        const { container } = renderTemperatureWidget(false, undefined, temp);
 
-    //     // the attribute of part of the svg is important to check it is working.
-    //     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    //     const temperatureReadout = container.querySelector(
-    //       "#feelsLikeTempIndicator"
-    //     );
-    //     expect(temperatureReadout).toHaveAttribute(
-    //       "width",
-    //       expectedRectangleLength
-    //     );
-    //   }
-    // );
+        // the attribute of part of the svg is important to check it is working.
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        const feelsLikeTemperatureReadout = container.querySelector(
+          "#feelsLikeTempIndicator"
+        );
+        expect(feelsLikeTemperatureReadout).toHaveAttribute(
+          "x",
+          expectedStartXPos
+        );
+        expect(feelsLikeTemperatureReadout).toHaveAttribute(
+          "width",
+          expectedRectangleLength
+        );
+      }
+    );
   });
 });
