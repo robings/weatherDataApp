@@ -36,6 +36,17 @@ header h1 {
   margin: 0;
 }
 
+a {
+  color: var(--default-text-colour);
+  padding: 10px 0;
+  float: right;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .component {
   overflow: auto;
 }

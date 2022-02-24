@@ -14,6 +14,7 @@ import { ReactComponent as HeavyRain } from "../svg/heavyRain.svg";
 import { ReactComponent as ClearNight } from "../svg/clearNight.svg";
 import { ReactComponent as PartlyCloudyNight } from "../svg/partlyCloudyNight.svg";
 import { ReactComponent as PartlyCloudyDay } from "../svg/partlyCloudyDay.svg";
+import { Link } from "react-router-dom";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);
@@ -32,7 +33,8 @@ const determineWeatherSvg = (weatherType: string): JSX.Element => {
   if (weatherTypeLC === "sunny day") return <Sun />;
   if (weatherTypeLC === "partly cloudy (day)") return <PartlyCloudyDay />;
   if (weatherTypeLC === "partly cloudy (night)") return <PartlyCloudyNight />;
-  if (cloudyRegex.test(weatherTypeLC)) return <Cloud />;
+  if (cloudyRegex.test(weatherTypeLC) || weatherTypeLC === "overcast")
+    return <Cloud />;
   if (lightRainRegex.test(weatherTypeLC)) return <LightRain />;
   if (heavyRainRegex.test(weatherTypeLC)) return <HeavyRain />;
   if (clearNightRegex.test(weatherTypeLC)) return <ClearNight />;
@@ -167,6 +169,7 @@ const WeatherForecast = function WeatherForecast() {
 
   return (
     <div>
+      <Link to="/table">Weather Data in Tabular Format</Link>
       {weatherForecastData && (
         <>
           <h2>
