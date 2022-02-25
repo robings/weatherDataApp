@@ -32,8 +32,27 @@ header svg {
 }
 
 header h1 {
-  padding: 4px 4px 4px 55px;
+  padding: 4px;
   margin: 0;
+  float: left;
+}
+
+header button {
+  float: right;
+  cursor: pointer;
+  padding: 3px 7px;
+  margin-top: 10px;
+  border: 1px solid;
+  border-radius: 0.25em;
+  background-color: inherit;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+header button:hover {
+  color: var(--background-colour);
+  background-color: var(--default-text-colour);
 }
 
 a {

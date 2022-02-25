@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import api from "./api/api";
 import "./App.css";
@@ -11,22 +11,24 @@ const App = function App() {
   const [weatherForecastData, setWeatherForecastData] =
     useState<WeatherForecastResponse | null>(null);
 
-  useEffect(() => {
-    const loadWeatherForecast = async () => {
-      const forecast = await api.getWeatherForecast();
+  const loadWeatherForecast = useCallback(async () => {
+    const forecast = await api.getWeatherForecast();
 
-      if (forecast) {
-        setWeatherForecastData(forecast);
-      }
-    };
-    void loadWeatherForecast();
+    if (forecast) {
+      setWeatherForecastData(forecast);
+    }
   }, []);
+
+  useEffect(() => {
+    void loadWeatherForecast();
+  }, [loadWeatherForecast]);
 
   return (
     <div className="App">
       <header>
         <Sun />
         <h1>Weather Forecast</h1>
+        <button onClick={loadWeatherForecast}>Refresh</button>
       </header>
       <Routes>
         <Route
