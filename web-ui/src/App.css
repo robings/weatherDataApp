@@ -4,6 +4,7 @@
   --forecast-border: #EEEEEE;
   --temperature-widget-text-colour: #222222;
   --table-header-bg-colour: #0063B1;
+  --error: #E81123;
 }
 
 body {
@@ -53,6 +54,16 @@ header button {
 header button:hover {
   color: var(--background-colour);
   background-color: var(--default-text-colour);
+}
+
+.error {
+  margin-top: 10px;
+  width: fit-content;
+  color: var(--default-text-colour);
+  background-color: var(--error);
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 0.25em;
 }
 
 a {

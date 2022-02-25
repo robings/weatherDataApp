@@ -4,6 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import App from "./App";
 import api from "./api/api";
 import sampleResponseJson from "./sampleResponse.json";
+import { WeatherForecastResponse } from "./Components/WeatherForecastResponse";
 
 jest.mock("./api/api");
 
@@ -20,12 +21,16 @@ afterAll(() => {
 });
 
 describe("app", () => {
-  const renderApp = () => {
+  const renderApp = (
+    returnValue: Promise<WeatherForecastResponse> = Promise.resolve(
+      sampleResponseJson
+    )
+  ) => {
     const mockedGetWeatherForecast =
       api.getWeatherForecast as jest.MockedFunction<
         typeof api.getWeatherForecast
       >;
-    mockedGetWeatherForecast.mockResolvedValue(sampleResponseJson);
+    mockedGetWeatherForecast.mockReturnValue(returnValue);
 
     render(
       <MemoryRouter>
@@ -106,5 +111,13 @@ describe("app", () => {
       screen.getByRole("heading", { name: expectedTitle })
     ).toBeInTheDocument();
     expect(mockedGetWeatherForecast).toHaveBeenCalledTimes(1);
+  });
+
+  test("shows error if api call fails", async () => {
+    const errorMessage = "Oops. It all went Pete Tong";
+
+    renderApp(Promise.reject(new Error(errorMessage)));
+
+    expect(await screen.findByText(errorMessage)).toBeInTheDocument();
   });
 });

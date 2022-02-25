@@ -10,12 +10,17 @@ import { ReactComponent as Sun } from "./svg/sun.svg";
 const App = function App() {
   const [weatherForecastData, setWeatherForecastData] =
     useState<WeatherForecastResponse | null>(null);
+  
+  const [error, setError] = useState<string>("");
 
   const loadWeatherForecast = useCallback(async () => {
-    const forecast = await api.getWeatherForecast();
+    let forecast;
 
-    if (forecast) {
+    try {
+      forecast = await api.getWeatherForecast();
       setWeatherForecastData(forecast);
+    } catch (e: unknown) {
+      setError((e as Error).message);
     }
   }, []);
 
@@ -45,6 +50,7 @@ const App = function App() {
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      {error && <div className="error">{error}</div>}
     </div>
   );
 };
