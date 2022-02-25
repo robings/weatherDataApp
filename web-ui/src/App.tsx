@@ -3,8 +3,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import api from "./api/api";
 import "./App.css";
 import TableWeatherForecast from "./Components/TableWeatherForecast";
-import WeatherForecast from "./Components/WeatherForecast";
-import { WeatherForecastResponse } from "./Components/WeatherForecastResponse";
+import WeatherForecast from "./Components/WeatherForecast/WeatherForecast";
+import { WeatherForecastResponse } from "./constants/WeatherForecastResponse";
 import { appStrings } from "./constants/app.strings";
 import { ReactComponent as Sun } from "./svg/sun.svg";
 
@@ -37,6 +37,11 @@ const App = function App() {
         <h1>Weather Forecast</h1>
         <button onClick={loadWeatherForecast}>{appStrings.refresh}</button>
       </header>
+      {error && (
+        <div className="error">
+          {error} {appStrings.previousData}
+        </div>
+      )}
       <Routes>
         <Route
           path="/"
@@ -52,7 +57,6 @@ const App = function App() {
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {error && <div className="error">{error}</div>}
     </div>
   );
 };

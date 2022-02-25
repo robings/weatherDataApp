@@ -3,7 +3,7 @@ import {
   ForecastElement,
   ThreeHourlyForecast,
   WeatherForecastResponse,
-} from "./WeatherForecastResponse";
+} from "../constants/WeatherForecastResponse";
 import { Link } from "react-router-dom";
 import { appStrings } from "../constants/app.strings";
 

@@ -3,14 +3,14 @@ import {
   DayData,
   ThreeHourlyForecast,
   WeatherForecastResponse,
-} from "./WeatherForecastResponse";
-import WindIndicator from "./WindIndicator/WindIndicator";
-import TemperatureWidget from "./TemperatureWidget/TemperatureWidget";
+} from "../../constants/WeatherForecastResponse";
+import WindIndicator from "../WindIndicator/WindIndicator";
+import TemperatureWidget from "../TemperatureWidget/TemperatureWidget";
 import { Link } from "react-router-dom";
-import WeatherSVG from "./WeatherSVG/WeatherSVG";
-import { ReactComponent as VisibilitySVG } from "../svg/visibility.svg";
-import { ReactComponent as PrecipitationSVG } from "../svg/precipitation.svg";
-import { appStrings } from "../constants/app.strings";
+import WeatherSVG from "../WeatherSVG/WeatherSVG";
+import { ReactComponent as VisibilitySVG } from "../../svg/visibility.svg";
+import { ReactComponent as PrecipitationSVG } from "../../svg/precipitation.svg";
+import { appStrings } from "../../constants/app.strings";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);

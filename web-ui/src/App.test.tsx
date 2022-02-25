@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import App from "./App";
 import api from "./api/api";
 import sampleResponseJson from "./sampleResponse.json";
-import { WeatherForecastResponse } from "./Components/WeatherForecastResponse";
+import { WeatherForecastResponse } from "./constants/WeatherForecastResponse";
 import { appStrings } from "./constants/app.strings";
 
 jest.mock("./api/api");
@@ -105,7 +105,7 @@ describe("app", () => {
 
     userEvent.click(screen.getByRole("link", { name: appStrings.tableFormat }));
 
-    expect(await screen.findAllByRole("table")).toHaveLength(38);
+    expect(await screen.findAllByRole("table")).toHaveLength(5);
     expect(
       screen.getByRole("heading", { name: expectedTitle })
     ).toBeInTheDocument();
@@ -127,7 +127,7 @@ describe("app", () => {
 
     userEvent.click(screen.getByRole("link", { name: appStrings.tableFormat }));
 
-    expect(await screen.findAllByRole("table")).toHaveLength(38);
+    expect(await screen.findAllByRole("table")).toHaveLength(5);
     expect(mockedGetWeatherForecast).toHaveBeenCalledTimes(1);
 
     userEvent.click(
@@ -146,6 +146,8 @@ describe("app", () => {
 
     renderApp(Promise.reject(new Error(errorMessage)));
 
-    expect(await screen.findByText(errorMessage)).toBeInTheDocument();
+    expect(
+      await screen.findByText(`${errorMessage} ${appStrings.previousData}`)
+    ).toBeInTheDocument();
   });
 });

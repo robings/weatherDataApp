@@ -6,4 +6,5 @@ export const appStrings = {
   refresh: "Refresh",
   tableFormat: "Tabular Format",
   graphicalFormat: "Graphical Format",
+  previousData: "Previous data, if available, is being shown.",
 };

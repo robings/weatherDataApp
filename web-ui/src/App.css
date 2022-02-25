@@ -23,7 +23,7 @@ header {
   overflow: auto;
   border-bottom: 1px solid;
   border-radius: 0.25em;
-  padding: 4px;
+  padding: 4px 4px 8px 4px;
 }
 
 header svg {
