@@ -5,6 +5,7 @@ import App from "./App";
 import api from "./api/api";
 import sampleResponseJson from "./sampleResponse.json";
 import { WeatherForecastResponse } from "./Components/WeatherForecastResponse";
+import { appStrings } from "./constants/app.strings";
 
 jest.mock("./api/api");
 
@@ -82,7 +83,7 @@ describe("app", () => {
       expect(mockedGetWeatherForecast).toHaveBeenCalledTimes(1);
     });
 
-    userEvent.click(screen.getByRole("button", { name: "Refresh" }));
+    userEvent.click(screen.getByRole("button", { name: appStrings.refresh }));
 
     await waitFor(() => {
       expect(mockedGetWeatherForecast).toHaveBeenCalledTimes(2);
@@ -102,11 +103,38 @@ describe("app", () => {
       expect(mockedGetWeatherForecast).toHaveBeenCalledTimes(1);
     });
 
-    userEvent.click(
-      screen.getByRole("link", { name: "Weather Data in Tabular Format" })
-    );
+    userEvent.click(screen.getByRole("link", { name: appStrings.tableFormat }));
 
     expect(await screen.findAllByRole("table")).toHaveLength(38);
+    expect(
+      screen.getByRole("heading", { name: expectedTitle })
+    ).toBeInTheDocument();
+    expect(mockedGetWeatherForecast).toHaveBeenCalledTimes(1);
+  });
+
+  test("returns to graphical format page on clicking link", async () => {
+    const expectedDate = new Date(sampleResponseJson.dateTimeOfForecast);
+
+    const expectedTitle = `${
+      sampleResponseJson.location
+    } ${expectedDate.toLocaleDateString()} ${expectedDate.toLocaleTimeString()}`;
+
+    const { mockedGetWeatherForecast } = renderApp();
+
+    await waitFor(() => {
+      expect(mockedGetWeatherForecast).toHaveBeenCalledTimes(1);
+    });
+
+    userEvent.click(screen.getByRole("link", { name: appStrings.tableFormat }));
+
+    expect(await screen.findAllByRole("table")).toHaveLength(38);
+    expect(mockedGetWeatherForecast).toHaveBeenCalledTimes(1);
+
+    userEvent.click(
+      screen.getByRole("link", { name: appStrings.graphicalFormat })
+    );
+
+    expect(screen.queryByRole("table")).not.toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: expectedTitle })
     ).toBeInTheDocument();

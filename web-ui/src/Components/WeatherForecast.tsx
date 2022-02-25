@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import WeatherSVG from "./WeatherSVG/WeatherSVG";
 import { ReactComponent as VisibilitySVG } from "../svg/visibility.svg";
 import { ReactComponent as PrecipitationSVG } from "../svg/precipitation.svg";
+import { appStrings } from "../constants/app.strings";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);
@@ -156,7 +157,7 @@ const WeatherForecast = function WeatherForecast(props: {
     <>
       {weatherForecastData && (
         <div>
-          <Link to="/table">Weather Data in Tabular Format</Link>
+          <Link to="/table">{appStrings.tableFormat}</Link>
           {weatherForecastData && (
             <>
               <h2>

@@ -5,15 +5,17 @@ import "./App.css";
 import TableWeatherForecast from "./Components/TableWeatherForecast";
 import WeatherForecast from "./Components/WeatherForecast";
 import { WeatherForecastResponse } from "./Components/WeatherForecastResponse";
+import { appStrings } from "./constants/app.strings";
 import { ReactComponent as Sun } from "./svg/sun.svg";
 
 const App = function App() {
   const [weatherForecastData, setWeatherForecastData] =
     useState<WeatherForecastResponse | null>(null);
-  
+
   const [error, setError] = useState<string>("");
 
   const loadWeatherForecast = useCallback(async () => {
+    setError("");
     let forecast;
 
     try {
@@ -33,7 +35,7 @@ const App = function App() {
       <header>
         <Sun />
         <h1>Weather Forecast</h1>
-        <button onClick={loadWeatherForecast}>Refresh</button>
+        <button onClick={loadWeatherForecast}>{appStrings.refresh}</button>
       </header>
       <Routes>
         <Route

@@ -5,6 +5,7 @@ import {
   WeatherForecastResponse,
 } from "./WeatherForecastResponse";
 import { Link } from "react-router-dom";
+import { appStrings } from "../constants/app.strings";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);
@@ -68,7 +69,7 @@ const TableWeatherForecast = function TableWeatherForecast(props: {
 
   return (
     <div>
-      <Link to="/">&lt;&lt;&lt; Back to Graphical Format</Link>
+      <Link to="/">{appStrings.graphicalFormat}</Link>
       {weatherForecastData && (
         <>
           <h2>

@@ -3,4 +3,7 @@ export const appStrings = {
     title: "Wind",
     gust: "Gusting",
   },
+  refresh: "Refresh",
+  tableFormat: "Tabular Format",
+  graphicalFormat: "Graphical Format",
 };
