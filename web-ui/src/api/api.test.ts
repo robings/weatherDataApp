@@ -2,7 +2,7 @@ import fetch from "jest-fetch-mock";
 import { apiStrings } from "../constants/api.strings";
 import { APIBaseUrl } from "../constants/settings";
 import sampleResponseJson from "../sampleResponse.json";
-import { getWeatherForecast } from "./api";
+import api from "./api";
 
 beforeEach(() => {
   fetch.enableMocks();
@@ -13,7 +13,7 @@ describe("api", () => {
   test("calls fetch with correct method", async () => {
     fetch.mockResponseOnce(JSON.stringify(sampleResponseJson));
 
-    await getWeatherForecast();
+    await api.getWeatherForecast();
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch.mock.calls[0][0]).toBe(`${APIBaseUrl}/weatherforecast`);
@@ -23,7 +23,7 @@ describe("api", () => {
   test("returns expected data", async () => {
     fetch.mockResponseOnce(JSON.stringify(sampleResponseJson));
 
-    const response = await getWeatherForecast();
+    const response = await api.getWeatherForecast();
 
     expect(response).toEqual(sampleResponseJson);
   });
@@ -31,7 +31,9 @@ describe("api", () => {
   test("throws if API unavailable", async () => {
     fetch.mockReject(new Error("API not available."));
 
-    await expect(() => getWeatherForecast()).rejects.toThrow(apiStrings.error);
+    await expect(() => api.getWeatherForecast()).rejects.toThrow(
+      apiStrings.error
+    );
   });
 
   const fourHundredCodes: number[] = [400, 401, 403, 404];
@@ -40,7 +42,7 @@ describe("api", () => {
     async (code) => {
       fetch.mockResponseOnce("Error", { status: code });
 
-      await expect(() => getWeatherForecast()).rejects.toThrow(
+      await expect(() => api.getWeatherForecast()).rejects.toThrow(
         apiStrings.notFound
       );
     }
@@ -49,6 +51,8 @@ describe("api", () => {
   test("throws if a response is received with a 500 status code", async () => {
     fetch.mockResponseOnce("Error", { status: 500 });
 
-    await expect(() => getWeatherForecast()).rejects.toThrow(apiStrings.error);
+    await expect(() => api.getWeatherForecast()).rejects.toThrow(
+      apiStrings.error
+    );
   });
 });

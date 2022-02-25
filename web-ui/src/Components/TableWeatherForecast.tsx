@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ForecastElement,
   ThreeHourlyForecast,
   WeatherForecastResponse,
 } from "./WeatherForecastResponse";
-import sampleResponseJson from "../sampleResponse.json";
 import { Link } from "react-router-dom";
 
 const getDate = (date: string): string => {
@@ -62,26 +61,10 @@ const WeatherForecastDay = function WeatherForecastDay(props: {
   );
 };
 
-const TableWeatherForecast = function TableWeatherForecast() {
-  const [weatherForecastData, setWeatherForecastData] =
-    useState<WeatherForecastResponse | null>(null);
-
-  useEffect(() => {
-    // const getWeatherForecast = async () => {
-    //   const forecastCall = await fetch(
-    //     "https://localhost:5001/weatherforecast"
-    //   );
-    //   let forecast: WeatherForecastResponse | null = null;
-    //   if (forecastCall.status === 200) {
-    //     forecast = await forecastCall.json();
-    //     if (forecast) {
-    //       setWeatherForecastData(forecast);
-    //     }
-    //   }
-    // };
-    // void getWeatherForecast();
-    setWeatherForecastData(sampleResponseJson);
-  }, []);
+const TableWeatherForecast = function TableWeatherForecast(props: {
+  weatherForecastData: WeatherForecastResponse | null;
+}) {
+  const { weatherForecastData } = props;
 
   return (
     <div>
