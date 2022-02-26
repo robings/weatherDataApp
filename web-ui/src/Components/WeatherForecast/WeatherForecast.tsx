@@ -8,18 +8,14 @@ import WindIndicator from "../WindIndicator/WindIndicator";
 import TemperatureWidget from "../TemperatureWidget/TemperatureWidget";
 import { Link } from "react-router-dom";
 import WeatherSVG from "../WeatherSVG/WeatherSVG";
-import { ReactComponent as VisibilitySVG } from "../../svg/visibility.svg";
-import { ReactComponent as PrecipitationSVG } from "../../svg/precipitation.svg";
 import { appStrings } from "../../constants/app.strings";
+import { forecastBgColours } from "../../constants/forecastBgColours";
+import OtherInfoWidget from "../OtherInfoWidget/OtherInfoWidget";
 
 const getDate = (date: string): string => {
   const dateAsDate = new Date(date);
   return `${dateAsDate.toLocaleDateString()} ${dateAsDate.toLocaleTimeString()}`;
 };
-
-const cloudyRegex = new RegExp("cloudy");
-const rainRegex = new RegExp("rain");
-const nightRegex = new RegExp("night");
 
 const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
   forecast: ThreeHourlyForecast;
@@ -52,15 +48,10 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
   const weatherType =
     forecastElements.find((e) => e.type === "Weather Type")?.value ?? "";
 
-  let bgColor =
-    cloudyRegex.test(weatherType.toLocaleLowerCase()) ||
-    rainRegex.test(weatherType.toLocaleLowerCase())
-      ? "#767676"
-      : "#0078D7";
-
-  if (nightRegex.test(weatherType.toLocaleLowerCase())) {
-    bgColor = "#111111";
-  }
+  const bgColorDefinition: string[] =
+    forecastBgColours.find((f) => f[0] === weatherType) || [];
+  const bgColor: string =
+    bgColorDefinition.length > 0 ? bgColorDefinition[1] : "transparent";
 
   const temperature =
     forecastElements.find((e) => e.type === "Temperature")?.value ??
@@ -72,14 +63,18 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
     forecastElements.find((e) => e.type === "Feels Like Temperature")?.value ??
     "C";
 
-  const visiblity =
-    forecastElements.find((e) => e.type === "Visibility")?.value ?? "Unknown";
+  const visibility =
+    forecastElements.find((e) => e.type === "Visibility")?.value ?? "Not found";
 
   const precipitationProbability = forecastElements.find(
     (e) => e.type === "Precipitation Probability"
-  );
+  ) ?? { type: "Precipitation Probability", units: "%", value: "Not found" };
 
-  const uvIndex =
+  const humidity = forecastElements.find(
+    (e) => e.type === "Screen Relative Humidity"
+  ) ?? { type: "Screen Relative Humidity", units: "%", value: "Not found" };
+
+  const UVIndex =
     forecastElements.find((e) => e.type === "Max UV Index")?.value ??
     "Not found";
 
@@ -90,8 +85,11 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
         backgroundColor: bgColor,
       }}
     >
-      <div>
-        <h3 className="dataH3">{`${start} - ${end}: ${weatherType}`}</h3>
+      <div className={useCompactComponents ? "" : "nonCompact"}>
+        <h3
+          className="dataH3"
+          style={useCompactComponents ? {} : { fontSize: "1.5em" }}
+        >{`${start} - ${end}: ${weatherType}`}</h3>
         <WeatherSVG weatherType={weatherType} />
       </div>
       <TemperatureWidget
@@ -106,18 +104,12 @@ const ThreeHourlyForecastDisplay = function ThreeHourlyForecastDisplay(props: {
         windDirection={windInformation.windDirection}
         compact={useCompactComponents}
       />
-      <div className="otherInfo">
-        <div>
-          <VisibilitySVG style={{ width: "20px", height: "20px" }} />
-          {visiblity}
-        </div>
-        <div>
-          <PrecipitationSVG style={{ width: "32px", height: "32px" }} />
-          {precipitationProbability?.value ?? "Not found"}
-          {precipitationProbability?.units ?? ""}
-        </div>
-        <div>UV Index: {uvIndex}</div>
-      </div>
+      <OtherInfoWidget
+        visibility={visibility}
+        precipitationProbability={precipitationProbability}
+        UVIndex={UVIndex}
+        humidity={humidity}
+      />
     </div>
   );
 };

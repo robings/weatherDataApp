@@ -1,4 +1,5 @@
 <svg id="clearNight" width="100" height="100" viewBox="0 0 100 100">
+  <title>Smiling Moon on a clear night</title>
   <path d="M65 90 A 40 40 0 0 1 65 10 C50 15 50 85 65 90" stroke="#111111" fill="#FFEAA7" />
   <circle r="5" cx="45" cy="41" stroke="#111111" strokeWidth="3" fill="#EEEEEE" />
   <circle r="2" cx="46" cy="42" fill="#111111" />

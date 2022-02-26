@@ -1,6 +1,7 @@
 import { render, screen, within, Screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { appStrings } from "../../constants/app.strings";
+import { forecastBgColours } from "../../constants/forecastBgColours";
 import { WeatherForecastResponse } from "../../constants/WeatherForecastResponse";
 import sampleResponseJson from "../../sampleResponse.json";
 import WeatherForecast from "./WeatherForecast";
@@ -183,8 +184,8 @@ describe("weather forecast component", () => {
     }
     return headingComponent[0].parentElement;
   }
+  /* eslint-enable testing-library/no-node-access */
 
-  /* eslint-enable testing-library/prefer-screen-queries */
   test("displays data passed in", () => {
     renderWeatherForecast(minimalDataForTest);
 
@@ -215,7 +216,7 @@ describe("weather forecast component", () => {
     ).toBeInTheDocument();
     expect(within(forecastElement).getByText("90%")).toBeInTheDocument();
     expect(
-      within(forecastElement).getByText("UV Index: 0")
+      within(forecastElement).getByText("Max UV Index: 0")
     ).toBeInTheDocument();
 
     // find the second day element
@@ -246,7 +247,7 @@ describe("weather forecast component", () => {
     ).toBeInTheDocument();
     expect(within(forecastElementTwo).getByText("1%")).toBeInTheDocument();
     expect(
-      within(forecastElementTwo).getByText("UV Index: 0")
+      within(forecastElementTwo).getByText("Max UV Index: 0")
     ).toBeInTheDocument();
 
     // third forecast element
@@ -272,8 +273,59 @@ describe("weather forecast component", () => {
     ).toBeInTheDocument();
     expect(within(forecastElementThree).getByText("0%")).toBeInTheDocument();
     expect(
-      within(forecastElementThree).getByText("UV Index: 0")
+      within(forecastElementThree).getByText("Max UV Index: 0")
     ).toBeInTheDocument();
   });
-  /* eslint-enable testing-library/no-node-access */
+
+  test.each(forecastBgColours)(
+    "displays %p forecast with expected background colour: %p",
+    (weatherType, expectedBgColour) => {
+      const dataForTest: WeatherForecastResponse = {
+        dateTimeOfForecast: "2022-02-24T09:00:00Z",
+        locationId: "TESTID",
+        location: "TESTPLACE",
+        dayData: [
+          {
+            date: "2022-02-24Z",
+            threeHourlyForecasts: [
+              {
+                start: "06:00",
+                end: "09:00",
+                forecastElements: [
+                  { type: "Wind Direction", units: "compass", value: "WSW" },
+                  { type: "Feels Like Temperature", units: "C", value: "3" },
+                  { type: "Wind Gust", units: "mph", value: "29" },
+                  { type: "Screen Relative Humidity", units: "%", value: "90" },
+                  {
+                    type: "Precipitation Probability",
+                    units: "%",
+                    value: "90",
+                  },
+                  { type: "Wind Speed", units: "mph", value: "11" },
+                  { type: "Temperature", units: "C", value: "6" },
+                  { type: "Visibility", units: "", value: "Moderate 4-10 km" },
+                  { type: "Weather Type", units: "", value: weatherType },
+                  { type: "Max UV Index", units: "", value: "0" },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+
+      renderWeatherForecast(dataForTest);
+
+      const forecastElement = getByHeading(
+        screen,
+        `06:00 - 09:00: ${weatherType}`,
+        3,
+        2
+      );
+
+      expect(forecastElement).toHaveAttribute(
+        "style",
+        `background-color: ${expectedBgColour};`
+      );
+    }
+  );
 });

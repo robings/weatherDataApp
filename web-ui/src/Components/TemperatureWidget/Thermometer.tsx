@@ -39,6 +39,7 @@ const Thermometer = function Thermometer(props: ThermometerProps) {
       viewBox="0 0 330 30"
       style={{ fontSize: "7" }}
     >
+      <title>{`Thermometer indicating temperature of ${temperature} degrees centigrade, and feels like temperature of ${feelsLikeTemperature} degrees centigrade`}</title>
       <rect
         id="feelsLikeTempIndicator"
         x={feelsLikeTemperatureXPos}

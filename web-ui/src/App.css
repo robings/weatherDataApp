@@ -105,6 +105,11 @@ header button:hover, a:hover {
   padding-top: 3px;
 }
 
+.forecast div.nonCompact svg {
+  width: 48px;
+  height: 48px;
+}
+
 .temperatureWidget {
   padding: 10px;
   border-radius: 0.5em;

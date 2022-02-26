@@ -43,6 +43,7 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
         viewBox="0 0 100 100"
         style={{ fontSize: "20", float: "left" }}
       >
+        <title>{`Compass indicating wind direction ${windDirection}`}</title>
         <circle
           r="49"
           cx="50"
