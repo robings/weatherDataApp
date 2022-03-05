@@ -57,6 +57,10 @@ const App = function App() {
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <div>
+        Contains public sector information licensed under the Open Government
+        Licence
+      </div>
     </div>
   );
 };
