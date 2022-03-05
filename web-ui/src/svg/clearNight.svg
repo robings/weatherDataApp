@@ -1,0 +1,18 @@
+<svg id="clearNight" width="100" height="100" viewBox="0 0 100 100">
+  <title>Smiling Moon on a clear night</title>
+  <path d="M65 90 A 40 40 0 0 1 65 10 C50 15 50 85 65 90" stroke="#111111" fill="#FFEAA7" />
+  <circle r="5" cx="45" cy="41" stroke="#111111" strokeWidth="3" fill="#EEEEEE" />
+  <circle r="2" cx="46" cy="42" fill="#111111" />
+  <path d="M 46 60 Q 46 65 54 65" stroke="#111111" strokeWidth="3" fill="#FFEAA7" />
+  <g id="stars">
+    <circle r="2" cx="93" cy="89" fill="#FFFFFF" />
+    <circle r="2" cx="3" cy="4" fill="#FFFFFF" />
+    <circle r="2" cx="85" cy="42" fill="#FFFFFF" />
+    <circle r="2" cx="81" cy="14" fill="#FFFFFF" />
+    <circle r="2" cx="30" cy="77" fill="#FFFFFF" />
+    <circle r="2" cx="11" cy="63" fill="#FFFFFF" />
+    <circle r="2" cx="67" cy="99" fill="#FFFFFF" />
+    <circle r="2" cx="86" cy="5" fill="#FFFFFF" />
+    <circle r="2" cx="25" cy="15" fill="#FFFFFF" />
+  </g>
+</svg>

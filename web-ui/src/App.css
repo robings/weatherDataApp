@@ -1,7 +1,10 @@
 :root {
   --background-colour: #0078D7;
   --default-text-colour: #FFFFFF;
+  --forecast-border: #EEEEEE;
+  --temperature-widget-text-colour: #222222;
   --table-header-bg-colour: #0063B1;
+  --error: #E81123;
 }
 
 body {
@@ -15,14 +18,124 @@ body {
   margin: 0 auto;
 }
 
-h1 {
-  border: 1px solid;
+header {
+  margin-top: 5px;
+  overflow: auto;
+  border-bottom: 1px solid;
   border-radius: 0.25em;
-  padding: 4px;
+  padding: 4px 4px 8px 4px;
 }
 
-h3:nth-child(odd) {
-  border-bottom: 1px solid
+header svg {
+  float: left;
+  width: 50px;
+  height: 50px;
+}
+
+header h1 {
+  padding: 4px;
+  margin: 0;
+  float: left;
+}
+
+header button, a {
+  float: right;
+  cursor: pointer;
+  padding: 3px 7px;
+  margin-top: 10px;
+  border: 1px solid;
+  border-radius: 0.25em;
+  background-color: inherit;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: none;
+}
+
+header button:hover, a:hover {
+  color: var(--background-colour);
+  background-color: var(--default-text-colour);
+}
+
+.error {
+  margin-top: 10px;
+  width: fit-content;
+  color: var(--default-text-colour);
+  background-color: var(--error);
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 0.25em;
+}
+
+.component {
+  overflow: auto;
+}
+
+.forecast {
+  padding: 5px;
+  border: 1px solid var(--forecast-border);
+  border-radius: 0.5em;
+  margin: 2px 0;
+  overflow: auto;
+
+}
+
+.forecast div {
+  float: left;
+  overflow: auto;
+  margin-right: 10px;
+}
+
+.forecast div:first-child {
+  float: none;
+}
+
+.forecast div:first-child > * {
+  float: left;
+}
+
+.forecast div:first-child svg {
+  width: 32px;
+  height: 32px;
+  margin:  0 0 3px 3px;
+}
+
+.dataH3 {
+  margin: 0 0 3px 0;
+  padding-top: 3px;
+}
+
+.forecast div.nonCompact svg {
+  width: 48px;
+  height: 48px;
+}
+
+.temperatureWidget {
+  padding: 10px;
+  border-radius: 0.5em;
+  border: 3px solid;
+  background-color: var(--default-text-colour);
+  color: var(--temperature-widget-text-colour);
+  width: fit-content;
+}
+
+.temperatureWidget div, .windSpeeds div {
+  float: none;
+}
+
+.smallText {
+  font-size: 0.75em;
+}
+
+.windSpeeds {
+  float: left;
+  border-top: 1px solid var(--default-text-colour);
+  border-bottom: 1px solid var(--default-text-colour);
+  padding: 5px;
+}
+
+.otherInfo div {
+  float: none;
 }
 
 table {
