@@ -37,7 +37,7 @@ describe("wind indicator", () => {
     ).toBeInTheDocument();
   });
 
-  const compassDirections: Array<Array<string | number>> = [
+  const compassDirections: [string, number][] = [
     ["N", 0],
     ["NNE", 22.5],
     ["NE", 45],
@@ -56,7 +56,7 @@ describe("wind indicator", () => {
     ["NNW", 337.5],
   ];
   test.each(compassDirections)(
-    "rotates compass pointer base on wind direction passed in",
+    "rotates compass pointer based on wind direction passed in",
     (compassDirection, bearingAngle) => {
       const { container } = renderWindIndicator(compassDirection as string);
 
