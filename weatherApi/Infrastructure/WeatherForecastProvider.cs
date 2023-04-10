@@ -13,6 +13,7 @@ namespace weatherApi.Infrastructure
         private readonly IConfiguration _config;
         private readonly string _key;
         private readonly string _locationId;
+        private readonly double _cacheRefreshInMinutes;
         private IClock _clock;
         private Dictionary<string, CachedWeatherForecastResponse> _cachedWeatherForecastResponses;
         private static HttpClient _httpClient;
@@ -22,6 +23,7 @@ namespace weatherApi.Infrastructure
             _config = config;
             _key = _config["Key"];
             _locationId = _config["LocationId"];
+            _cacheRefreshInMinutes = double.Parse(_config["CacheRefreshInMinutes"]);
             _httpClient = new HttpClient
             {
                 BaseAddress = new Uri(_config["BaseURL"])
@@ -34,7 +36,7 @@ namespace weatherApi.Infrastructure
         {
             var cachedResponseAvailable = _cachedWeatherForecastResponses.TryGetValue(_locationId, out var cachedWeatherForecastResponse);
 
-            if (cachedResponseAvailable && cachedWeatherForecastResponse.LastReceived.AddMinutes(30) > _clock.Now())
+            if (cachedResponseAvailable && cachedWeatherForecastResponse.LastReceived.AddMinutes(_cacheRefreshInMinutes) > _clock.Now())
             {
                 return cachedWeatherForecastResponse.Forecast;
             }
@@ -56,4 +58,3 @@ namespace weatherApi.Infrastructure
         }
     }
 }
-
