@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using weatherApi.Infrastructure;
-using weatherApi.Models;
 
 namespace weatherApi.Controllers
 {
@@ -14,30 +11,29 @@ namespace weatherApi.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private readonly IConfiguration _config;
-        private IWeatherForecastConvertor _weatherForecastConvertor;
-        private static HttpClient _httpClient;
+        private readonly IWeatherForecastProvider _weatherForecastProvider;
+        private readonly IWeatherForecastConvertor _weatherForecastConvertor;
 
-        public WeatherForecastController(IConfiguration config, IWeatherForecastConvertor weatherForecastConvertor)
+        public WeatherForecastController(
+            IConfiguration config,
+            IWeatherForecastProvider weatherForecastProvider,
+            IWeatherForecastConvertor weatherForecastConvertor)
         {
             _config = config;
+            _weatherForecastProvider = weatherForecastProvider;
             _weatherForecastConvertor = weatherForecastConvertor;
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(_config["BaseURL"])
-            };
         }
 
         [HttpGet]
-        public async Task<object> Get()
+        public async Task<object> GetForecast()
         {
             var clock = new Clock(() => DateTime.Now);
 
             var key = _config["Key"];
             var locationId = _config["LocationId"];
-            var response = await _httpClient.GetStreamAsync($"val/wxfcs/all/json/{locationId}?res=3hourly&key={key}");
+            var forecast = await _weatherForecastProvider.GetForecastAsync();
 
-            var deserialized = await JsonSerializer.DeserializeAsync<WeatherForecastResponse>(response);
-            var converted = _weatherForecastConvertor.Convert(deserialized, locationId);
+            var converted = _weatherForecastConvertor.Convert(forecast, locationId);
 
             return converted;
         }

@@ -22,7 +22,7 @@ builder.Services.AddControllers();
 
 var clock = new Clock(() => DateTime.Now);
 builder.Services.AddSingleton<IClock>(clock);
-
+builder.Services.AddSingleton<IWeatherForecastProvider, WeatherForecastProvider>();
 builder.Services.AddSingleton<IWeatherForecastConvertor, WeatherForecastConvertor>();
 
 var app = builder.Build();
