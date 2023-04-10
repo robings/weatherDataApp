@@ -19,6 +19,8 @@ builder.Services.AddCors(options =>
                       });
 });
 builder.Services.AddControllers();
+builder.Services.Configure<WeatherForecastProviderOptions>(
+    builder.Configuration.GetSection(WeatherForecastProviderOptions.WeatherForecastProvider));
 
 var clock = new Clock(() => DateTime.Now);
 builder.Services.AddSingleton<IClock>(clock);
