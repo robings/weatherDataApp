@@ -1,26 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using weatherApi.Infrastructure;
 
-namespace weatherApi
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    options.AddPolicy(name: "_allowedOrigins",
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost:3000",
+                                              "https://localhost:3000");
+                      });
+});
+builder.Services.AddControllers();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+var clock = new Clock(() => DateTime.Now);
+builder.Services.AddSingleton<IClock>(clock);
+
+builder.Services.AddSingleton<IWeatherForecastConvertor, WeatherForecastConvertor>();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("_allowedOrigins");
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
