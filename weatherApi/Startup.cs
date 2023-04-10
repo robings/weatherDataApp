@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using weatherApi.Infrastructure;
 
 namespace weatherApi
 {
@@ -35,6 +36,11 @@ namespace weatherApi
                                   });
             });
             services.AddControllers();
+
+            var clock = new Clock(() => DateTime.Now);
+            services.AddSingleton<IClock>(clock);
+
+            services.AddSingleton<IWeatherForecastConvertor, WeatherForecastConvertor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

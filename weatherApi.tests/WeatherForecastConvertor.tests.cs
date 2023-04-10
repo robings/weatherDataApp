@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using NUnit.Framework;
+using weatherApi.Infrastructure;
 using weatherApi.Models;
 
 namespace weatherApi.tests
@@ -250,8 +251,9 @@ namespace weatherApi.tests
         public void WeatherForecastConvertor_ConvertsWeatherForecastAsExpected()
         {
             var clock = new Clock(() => new System.DateTime(2022, 02, 19, 18, 10, 00));
+            var weatherForecastConvertor = new WeatherForecastConvertor(clock);
 
-            var convertedForecast = WeatherForecastConvertor.Convert(sampleWeatherForecastResponse, locationId, clock);
+            var convertedForecast = weatherForecastConvertor.Convert(sampleWeatherForecastResponse, locationId);
 
             var JSONexpectedForecast = JsonSerializer.Serialize(expectedWeatherForecast);
             var JSONconvertedForecast = JsonSerializer.Serialize(convertedForecast);
@@ -263,8 +265,9 @@ namespace weatherApi.tests
         public void WeatherForecastConvertor_WhereDataIsReturnedForTimePriorToCurrentTime_RemovesDataFromResponse()
         {
             var clock = new Clock(() => new System.DateTime(2022, 02, 19, 21, 10, 00));
+            var weatherForecastConvertor = new WeatherForecastConvertor(clock);
 
-            var convertedForecast = WeatherForecastConvertor.Convert(sampleWeatherForecastResponse, locationId, clock);
+            var convertedForecast = weatherForecastConvertor.Convert(sampleWeatherForecastResponse, locationId);
             var filteredExpectedForecast = expectedWeatherForecast;
             var secondThreeHourlyForecastFirstDay = expectedWeatherForecast.DayData[0].ThreeHourlyForecasts[1];
             filteredExpectedForecast.DayData[0].ThreeHourlyForecasts = new List<ThreeHourlyForecast>
