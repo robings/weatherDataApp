@@ -7,13 +7,14 @@ using weatherApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var allowedOrigins = builder.Configuration["AllowedOrigins"];
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "_allowedOrigins",
                       builder =>
                       {
-                          builder.WithOrigins("http://localhost:3000",
-                                              "https://localhost:3000");
+                          builder.WithOrigins(allowedOrigins);
                       });
 });
 builder.Services.AddControllers();
