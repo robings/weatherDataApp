@@ -27,12 +27,14 @@ namespace weatherApi.Controllers
         [HttpGet]
         public async Task<object> Get()
         {
+            var clock = new Clock(() => DateTime.Now);
+
             var key = _config["Key"];
             var locationId = _config["LocationId"];
             var response = await _httpClient.GetStreamAsync($"val/wxfcs/all/json/{locationId}?res=3hourly&key={key}");
 
             var deserialized = await JsonSerializer.DeserializeAsync<WeatherForecastResponse>(response);
-            var converted = WeatherForecastConvertor.Convert(deserialized, locationId);
+            var converted = WeatherForecastConvertor.Convert(deserialized, locationId, clock);
 
             return converted;
         }

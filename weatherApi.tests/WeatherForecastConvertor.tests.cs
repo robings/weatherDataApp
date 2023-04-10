@@ -249,9 +249,30 @@ namespace weatherApi.tests
         [Test]
         public void WeatherForecastConvertor_ConvertsWeatherForecastAsExpected()
         {
-            var convertedForecast = WeatherForecastConvertor.Convert(sampleWeatherForecastResponse, locationId);
+            var clock = new Clock(() => new System.DateTime(2022, 02, 19, 18, 10, 00));
+
+            var convertedForecast = WeatherForecastConvertor.Convert(sampleWeatherForecastResponse, locationId, clock);
 
             var JSONexpectedForecast = JsonSerializer.Serialize(expectedWeatherForecast);
+            var JSONconvertedForecast = JsonSerializer.Serialize(convertedForecast);
+
+            Assert.That(JSONconvertedForecast, Is.EqualTo(JSONexpectedForecast));
+        }
+
+        [Test]
+        public void WeatherForecastConvertor_WhereDataIsReturnedForTimePriorToCurrentTime_RemovesDataFromResponse()
+        {
+            var clock = new Clock(() => new System.DateTime(2022, 02, 19, 21, 10, 00));
+
+            var convertedForecast = WeatherForecastConvertor.Convert(sampleWeatherForecastResponse, locationId, clock);
+            var filteredExpectedForecast = expectedWeatherForecast;
+            var secondThreeHourlyForecastFirstDay = expectedWeatherForecast.DayData[0].ThreeHourlyForecasts[1];
+            filteredExpectedForecast.DayData[0].ThreeHourlyForecasts = new List<ThreeHourlyForecast>
+            {
+                secondThreeHourlyForecastFirstDay,
+            };
+
+            var JSONexpectedForecast = JsonSerializer.Serialize(filteredExpectedForecast);
             var JSONconvertedForecast = JsonSerializer.Serialize(convertedForecast);
 
             Assert.That(JSONconvertedForecast, Is.EqualTo(JSONexpectedForecast));

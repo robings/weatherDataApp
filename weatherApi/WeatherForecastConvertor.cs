@@ -9,13 +9,13 @@ namespace weatherApi
     {
         static ReferenceData reference = new();
 
-        public static WeatherForecastResponseForUI Convert(WeatherForecastResponse forecast, string locationId)
+        public static WeatherForecastResponseForUI Convert(WeatherForecastResponse forecast, string locationId, Clock clock)
         {
             List<DayData> dayData = forecast.SiteRep.DV.Location.Period.Select((period) => {
                 return new DayData
                 {
                     Date = period.value,
-                    ThreeHourlyForecasts = GetThreeHourlyForecasts(period.Rep, forecast.SiteRep.Wx),
+                    ThreeHourlyForecasts = GetThreeHourlyForecasts(period.Rep, forecast.SiteRep.Wx, period.value, clock),
                 };
             }).ToList();
 
@@ -30,9 +30,12 @@ namespace weatherApi
             return weatherForecastForUI;
         }
 
-        internal static List<ThreeHourlyForecast> GetThreeHourlyForecasts(List<Rep> reps, Wx wx)
+        private static List<ThreeHourlyForecast> GetThreeHourlyForecasts(List<Rep> reps, Wx wx, string date, Clock clock)
         {
-            return reps.Select((rep) => {
+            var convertedDate = DateTime.Parse(date).Date;
+            var currentDateTime = clock.Now();
+
+            var threeHourlyForecasts = reps.Select((rep) => {
                 ( string startTime, string endTime ) = GetStartAndEndTime(rep.Name);
 
                 return new ThreeHourlyForecast
@@ -42,9 +45,13 @@ namespace weatherApi
                     ForecastElements = GetForecastElements(rep, wx),
                 };
             }).ToList();
+
+            var forecastsInThePast = threeHourlyForecasts.Where(rep => DetermineIfForecastInPast(rep, currentDateTime, convertedDate));
+
+            return threeHourlyForecasts.Where(rep => forecastsInThePast.All(forecast => forecast != rep)).ToList();
         }
 
-        internal static List<ForecastElement> GetForecastElements(Rep rep, Wx wx)
+        private static List<ForecastElement> GetForecastElements(Rep rep, Wx wx)
         {
             var forecastElementsList = new List<ForecastElement>();
 
@@ -62,7 +69,7 @@ namespace weatherApi
             return forecastElementsList;
         }
 
-        internal static ForecastElement GetForecastElement(Rep rep, Wx wx, string parameter) {
+        private static ForecastElement GetForecastElement(Rep rep, Wx wx, string parameter) {
             var forecastElement = new ForecastElement
             {
                 Type = wx.Param.Find(param => param.name == parameter).ReadableName,
@@ -85,7 +92,7 @@ namespace weatherApi
             return forecastElement;
         }
 
-        internal static (string startTime, string endTime) GetStartAndEndTime(string timeInMinutes)
+        private static (string startTime, string endTime) GetStartAndEndTime(string timeInMinutes)
         {
             var startTimeInMins = int.Parse(timeInMinutes);
             var startTime = startTimeInMins == 0 ? startTimeInMins : startTimeInMins / 60;
@@ -108,6 +115,13 @@ namespace weatherApi
             }
 
             return (startTimeDisplay, endTimeDisplay);
+        }
+
+        private static bool DetermineIfForecastInPast(ThreeHourlyForecast forecast, DateTime currentDateTime, DateTime forecastDate)
+        {
+            var endTime = forecast.End == "00:00" ? "23:59" : forecast.End;
+
+            return TimeSpan.Parse(endTime) < currentDateTime.TimeOfDay && forecastDate == currentDateTime.Date;
         }
     }
 }
