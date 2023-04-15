@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using weatherApi.Models;
 
@@ -16,13 +15,10 @@ namespace weatherApi.Infrastructure
         private Dictionary<string, CachedWeatherForecastResponse> _cachedWeatherForecastResponses;
         private static HttpClient _httpClient;
 
-        public WeatherForecastProvider(IOptions<WeatherForecastProviderOptions> options, IClock clock)
+        public WeatherForecastProvider(IOptions<WeatherForecastProviderOptions> options, IClock clock, HttpClient httpClient)
 		{
             _options = options.Value;
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(_options.BaseURL)
-            };
+            _httpClient = httpClient;
             _cachedWeatherForecastResponses = new Dictionary<string, CachedWeatherForecastResponse>();
             _clock = clock;
         }

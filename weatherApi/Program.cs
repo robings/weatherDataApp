@@ -25,6 +25,10 @@ builder.Services.Configure<WeatherForecastProviderOptions>(
 var clock = new Clock(() => DateTime.Now);
 builder.Services.AddSingleton<IClock>(clock);
 builder.Services.AddSingleton<IWeatherForecastProvider, WeatherForecastProvider>();
+builder.Services.AddHttpClient<IWeatherForecastProvider, WeatherForecastProvider>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration.GetSection("WeatherForecastProvider").GetValue<string>("BaseURL"));
+});
 builder.Services.AddSingleton<IWeatherForecastConvertor, WeatherForecastConvertor>();
 
 var app = builder.Build();
