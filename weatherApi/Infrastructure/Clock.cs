@@ -12,6 +12,11 @@ namespace weatherApi.Infrastructure
         }
 
         public DateTime Now() => _nowProvider();
+
+        public void UpdateClock(Func<DateTime> nowProvider)
+        {
+            _nowProvider = nowProvider;
+        }
     }
 }
 

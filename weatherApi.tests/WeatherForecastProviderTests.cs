@@ -20,11 +20,13 @@ namespace weatherApi.tests
 		private WeatherForecastProvider _weatherForecastProvider;
 		private WeatherForecastProviderOptions _options;
 		private string _sampleWeatherForecast;
+		private MockedRequest _mockRequest;
+		private Clock _clock;
 
 		[SetUp]
 		public void Setup()
 		{
-			var clock = new Clock(() => DateTime.Now);
+			_clock = new Clock(() => DateTime.Now);
 			_options = new WeatherForecastProviderOptions
 			{
 				BaseURL = "http://baseurl/",
@@ -38,7 +40,7 @@ namespace weatherApi.tests
             _sampleWeatherForecast = File.ReadAllText("./sampleApiResponse.json");
 
             _mockHttpMessageHandler = new MockHttpMessageHandler();
-            _mockHttpMessageHandler.When(HttpMethod.Get, $"{_options.BaseURL}val/wxfcs/all/json/{_options.LocationId}?res=3hourly&key={_options.Key}")
+            _mockRequest = _mockHttpMessageHandler.When(HttpMethod.Get, $"{_options.BaseURL}val/wxfcs/all/json/{_options.LocationId}?res=3hourly&key={_options.Key}")
 				.Respond(HttpStatusCode.OK, "application/json", _sampleWeatherForecast);
 
             _mockHttpClientFactory = new Mock<IHttpClientFactory>();
@@ -48,7 +50,7 @@ namespace weatherApi.tests
 					BaseAddress = new Uri(_options.BaseURL)
 				});
 
-			_weatherForecastProvider = new WeatherForecastProvider(iOptions, clock, _mockHttpClientFactory.Object.CreateClient());
+			_weatherForecastProvider = new WeatherForecastProvider(iOptions, _clock, _mockHttpClientFactory.Object.CreateClient());
 		}
 
 		[Test]
@@ -62,6 +64,31 @@ namespace weatherApi.tests
             var JSONconvertedForecast = JsonSerializer.Serialize(converted);
 
 			Assert.That(JSONexpectedForecast, Is.EqualTo(JSONconvertedForecast));
-        } 
-	}
+			Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockRequest), Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task GetForecastAsync_GivenValidRequest_ThenSameRequestWithinCachingTime_OnlyMakesHttpRequestOnce()
+        {
+            await _weatherForecastProvider.GetForecastAsync();
+
+            // call it twice more
+            await _weatherForecastProvider.GetForecastAsync();
+            await _weatherForecastProvider.GetForecastAsync();
+
+            Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockRequest), Is.EqualTo(1));
+        }
+
+		[Test]
+		public async Task GetForecastAsync_GivenValidRequest_ThenSameRequest_AfterCachingExpired_MakesHttpRequestTwice()
+		{
+            await _weatherForecastProvider.GetForecastAsync();
+
+			// change the clock
+			_clock.UpdateClock(() => DateTime.Now.AddMinutes(_options.CacheRefreshInMinutes));
+            await _weatherForecastProvider.GetForecastAsync();
+
+            Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockRequest), Is.EqualTo(2));
+        }
+    }
 }
