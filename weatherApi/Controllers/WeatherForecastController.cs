@@ -53,11 +53,16 @@ namespace weatherApi.Controllers
         public async Task<IResult> GetSiteList(
             [FromQuery] string searchString)
         {
+            if (string.IsNullOrEmpty(searchString))
+            {
+                return TypedResults.BadRequest("Search term is required.");
+            }
+
             var siteList = await _weatherForecastProvider.GetSiteListAsync();
 
             var filterSiteList = _siteListSearcher.SearchSiteList(siteList, searchString);
 
-            var converted = _siteListConvertor.ConvertSiteList(siteList);
+            var converted = _siteListConvertor.ConvertSiteList(filterSiteList);
 
             return TypedResults.Ok(converted);
         }

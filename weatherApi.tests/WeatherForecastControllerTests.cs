@@ -120,7 +120,7 @@ namespace weatherApi.tests
             _mockSiteListConvertor.Setup(m => m.ConvertSiteList(It.IsAny<SiteListResponse>()))
                 .Returns(UISiteList);
 
-            var response = await _weatherForecastController.GetSiteList(null);
+            var response = await _weatherForecastController.GetSiteList("search term");
 
             Assert.That(response, Is.TypeOf<Ok<SiteListResponseForUI>>());
 
@@ -142,6 +142,18 @@ namespace weatherApi.tests
 
             Assert.That(response, Is.TypeOf<Ok<SiteListResponseForUI>>());
             _mockSiteListSearcher.Verify(m => m.SearchSiteList(It.IsAny<SiteListResponse>(), searchTerm), Times.Once());
+        }
+
+        [Test]
+        public async Task GetSiteList_WithNullSearchTerm_ReturnsBadRequest()
+        {
+            var response = await _weatherForecastController.GetSiteList(null);
+
+            Assert.That(response, Is.TypeOf<BadRequest<string>>());
+
+            var result = (BadRequest<string>)response;
+            Assert.That(result.StatusCode, Is.EqualTo(400));
+            Assert.That(result.Value, Is.EqualTo("Search term is required."));
         }
     }
 }
