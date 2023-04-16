@@ -7,6 +7,7 @@ using Moq;
 using NUnit.Framework;
 using weatherApi.Controllers;
 using weatherApi.Infrastructure;
+using weatherApi.Infrastructure.SiteList;
 using weatherApi.Models;
 using weatherApi.Models.SiteListResponse;
 
@@ -18,6 +19,8 @@ namespace weatherApi.tests
 		private Mock<IWeatherForecastConvertor> _mockWeatherForecastConvertor;
         private Mock<ISiteListConvertor> _mockSiteListConvertor;
 		private Mock<IWeatherForecastProvider> _mockWeatherForecastProvider;
+        private Mock<ISiteListSearcher> _mockSiteListSearcher;
+
 		private WeatherForecastController _weatherForecastController;
 
         [SetUp]
@@ -37,12 +40,14 @@ namespace weatherApi.tests
 			_mockWeatherForecastProvider = new Mock<IWeatherForecastProvider>();
 
             _mockSiteListConvertor = new Mock<ISiteListConvertor>();
+            _mockSiteListSearcher = new Mock<ISiteListSearcher>();
 
 			_weatherForecastController = new WeatherForecastController(
 				iOptions,
 				_mockWeatherForecastProvider.Object,
 				_mockWeatherForecastConvertor.Object,
-                _mockSiteListConvertor.Object);
+                _mockSiteListConvertor.Object,
+                _mockSiteListSearcher.Object);
         }
 
 		[Test]
@@ -123,6 +128,20 @@ namespace weatherApi.tests
 
             Assert.That(result.StatusCode, Is.EqualTo(200));
             Assert.That(result.Value, Is.EqualTo(UISiteList));
+        }
+
+        [Test]
+        public async Task GetSiteList_UsesSearchTerm()
+        {
+            var searchTerm = "search";
+
+            _mockSiteListSearcher.Setup(m => m.SearchSiteList(It.IsAny<SiteListResponse>(), searchTerm))
+                .Returns(new SiteListResponse());
+
+            var response = await _weatherForecastController.GetSiteList(searchTerm);
+
+            Assert.That(response, Is.TypeOf<Ok<SiteListResponseForUI>>());
+            _mockSiteListSearcher.Verify(m => m.SearchSiteList(It.IsAny<SiteListResponse>(), searchTerm), Times.Once());
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using weatherApi.Infrastructure;
 using Microsoft.Extensions.Options;
+using weatherApi.Infrastructure.SiteList;
 
 namespace weatherApi.Controllers
 {
@@ -16,17 +17,20 @@ namespace weatherApi.Controllers
         private readonly IWeatherForecastProvider _weatherForecastProvider;
         private readonly IWeatherForecastConvertor _weatherForecastConvertor;
         private readonly ISiteListConvertor _siteListConvertor;
+        private readonly ISiteListSearcher _siteListSearcher;
 
         public WeatherForecastController(
             IOptions<WeatherForecastOptions> options,
             IWeatherForecastProvider weatherForecastProvider,
             IWeatherForecastConvertor weatherForecastConvertor,
-            ISiteListConvertor siteListConvertor)
+            ISiteListConvertor siteListConvertor,
+            ISiteListSearcher siteListSearcher)
         {
             _options = options.Value;
             _weatherForecastProvider = weatherForecastProvider;
             _weatherForecastConvertor = weatherForecastConvertor;
             _siteListConvertor = siteListConvertor;
+            _siteListSearcher = siteListSearcher;
         }
 
         [HttpGet]
@@ -50,6 +54,8 @@ namespace weatherApi.Controllers
             [FromQuery] string searchString)
         {
             var siteList = await _weatherForecastProvider.GetSiteListAsync();
+
+            var filterSiteList = _siteListSearcher.SearchSiteList(siteList, searchString);
 
             var converted = _siteListConvertor.ConvertSiteList(siteList);
 
