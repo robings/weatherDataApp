@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using weatherApi.Infrastructure;
+using weatherApi.Infrastructure.SiteList;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,7 @@ builder.Services.AddHttpClient<IWeatherForecastProvider, WeatherForecastProvider
 });
 builder.Services.AddSingleton<IWeatherForecastConvertor, WeatherForecastConvertor>();
 builder.Services.AddSingleton<ISiteListConvertor, SiteListConvertor>();
+builder.Services.AddSingleton<ISiteListSearcher, SiteListSearcher>();
 
 var app = builder.Build();
 
