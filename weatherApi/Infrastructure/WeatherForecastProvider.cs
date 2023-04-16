@@ -11,13 +11,13 @@ namespace weatherApi.Infrastructure
 {
 	public class WeatherForecastProvider : IWeatherForecastProvider
 	{
-        private readonly WeatherForecastProviderOptions _options;
+        private readonly WeatherForecastOptions _options;
         private IClock _clock;
         private Dictionary<string, CachedWeatherForecastResponse> _cachedWeatherForecastResponses;
         private CachedSiteListResponse _cachedSiteListResponse;
         private static HttpClient _httpClient;
 
-        public WeatherForecastProvider(IOptions<WeatherForecastProviderOptions> options, IClock clock, HttpClient httpClient)
+        public WeatherForecastProvider(IOptions<WeatherForecastOptions> options, IClock clock, HttpClient httpClient)
 		{
             _options = options.Value;
             _httpClient = httpClient;

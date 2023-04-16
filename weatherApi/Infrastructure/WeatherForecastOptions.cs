@@ -1,7 +1,7 @@
 ﻿using System;
 namespace weatherApi.Infrastructure
 {
-	public class WeatherForecastProviderOptions
+	public class WeatherForecastOptions
 	{
 		public const string WeatherForecastProvider = "WeatherForecastProvider";
 

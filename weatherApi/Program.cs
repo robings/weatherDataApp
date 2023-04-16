@@ -19,8 +19,8 @@ builder.Services.AddCors(options =>
                       });
 });
 builder.Services.AddControllers();
-builder.Services.Configure<WeatherForecastProviderOptions>(
-    builder.Configuration.GetSection(WeatherForecastProviderOptions.WeatherForecastProvider));
+builder.Services.Configure<WeatherForecastOptions>(
+    builder.Configuration.GetSection(WeatherForecastOptions.WeatherForecastProvider));
 
 var clock = new Clock(() => DateTime.Now);
 builder.Services.AddSingleton<IClock>(clock);
@@ -30,6 +30,7 @@ builder.Services.AddHttpClient<IWeatherForecastProvider, WeatherForecastProvider
     client.BaseAddress = new Uri(builder.Configuration.GetSection("WeatherForecastProvider").GetValue<string>("BaseURL"));
 });
 builder.Services.AddSingleton<IWeatherForecastConvertor, WeatherForecastConvertor>();
+builder.Services.AddSingleton<ISiteListConvertor, SiteListConvertor>();
 
 var app = builder.Build();
 

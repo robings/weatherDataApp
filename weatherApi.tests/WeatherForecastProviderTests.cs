@@ -19,7 +19,7 @@ namespace weatherApi.tests
 		private MockHttpMessageHandler _mockHttpMessageHandler;
 		private Mock<IHttpClientFactory> _mockHttpClientFactory;
 		private WeatherForecastProvider _weatherForecastProvider;
-		private WeatherForecastProviderOptions _options;
+		private WeatherForecastOptions _options;
 		private string _sampleWeatherForecast;
 		private string _sampleSiteList;
 		private MockedRequest _mockWeatherForecastRequest;
@@ -30,7 +30,7 @@ namespace weatherApi.tests
 		public void Setup()
 		{
 			_clock = new Clock(() => DateTime.Now);
-			_options = new WeatherForecastProviderOptions
+			_options = new WeatherForecastOptions
 			{
 				BaseURL = "http://baseurl/",
 				Key = "TestKey",
@@ -38,7 +38,7 @@ namespace weatherApi.tests
 				CacheRefreshInMinutes = 1,
 			};
 
-			var iOptions = Options.Create<WeatherForecastProviderOptions>(_options);
+			var iOptions = Options.Create<WeatherForecastOptions>(_options);
 
             _sampleWeatherForecast = File.ReadAllText("./sampleApiResponse.json");
 			_sampleSiteList = File.ReadAllText("./sampleSitesApiResponse.json");
