@@ -1,16 +1,38 @@
 import AsyncSelect from "react-select/async";
 import api from "../../api/api";
-import { ActionMeta } from "react-select/dist/declarations/src";
+import { ActionMeta, StylesConfig } from "react-select/dist/declarations/src";
+import { appStrings } from "../../constants/app.strings";
 
 interface SelectOption {
   value: number;
   label: string;
 }
 
+const selectStyles: StylesConfig<SelectOption> = {
+  container: (styles) => ({
+    ...styles,
+    width: "50%",
+    display: "inline-block",
+  }),
+  option: (styles, { isSelected }) => {
+    return {
+      ...styles,
+      color: "black",
+      backgroundColor: isSelected ? "transparent" : "transparent",
+      ":hover": {
+        ...styles[":hover"],
+        color: "white",
+        backgroundColor: "orange",
+      },
+    };
+  },
+};
+
 const SiteSelector = function SiteSelector(props: {
   setLocationId: (locationId: string) => void;
+  loadWeatherForecast: () => void;
 }) {
-  const { setLocationId } = props;
+  const { setLocationId, loadWeatherForecast } = props;
 
   const defaultOptions: Array<SelectOption> = [];
 
@@ -51,15 +73,21 @@ const SiteSelector = function SiteSelector(props: {
   };
 
   return (
-    <div>
-      <label>Select Site</label>
-      <AsyncSelect
-        loadOptions={loadOptions}
-        cacheOptions
-        defaultOptions={defaultOptions}
-        onChange={onChange}
-      />
-    </div>
+    <form>
+      <span>
+        <label htmlFor="location">Select Location</label>
+        <AsyncSelect<SelectOption>
+          loadOptions={loadOptions}
+          cacheOptions
+          defaultOptions={defaultOptions}
+          onChange={onChange}
+          styles={selectStyles}
+          id="location"
+          name="location"
+        />
+      </span>
+      <button onClick={loadWeatherForecast}>{appStrings.refresh}</button>
+    </form>
   );
 };
 

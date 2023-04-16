@@ -38,11 +38,10 @@ header h1 {
   float: left;
 }
 
-header button, a {
+form button, a {
   float: right;
   cursor: pointer;
-  padding: 3px 7px;
-  margin-top: 10px;
+  padding: 9px 7px;
   border: 1px solid;
   border-radius: 0.25em;
   background-color: inherit;
@@ -52,9 +51,19 @@ header button, a {
   text-decoration: none;
 }
 
-header button:hover, a:hover {
+form button:hover, a:hover {
   color: var(--background-colour);
   background-color: var(--default-text-colour);
+}
+
+form {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--default-text-colour);
+}
+
+label {
+  display: inline-block;
+  padding-right: 10px;
 }
 
 .error {

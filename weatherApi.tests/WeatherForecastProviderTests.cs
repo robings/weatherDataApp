@@ -57,7 +57,8 @@ namespace weatherApi.tests
 					BaseAddress = new Uri(_options.BaseURL)
 				});
 
-			_weatherForecastProvider = new WeatherForecastProvider(iOptions, _clock, _mockHttpClientFactory.Object.CreateClient());
+            var cacheStorage = new CacheStorage();
+			_weatherForecastProvider = new WeatherForecastProvider(iOptions, _clock, _mockHttpClientFactory.Object.CreateClient(), cacheStorage);
 		}
 
 		[Test]

@@ -25,6 +25,7 @@ builder.Services.Configure<WeatherForecastOptions>(
 
 var clock = new Clock(() => DateTime.Now);
 builder.Services.AddSingleton<IClock>(clock);
+builder.Services.AddSingleton<CacheStorage>();
 builder.Services.AddSingleton<IWeatherForecastProvider, WeatherForecastProvider>();
 builder.Services.AddHttpClient<IWeatherForecastProvider, WeatherForecastProvider>(client =>
 {
