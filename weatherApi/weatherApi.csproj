@@ -8,10 +8,14 @@
     <None Remove="Models\" />
     <None Remove="Infrastructure\" />
     <None Remove="Models\SiteListResponse\" />
+    <None Remove="Infrastructure\WeatherForecast\" />
+    <None Remove="Infrastructure\SiteList\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Models\SiteListResponse\" />
+    <Folder Include="Infrastructure\WeatherForecast\" />
+    <Folder Include="Infrastructure\SiteList\" />
   </ItemGroup>
 </Project>
