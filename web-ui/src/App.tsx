@@ -7,10 +7,13 @@ import WeatherForecast from "./Components/WeatherForecast/WeatherForecast";
 import { WeatherForecastResponse } from "./constants/WeatherForecastResponse";
 import { appStrings } from "./constants/app.strings";
 import { ReactComponent as Sun } from "./svg/sun.svg";
+import SiteSelector from "./Components/SiteSelector/SiteSelector";
 
 const App = function App() {
   const [weatherForecastData, setWeatherForecastData] =
     useState<WeatherForecastResponse | null>(null);
+
+  const [locationId, setLocationId] = useState<string>("");
 
   const [error, setError] = useState<string>("");
 
@@ -19,12 +22,12 @@ const App = function App() {
     let forecast;
 
     try {
-      forecast = await api.getWeatherForecast();
+      forecast = await api.getWeatherForecast(locationId);
       setWeatherForecastData(forecast);
     } catch (e: unknown) {
       setError((e as Error).message);
     }
-  }, []);
+  }, [locationId]);
 
   useEffect(() => {
     void loadWeatherForecast();
@@ -42,6 +45,7 @@ const App = function App() {
           {error} {appStrings.previousData}
         </div>
       )}
+      <SiteSelector setLocationId={setLocationId} />
       <Routes>
         <Route
           path="/"
