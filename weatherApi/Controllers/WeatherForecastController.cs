@@ -46,7 +46,8 @@ namespace weatherApi.Controllers
         }
 
         [HttpGet("sites")]
-        public async Task<IResult> GetSiteList()
+        public async Task<IResult> GetSiteList(
+            [FromQuery] string searchString)
         {
             var siteList = await _weatherForecastProvider.GetSiteListAsync();
 

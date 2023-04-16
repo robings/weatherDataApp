@@ -115,7 +115,7 @@ namespace weatherApi.tests
             _mockSiteListConvertor.Setup(m => m.ConvertSiteList(It.IsAny<SiteListResponse>()))
                 .Returns(UISiteList);
 
-            var response = await _weatherForecastController.GetSiteList();
+            var response = await _weatherForecastController.GetSiteList(null);
 
             Assert.That(response, Is.TypeOf<Ok<SiteListResponseForUI>>());
 
