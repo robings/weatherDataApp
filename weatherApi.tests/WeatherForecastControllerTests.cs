@@ -54,11 +54,12 @@ namespace weatherApi.tests
 				DateTimeOfForecast = DateTime.Now.Date.ToShortDateString(),
 			};
 
+            var locationId = "2";
 
-            _mockWeatherForecastConvertor.Setup(m => m.Convert(It.IsAny<WeatherForecastResponse>(), It.IsAny<string>()))
+            _mockWeatherForecastConvertor.Setup(m => m.Convert(It.IsAny<WeatherForecastResponse>(), locationId))
 				.Returns(UIWeatherForecast);
 
-			var response = await _weatherForecastController.GetForecast();
+			var response = await _weatherForecastController.GetForecast(locationId);
 
 			Assert.That(response, Is.TypeOf<Ok<WeatherForecastResponseForUI>>());
 
@@ -67,6 +68,28 @@ namespace weatherApi.tests
 			Assert.That(result.StatusCode, Is.EqualTo(200));
 			Assert.That(result.Value, Is.EqualTo(UIWeatherForecast));
 		}
+
+        [Test]
+        public async Task GetForecast_WhereLocationIdIsNull_ReturnsOk_WithForecastForLocationInOptions()
+        {
+            var UIWeatherForecast = new WeatherForecastResponseForUI
+            {
+                LocationId = "1",
+                DateTimeOfForecast = DateTime.Now.Date.ToShortDateString(),
+            };
+
+            _mockWeatherForecastConvertor.Setup(m => m.Convert(It.IsAny<WeatherForecastResponse>(), _options.LocationId))
+                .Returns(UIWeatherForecast);
+
+            var response = await _weatherForecastController.GetForecast(null);
+
+            Assert.That(response, Is.TypeOf<Ok<WeatherForecastResponseForUI>>());
+
+            var result = (Ok<WeatherForecastResponseForUI>)response;
+
+            Assert.That(result.StatusCode, Is.EqualTo(200));
+            Assert.That(result.Value, Is.EqualTo(UIWeatherForecast));
+        }
 
         [Test]
         public async Task GetSiteList_ReturnsOk_WithSites()

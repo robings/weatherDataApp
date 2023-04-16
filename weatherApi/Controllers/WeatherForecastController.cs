@@ -30,10 +30,15 @@ namespace weatherApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IResult> GetForecast()
+        public async Task<IResult> GetForecast(
+            [FromQuery] string locationId)
         {
-            var locationId = _options.LocationId;
-            var forecast = await _weatherForecastProvider.GetForecastAsync();
+            if (locationId is null)
+            {
+                locationId = _options.LocationId;
+            }
+
+            var forecast = await _weatherForecastProvider.GetForecastAsync(locationId);
 
             var converted = _weatherForecastConvertor.Convert(forecast, locationId);
 

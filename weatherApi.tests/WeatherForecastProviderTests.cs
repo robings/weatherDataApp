@@ -65,10 +65,10 @@ namespace weatherApi.tests
 		{
 			var expectedConvertedWeatherForecast = JsonSerializer.Deserialize<WeatherForecastResponse>(_sampleWeatherForecast);
 
-			var converted = await _weatherForecastProvider.GetForecastAsync();
+			var receivedWeatherForecast = await _weatherForecastProvider.GetForecastAsync(_options.LocationId);
 
             var JSONexpectedForecast = JsonSerializer.Serialize(expectedConvertedWeatherForecast);
-            var JSONconvertedForecast = JsonSerializer.Serialize(converted);
+            var JSONconvertedForecast = JsonSerializer.Serialize(receivedWeatherForecast);
 
 			Assert.That(JSONexpectedForecast, Is.EqualTo(JSONconvertedForecast));
 			Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockWeatherForecastRequest), Is.EqualTo(1));
@@ -77,11 +77,11 @@ namespace weatherApi.tests
         [Test]
         public async Task GetForecastAsync_GivenValidRequest_ThenSameRequestWithinCachingTime_OnlyMakesHttpRequestOnce()
         {
-            await _weatherForecastProvider.GetForecastAsync();
+            await _weatherForecastProvider.GetForecastAsync(_options.LocationId);
 
             // call it twice more
-            await _weatherForecastProvider.GetForecastAsync();
-            await _weatherForecastProvider.GetForecastAsync();
+            await _weatherForecastProvider.GetForecastAsync(_options.LocationId);
+            await _weatherForecastProvider.GetForecastAsync(_options.LocationId);
 
             Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockWeatherForecastRequest), Is.EqualTo(1));
         }
@@ -89,11 +89,11 @@ namespace weatherApi.tests
 		[Test]
 		public async Task GetForecastAsync_GivenValidRequest_ThenSameRequest_AfterCachingExpired_MakesHttpRequestTwice()
 		{
-            await _weatherForecastProvider.GetForecastAsync();
+            await _weatherForecastProvider.GetForecastAsync(_options.LocationId);
 
 			// change the clock
 			_clock.UpdateClock(() => DateTime.Now.AddMinutes(_options.CacheRefreshInMinutes));
-            await _weatherForecastProvider.GetForecastAsync();
+            await _weatherForecastProvider.GetForecastAsync(_options.LocationId);
 
             Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockWeatherForecastRequest), Is.EqualTo(2));
         }

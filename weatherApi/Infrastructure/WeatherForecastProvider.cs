@@ -26,16 +26,16 @@ namespace weatherApi.Infrastructure
             _clock = clock;
         }
 
-        public async Task<WeatherForecastResponse> GetForecastAsync()
+        public async Task<WeatherForecastResponse> GetForecastAsync(string locationId)
         {
-            var cachedResponseAvailable = _cachedWeatherForecastResponses.TryGetValue(_options.LocationId, out var cachedWeatherForecastResponse);
+            var cachedResponseAvailable = _cachedWeatherForecastResponses.TryGetValue(locationId, out var cachedWeatherForecastResponse);
 
             if (cachedResponseAvailable && cachedWeatherForecastResponse.LastReceived.AddMinutes(_options.CacheRefreshInMinutes) > _clock.Now())
             {
                 return cachedWeatherForecastResponse.Forecast;
             }
 
-            var response = await _httpClient.GetStreamAsync($"val/wxfcs/all/json/{_options.LocationId}?res=3hourly&key={_options.Key}");
+            var response = await _httpClient.GetStreamAsync($"val/wxfcs/all/json/{locationId}?res=3hourly&key={_options.Key}");
             var forecast = await JsonSerializer.DeserializeAsync<WeatherForecastResponse>(response);
 
             var newCachedWeatherForecastResponse = new CachedWeatherForecastResponse
@@ -44,9 +44,9 @@ namespace weatherApi.Infrastructure
                 LastReceived = _clock.Now(),
             };
 
-            _cachedWeatherForecastResponses.Remove(_options.LocationId);
+            _cachedWeatherForecastResponses.Remove(locationId);
 
-            _cachedWeatherForecastResponses.Add(_options.LocationId, newCachedWeatherForecastResponse);
+            _cachedWeatherForecastResponses.Add(locationId, newCachedWeatherForecastResponse);
 
             return forecast;
         }

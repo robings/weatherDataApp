@@ -6,7 +6,7 @@ namespace weatherApi.Infrastructure
 {
 	public interface IWeatherForecastProvider
 	{
-		public Task<WeatherForecastResponse> GetForecastAsync();
+		public Task<WeatherForecastResponse> GetForecastAsync(string locationId);
 
 		public Task<SiteListResponse> GetSiteListAsync();
 	}
