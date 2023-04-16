@@ -10,6 +10,7 @@ using NUnit.Framework;
 using RichardSzalay.MockHttp;
 using weatherApi.Infrastructure;
 using weatherApi.Models;
+using weatherApi.Models.SiteListResponse;
 
 namespace weatherApi.tests
 {
@@ -20,7 +21,9 @@ namespace weatherApi.tests
 		private WeatherForecastProvider _weatherForecastProvider;
 		private WeatherForecastProviderOptions _options;
 		private string _sampleWeatherForecast;
-		private MockedRequest _mockRequest;
+		private string _sampleSiteList;
+		private MockedRequest _mockWeatherForecastRequest;
+		private MockedRequest _mockSiteListRequest;
 		private Clock _clock;
 
 		[SetUp]
@@ -38,10 +41,14 @@ namespace weatherApi.tests
 			var iOptions = Options.Create<WeatherForecastProviderOptions>(_options);
 
             _sampleWeatherForecast = File.ReadAllText("./sampleApiResponse.json");
+			_sampleSiteList = File.ReadAllText("./sampleSitesApiResponse.json");
 
             _mockHttpMessageHandler = new MockHttpMessageHandler();
-            _mockRequest = _mockHttpMessageHandler.When(HttpMethod.Get, $"{_options.BaseURL}val/wxfcs/all/json/{_options.LocationId}?res=3hourly&key={_options.Key}")
+            _mockWeatherForecastRequest = _mockHttpMessageHandler.When(HttpMethod.Get, $"{_options.BaseURL}val/wxfcs/all/json/{_options.LocationId}?res=3hourly&key={_options.Key}")
 				.Respond(HttpStatusCode.OK, "application/json", _sampleWeatherForecast);
+
+            _mockSiteListRequest = _mockHttpMessageHandler.When(HttpMethod.Get, $"{_options.BaseURL}val/wxfcs/all/json/sitelist?key={_options.Key}")
+                .Respond(HttpStatusCode.OK, "application/json", _sampleSiteList);
 
             _mockHttpClientFactory = new Mock<IHttpClientFactory>();
 			_mockHttpClientFactory.Setup(x => x.CreateClient(It.IsAny<string>()))
@@ -64,7 +71,7 @@ namespace weatherApi.tests
             var JSONconvertedForecast = JsonSerializer.Serialize(converted);
 
 			Assert.That(JSONexpectedForecast, Is.EqualTo(JSONconvertedForecast));
-			Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockRequest), Is.EqualTo(1));
+			Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockWeatherForecastRequest), Is.EqualTo(1));
         }
 
         [Test]
@@ -76,7 +83,7 @@ namespace weatherApi.tests
             await _weatherForecastProvider.GetForecastAsync();
             await _weatherForecastProvider.GetForecastAsync();
 
-            Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockRequest), Is.EqualTo(1));
+            Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockWeatherForecastRequest), Is.EqualTo(1));
         }
 
 		[Test]
@@ -88,7 +95,45 @@ namespace weatherApi.tests
 			_clock.UpdateClock(() => DateTime.Now.AddMinutes(_options.CacheRefreshInMinutes));
             await _weatherForecastProvider.GetForecastAsync();
 
-            Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockRequest), Is.EqualTo(2));
+            Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockWeatherForecastRequest), Is.EqualTo(2));
+        }
+
+        [Test]
+        public async Task GetSiteListAsync_GivenValidRequest_ReturnsExpectedWeatherForecastResponse()
+        {
+            var expectedConvertedSiteList = JsonSerializer.Deserialize<SiteListResponse>(_sampleSiteList);
+
+            var receivedSiteList = await _weatherForecastProvider.GetSiteListAsync();
+
+            var JSONexpectedSiteList = JsonSerializer.Serialize(expectedConvertedSiteList);
+            var JSONconvertedSiteList = JsonSerializer.Serialize(receivedSiteList);
+
+            Assert.That(JSONexpectedSiteList, Is.EqualTo(JSONconvertedSiteList));
+            Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockSiteListRequest), Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task GetSiteListAsync_GivenValidRequest_ThenSameRequestWithinCachingTime_OnlyMakesHttpRequestOnce()
+        {
+            await _weatherForecastProvider.GetSiteListAsync();
+
+            // call it twice more
+            await _weatherForecastProvider.GetSiteListAsync();
+            await _weatherForecastProvider.GetSiteListAsync();
+
+            Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockSiteListRequest), Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task GetSiteListAsync_GivenValidRequest_ThenSameRequest_AfterCachingExpired_MakesHttpRequestTwice()
+        {
+            await _weatherForecastProvider.GetSiteListAsync();
+
+            // change the clock
+            _clock.UpdateClock(() => DateTime.Now.AddDays(1));
+            await _weatherForecastProvider.GetSiteListAsync();
+
+            Assert.That(_mockHttpMessageHandler.GetMatchCount(_mockSiteListRequest), Is.EqualTo(2));
         }
     }
 }

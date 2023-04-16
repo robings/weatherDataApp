@@ -20,12 +20,16 @@
   <ItemGroup>
     <None Remove="sampleApiResponse.json" />
     <None Remove="sampleApiResponse2.json" />
+    <None Remove="sampleSitesApiResponse.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="sampleApiResponse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sampleApiResponse2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSitesApiResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

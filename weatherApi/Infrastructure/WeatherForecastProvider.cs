@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using weatherApi.Models;
+using weatherApi.Models.SiteListResponse;
 
 namespace weatherApi.Infrastructure
 {
@@ -13,6 +14,7 @@ namespace weatherApi.Infrastructure
         private readonly WeatherForecastProviderOptions _options;
         private IClock _clock;
         private Dictionary<string, CachedWeatherForecastResponse> _cachedWeatherForecastResponses;
+        private CachedSiteListResponse _cachedSiteListResponse;
         private static HttpClient _httpClient;
 
         public WeatherForecastProvider(IOptions<WeatherForecastProviderOptions> options, IClock clock, HttpClient httpClient)
@@ -20,6 +22,7 @@ namespace weatherApi.Infrastructure
             _options = options.Value;
             _httpClient = httpClient;
             _cachedWeatherForecastResponses = new Dictionary<string, CachedWeatherForecastResponse>();
+            _cachedSiteListResponse = null;
             _clock = clock;
         }
 
@@ -46,6 +49,29 @@ namespace weatherApi.Infrastructure
             _cachedWeatherForecastResponses.Add(_options.LocationId, newCachedWeatherForecastResponse);
 
             return forecast;
+        }
+
+        public async Task<SiteListResponse> GetSiteListAsync()
+        {
+            var cachedResponseAvailable = _cachedSiteListResponse != null;
+
+            if (cachedResponseAvailable && _cachedSiteListResponse.LastReceived.AddDays(1).Date > _clock.Now().Date)
+            {
+                return _cachedSiteListResponse.SiteListResponse;
+            }
+
+            var response = await _httpClient.GetStreamAsync($"val/wxfcs/all/json/sitelist?key={_options.Key}");
+            var siteList = await JsonSerializer.DeserializeAsync<SiteListResponse>(response);
+
+            var newCachedSiteListResponse = new CachedSiteListResponse
+            {
+                SiteListResponse = siteList,
+                LastReceived = _clock.Now(),
+            };
+
+            _cachedSiteListResponse = newCachedSiteListResponse;
+
+            return siteList;
         }
     }
 }
