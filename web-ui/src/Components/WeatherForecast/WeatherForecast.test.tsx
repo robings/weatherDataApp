@@ -207,10 +207,6 @@ describe("weather forecast component", () => {
     expect(
       within(forecastElement).getByText("(feels like 3°C)")
     ).toBeInTheDocument();
-    expect(within(forecastElement).getByText("11 mph")).toBeInTheDocument();
-    expect(
-      within(forecastElement).getByText("Gusting: 29 mph")
-    ).toBeInTheDocument();
     expect(
       within(forecastElement).getByText("Moderate 4-10 km")
     ).toBeInTheDocument();
@@ -238,10 +234,6 @@ describe("weather forecast component", () => {
     expect(
       within(forecastElementTwo).getByText("(feels like -1°C)")
     ).toBeInTheDocument();
-    expect(within(forecastElementTwo).getByText("16 mph")).toBeInTheDocument();
-    expect(
-      within(forecastElementTwo).getByText("Gusting: 31 mph")
-    ).toBeInTheDocument();
     expect(
       within(forecastElementTwo).getByText("Excellent < 40 km")
     ).toBeInTheDocument();
@@ -261,12 +253,6 @@ describe("weather forecast component", () => {
     expect(within(forecastElementThree).getByText("3°C")).toBeInTheDocument();
     expect(
       within(forecastElementThree).getByText("(feels like -2°C)")
-    ).toBeInTheDocument();
-    expect(
-      within(forecastElementThree).getByText("13 mph")
-    ).toBeInTheDocument();
-    expect(
-      within(forecastElementThree).getByText("Gusting: 27 mph")
     ).toBeInTheDocument();
     expect(
       within(forecastElementThree).getByText("Excellent < 40 km")

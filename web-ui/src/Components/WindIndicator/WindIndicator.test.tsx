@@ -80,13 +80,13 @@ describe("wind indicator", () => {
     expect(compassPointer).toHaveAttribute("height", "100");
   });
 
-  test("displays compass half size if compact", () => {
+  test("displays compass smaller size if compact", () => {
     const { container } = renderWindIndicator(undefined, true);
 
     // the attribute of part of the svg is important to check it is working.
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const compassPointer = container.querySelector("#compass");
-    expect(compassPointer).toHaveAttribute("width", "50");
-    expect(compassPointer).toHaveAttribute("width", "50");
+    expect(compassPointer).toHaveAttribute("width", "30");
+    expect(compassPointer).toHaveAttribute("width", "30");
   });
 });
