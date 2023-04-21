@@ -12,6 +12,9 @@ const ForecastTile = function ForecastTile(props: {
   const { start, end, forecastElements } = forecast;
   const [compactValue, setCompactValue] = useState<boolean>(compact);
 
+  const weatherType =
+    forecastElements.find((e) => e.type === "Weather Type")?.value ?? "";
+
   const timeSpan = `${start} - ${end}`;
   const temperature =
     forecastElements.find((e) => e.type === "Temperature")?.value ??
@@ -52,7 +55,7 @@ const ForecastTile = function ForecastTile(props: {
       {compactValue && (
         <div className="newForecast" onClick={toggleSize}>
           <div className="quarters">
-            <WeatherSVG weatherType="Partly cloudy (day)" />
+            <WeatherSVG weatherType={weatherType} />
           </div>
           <div className="quarters">
             <div className="tempContainer">
@@ -90,7 +93,7 @@ const ForecastTile = function ForecastTile(props: {
       )}
       {!compactValue && (
         <div className="newForecast big" onClick={toggleSize}>
-          <WeatherSVG weatherType="Partly cloudy (day)" />
+          <WeatherSVG weatherType={weatherType} />
           <div className="bigTempContainer">
             <div className="tempContainer">
               <div className="temp">{temperatureForDisplay}</div>
