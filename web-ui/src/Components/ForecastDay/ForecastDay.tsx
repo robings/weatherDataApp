@@ -5,10 +5,11 @@ import ForecastTile from "../ForecastTile/ForecastTile";
 const ForecastDay = function ForecastDay(props: { dayData: DayData }) {
   const { date, threeHourlyForecasts } = props.dayData;
   const dayDate = new Date(date);
+  const day = dayDate.toLocaleDateString("en-gb", { weekday: "long" });
 
   return (
     <div className="forecastDay">
-      <h3>{dayDate.toLocaleDateString()}</h3>
+      <h3>{`${day} ${dayDate.toLocaleDateString()}`}</h3>
       {threeHourlyForecasts.map((threeHourlyForecast, index) => {
         return (
           <React.Fragment key={`${threeHourlyForecast.start}-${index}`}>

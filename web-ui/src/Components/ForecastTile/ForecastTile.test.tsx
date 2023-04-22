@@ -66,7 +66,9 @@ describe("forecast tile component", () => {
 
       const expectedTimeSpan = `${forecast.start} - ${forecast.end}`;
 
-      expect(screen.getByText(expectedTimeSpan)).toBeInTheDocument();
+      expect(
+        screen.getByRole("heading", { name: expectedTimeSpan })
+      ).toBeInTheDocument();
     });
 
     test("displays temperature", () => {

@@ -3,15 +3,27 @@
   --default-text-colour: #000000;
   --forecast-border: #EEEEEE;
   --temperature-widget-text-colour: #222222;
-  --wind-indicator-border: #ccccee;
-  --table-header-bg-colour: #0063B1;
+  --wind-indicator-border: #CCCCEE;
+  --table-header-bg-colour: #CA6702;
+  --dark-slate-grey: #1C2527;
   --error: #E81123;
+}
+
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("./fonts/IBMPlexMono-Regular.ttf");
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url("./fonts/IBMPlexSans-Regular.ttf");
 }
 
 body {
   background-color: var(--background-colour);
   font-size: 16px;
   color: var(--default-text-colour);
+  font-family: "IBMPlexSans"
 }
 
 .App {
@@ -54,7 +66,7 @@ form button, a {
 
 form button:hover, a:hover {
   color: var(--background-colour);
-  background-color: var(--default-text-colour);
+  background-color: var(--table-header-bg-colour);
 }
 
 form {
@@ -89,7 +101,6 @@ label {
   border-radius: 0.5em;
   margin: 2px 0;
   overflow: auto;
-
 }
 
 .forecast div {
@@ -163,6 +174,7 @@ th, td {
 
 th {
   background-color: var(--table-header-bg-colour);
+  color: var(--background-colour);
 }
 
 .forecastDay {
@@ -286,14 +298,16 @@ th {
   float: right;
 }
 
-.newForecast .time {
+.newForecast h4 {
   font-size: 0.5em;
   float: right;
   padding-right: 3px;
   padding-bottom: 2px;
+  font-weight: normal;
+  margin: 0;
 }
 
-.big .time {
+.big h4 {
   font-size: 0.75em;
 }
 

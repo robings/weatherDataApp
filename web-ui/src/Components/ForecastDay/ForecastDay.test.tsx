@@ -60,9 +60,13 @@ describe("Forecast Day Component", () => {
   test("displays date as title", () => {
     renderForecastDay();
 
+    var date = new Date(dayData.date);
+    var day = date.toLocaleDateString("en-gb", { weekday: "long" });
+    var expectedDisplay = `${day} ${date.toLocaleDateString()}`;
+
     expect(
       screen.getByRole("heading", {
-        name: new Date(dayData.date).toLocaleDateString(),
+        name: expectedDisplay,
       })
     ).toBeInTheDocument();
   });
@@ -77,7 +81,9 @@ describe("Forecast Day Component", () => {
     renderForecastDay();
 
     tileTitles.forEach((tileTitle) => {
-      expect(screen.getByText(tileTitle)).toBeInTheDocument();
+      expect(
+        screen.getByRole("heading", { name: tileTitle })
+      ).toBeInTheDocument();
     });
   });
 });

@@ -3,6 +3,29 @@ import WindIndicator from "../WindIndicator/WindIndicator";
 import { ReactComponent as PrecipitationSVG } from "../../svg/precipitation.svg";
 import { useState } from "react";
 import { ThreeHourlyForecast } from "../../constants/WeatherForecastResponse";
+import { temperatureColours } from "../../constants/temperatureColours";
+
+const determineTemperatureColour = (temperature: string): string => {
+  const temperatureAsNumber: number = parseInt(temperature);
+
+  if (temperatureAsNumber <= 0) {
+    return temperatureColours.subZero;
+  }
+
+  if (temperatureAsNumber <= 10) {
+    return temperatureColours.cold;
+  }
+
+  if (temperatureAsNumber <= 20) {
+    return temperatureColours.warm;
+  }
+
+  if (temperatureAsNumber <= 30) {
+    return temperatureColours.hot;
+  }
+
+  return temperatureColours.veryHot;
+};
 
 const ForecastTile = function ForecastTile(props: {
   compact: boolean;
@@ -59,7 +82,12 @@ const ForecastTile = function ForecastTile(props: {
           </div>
           <div className="quarters">
             <div className="tempContainer">
-              <div className="temp">{temperatureForDisplay}</div>
+              <div
+                className="temp"
+                style={{ color: `${determineTemperatureColour(temperature)}` }}
+              >
+                {temperatureForDisplay}
+              </div>
             </div>
           </div>
           <div className="quarters">
@@ -88,7 +116,7 @@ const ForecastTile = function ForecastTile(props: {
               </div>
             </div>
           </div>
-          <div className="time">{timeSpan}</div>
+          <h4>{timeSpan}</h4>
         </div>
       )}
       {!compactValue && (
@@ -96,10 +124,22 @@ const ForecastTile = function ForecastTile(props: {
           <WeatherSVG weatherType={weatherType} />
           <div className="bigTempContainer">
             <div className="tempContainer">
-              <div className="temp">{temperatureForDisplay}</div>
+              <div
+                className="temp"
+                style={{ color: `${determineTemperatureColour(temperature)}` }}
+              >
+                {temperatureForDisplay}
+              </div>
             </div>
             <div className="tempContainer">
-              <div className="feelsLike">{feelsLikeTemperatureForDisplay}</div>
+              <div
+                className="feelsLike"
+                style={{
+                  color: `${determineTemperatureColour(feelsLikeTemperature)}`,
+                }}
+              >
+                {feelsLikeTemperatureForDisplay}
+              </div>
             </div>
           </div>
           <div className="precipitation">
@@ -116,7 +156,7 @@ const ForecastTile = function ForecastTile(props: {
               compact={false}
             />
           </div>
-          <div className="time">{timeSpan}</div>
+          <h4>{timeSpan}</h4>
         </div>
       )}
     </>
