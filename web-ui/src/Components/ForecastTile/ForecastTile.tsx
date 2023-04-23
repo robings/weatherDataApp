@@ -121,24 +121,33 @@ const ForecastTile = function ForecastTile(props: {
       )}
       {!compactValue && (
         <div className="newForecast big" onClick={toggleSize}>
-          <WeatherSVG weatherType={weatherType} />
-          <div className="bigTempContainer">
-            <div className="tempContainer">
-              <div
-                className="temp"
-                style={{ color: `${determineTemperatureColour(temperature)}` }}
-              >
-                {temperatureForDisplay}
-              </div>
+          <div className="summaryContainer">
+            <div className="summary">
+              <WeatherSVG weatherType={weatherType} />
+              <div className="summaryText">{weatherType}</div>
             </div>
-            <div className="tempContainer">
-              <div
-                className="feelsLike"
-                style={{
-                  color: `${determineTemperatureColour(feelsLikeTemperature)}`,
-                }}
-              >
-                {feelsLikeTemperatureForDisplay}
+            <div className="bigTempContainer">
+              <div className="tempContainer">
+                <div
+                  className="temp"
+                  style={{
+                    color: `${determineTemperatureColour(temperature)}`,
+                  }}
+                >
+                  {temperatureForDisplay}
+                </div>
+              </div>
+              <div className="tempContainer">
+                <div
+                  className="feelsLike"
+                  style={{
+                    color: `${determineTemperatureColour(
+                      feelsLikeTemperature
+                    )}`,
+                  }}
+                >
+                  {feelsLikeTemperatureForDisplay}
+                </div>
               </div>
             </div>
           </div>

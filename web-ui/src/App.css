@@ -161,6 +161,10 @@ label {
   float: none;
 }
 
+.forecastTable {
+  padding-bottom: 30px;
+}
+
 table {
   border: 1px solid var(--default-text-colour);
   border-collapse: collapse;
@@ -178,9 +182,8 @@ th {
 }
 
 .forecastDay {
-  width: 100%;
   overflow: auto;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .newForecast {
@@ -193,7 +196,7 @@ th {
   overflow: auto;
   cursor: pointer;
   margin-right: 5px;
-  float: left;
+  display: inline-block;
 }
 
 .big {
@@ -264,10 +267,30 @@ th {
   font-size: 2em;
 }
 
+.big .summaryContainer {
+  width: 100%;
+  overflow: auto;
+}
+
+.big .summary {
+  float: left;
+  overflow: auto;
+}
+
+.big .summaryText {
+  float: right;
+  max-width: 130px;
+  padding-top: 18px;
+}
+
 .newForecast .indicatorContainer {
   float: right;
   padding-top: 7px;
   padding-right: 7px;
+}
+
+.big .indicatorContainer {
+  padding-top: 0;
 }
 
 .newForecast .indicatorContainer svg {
@@ -309,6 +332,7 @@ th {
 
 .big h4 {
   font-size: 0.75em;
+  padding-right: 10px;
 }
 
 .big .feelsLike {

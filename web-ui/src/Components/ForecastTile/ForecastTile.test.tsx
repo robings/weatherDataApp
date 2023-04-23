@@ -95,5 +95,11 @@ describe("forecast tile component", () => {
       expect(screen.getByText("11 mph")).toBeInTheDocument();
       expect(screen.getByText("Gusting: 29 mph")).toBeInTheDocument();
     });
+
+    test("displays summary text", () => {
+      renderForecastTile(false);
+
+      expect(screen.getByText("Heavy rain")).toBeInTheDocument();
+    });
   });
 });
