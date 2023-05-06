@@ -100,70 +100,11 @@ label {
   overflow: auto;
 }
 
-.forecast {
-  padding: 5px;
-  border: 1px solid var(--forecast-border);
-  border-radius: 0.5em;
-  margin: 2px 0;
-  overflow: auto;
-}
-
-.forecast div {
-  float: left;
-  overflow: auto;
-  margin-right: 10px;
-}
-
-.forecast div:first-child {
-  float: none;
-}
-
-.forecast div:first-child > * {
-  float: left;
-}
-
-.forecast div:first-child svg {
-  width: 32px;
-  height: 32px;
-  margin:  0 0 3px 3px;
-}
-
-.dataH3 {
-  margin: 0 0 3px 0;
-  padding-top: 3px;
-}
-
-.forecast div.nonCompact svg {
-  width: 48px;
-  height: 48px;
-}
-
-.temperatureWidget {
-  padding: 10px;
-  border-radius: 0.5em;
-  border: 3px solid;
-  background-color: var(--black);
-  color: var(--temperature-widget-text-colour);
-  width: fit-content;
-}
-
-.temperatureWidget div, .windSpeeds div {
-  float: none;
-}
-
-.smallText {
-  font-size: 0.75em;
-}
-
 .windSpeeds {
   float: left;
   border-top: 1px solid var(--wind-indicator-border);
   border-bottom: 1px solid var(--wind-indicator-border);
   padding: 5px 0 5px 5px;
-}
-
-.otherInfo div {
-  float: none;
 }
 
 .forecastTable {
@@ -198,7 +139,7 @@ th {
   padding: 0 2px;
 }
 
-.newForecast {
+.forecast {
   width: 110px;
   height: 110px;
   background-color: var(--white);
@@ -211,149 +152,84 @@ th {
   display: inline-block;
 }
 
-.newForecast:hover {
+.forecast:hover {
   border-color: var(--dark-slate-grey);
 }
 
-.big {
-  width: 250px;
-  height: 250px;
-  border-radius: 1em;
-  border-width: 2px;
-}
-
-.newForecast .quarters {
+.forecast .quarters {
   width: 50%;
   height: 44%;
   float: left;
 }
 
-.newForecast svg {
+.forecast svg {
   width: 32px;
   height: 32px;
   margin: 7px;
 }
 
-.big svg {
-  width: 48px;
-  height: 48px;
-  margin: 7px;
-}
-
-.newForecast .otherData svg {
-  float: left;
-  width: 20px;
-  height: 20px;
-  margin: 14px 0 0 0;
-}
-
-.newForecast.big .otherData svg {
-  width: 30px;
-  height: 30px;
-  margin-left: 10px;
-  margin-top: 7px;
-}
-
-.newForecast .otherData .otherLineOneText {
-  float: left;
-  padding-top: 21px;
-  padding-left: 7px;
-  font-size: 0.5em;
-}
-
-.big .otherData {
-  float: left;
-}
-
-.big .otherData .otherLineOneText {
-  padding-top: 16px;
-  padding-left: 0;
-  font-size: 0.75em;
-}
-
-.big .otherData .otherLineTwoText {
-  float: left;
-  padding-top: 0;
-  padding-left: 12px;
-  font-size: 0.75em;
-}
-
-.newForecast .tempContainer {
+.forecast .tempContainer {
   overflow: auto;
   width: 100%;
 }
 
-.newForecast .temp {
+.forecast .temp {
   padding-top: 7px;
   padding-right: 10px;
   font-size: 1.5em;
   float: right;
 }
 
-.big .temp {
-  font-size: 2em;
-}
-
-.big .summaryContainer {
-  width: 100%;
-  overflow: auto;
-}
-
-.big .summary {
+.forecast .otherData svg {
   float: left;
-  overflow: auto;
+  width: 20px;
+  height: 20px;
+  margin: 14px 0 0 0;
 }
 
-.big .summaryText {
-  float: right;
-  max-width: 115px;
-  padding-top: 18px;
+.forecast.expandedTile .otherData svg {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 7px;
 }
 
-.newForecast .indicatorContainer {
+.forecast .otherData .otherLineOneText {
+  float: left;
+  padding-top: 21px;
+  padding-left: 7px;
+  font-size: 0.5em;
+}
+
+.forecast .indicatorContainer {
   float: right;
   padding-top: 7px;
   padding-right: 7px;
 }
 
-.big .indicatorContainer {
-  padding-top: 0;
-}
-
-.newForecast .indicatorContainer svg {
+.forecast .indicatorContainer svg {
   width: 28px;
   height: 28px;
   margin: 0px;
 }
 
-.big .indicatorContainer svg {
-  width: 100px;
-  height: 100px;
-}
-
-.big .otherContainer {
-  width: 100%;
-  float: left;
-  margin-bottom: 7px;
-}
-
-.newForecast .windNos {
+.forecast .windNos {
   height: 100%;
   float: left;
 }
 
-.newForecast .windSpeed {
+.forecast .windSpeed {
   padding-top: 7px;
   font-size: 1em;
   float: right;
 }
 
-.newForecast .gusts {
+.forecast .gusts {
   font-size: 0.5em;
   float: right;
 }
 
-.newForecast h4 {
+.forecast h4 {
   font-size: 0.5em;
   float: right;
   padding-right: 3px;
@@ -362,12 +238,77 @@ th {
   margin: 0;
 }
 
-.big h4 {
+.expandedTile {
+  width: 250px;
+  height: 250px;
+  border-radius: 1em;
+  border-width: 2px;
+}
+
+.expandedTile svg {
+  width: 48px;
+  height: 48px;
+  margin: 7px;
+}
+
+.expandedTile .otherData {
+  float: left;
+}
+
+.expandedTile .otherData .otherLineOneText {
+  padding-top: 16px;
+  padding-left: 0;
+  font-size: 0.75em;
+}
+
+.expandedTile .otherData .otherLineTwoText {
+  float: left;
+  padding-top: 0;
+  padding-left: 12px;
+  font-size: 0.75em;
+}
+
+.expandedTile .temp {
+  font-size: 2em;
+}
+
+.expandedTile .summaryContainer {
+  width: 100%;
+  overflow: auto;
+}
+
+.expandedTile .summary {
+  float: left;
+  overflow: auto;
+}
+
+.expandedTile .summaryText {
+  float: right;
+  max-width: 115px;
+  padding-top: 18px;
+}
+
+.expandedTile .indicatorContainer {
+  padding-top: 0;
+}
+
+.expandedTile .indicatorContainer svg {
+  width: 100px;
+  height: 100px;
+}
+
+.expandedTile .otherContainer {
+  width: 100%;
+  float: left;
+  margin-bottom: 7px;
+}
+
+.expandedTile h4 {
   font-size: 0.75em;
   padding-right: 10px;
 }
 
-.big .feelsLike {
+.expandedTile .feelsLike {
   font-size: 1em;
   float: right;
   padding-right: 10px;

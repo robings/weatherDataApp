@@ -88,7 +88,7 @@ const ForecastTile = function ForecastTile(props: {
   return (
     <>
       {compactValue && (
-        <div className="newForecast" onClick={toggleSize}>
+        <div className="forecast" onClick={toggleSize}>
           <div className="quarters">
             <WeatherSVG weatherType={weatherType} />
           </div>
@@ -132,7 +132,7 @@ const ForecastTile = function ForecastTile(props: {
         </div>
       )}
       {!compactValue && (
-        <div className="newForecast big" onClick={toggleSize}>
+        <div className="forecast expandedTile" onClick={toggleSize}>
           <div className="summaryContainer">
             <div className="summary">
               <WeatherSVG weatherType={weatherType} />
