@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ForecastDay from "./ForecastDay";
 import { DayData } from "../../constants/WeatherForecastResponse";
+import userEvent from "@testing-library/user-event";
 
 describe("Forecast Day Component", () => {
   const dayData: DayData = {
@@ -53,8 +54,11 @@ describe("Forecast Day Component", () => {
     ],
   };
 
-  const renderForecastDay = (data: DayData = dayData) => {
-    render(<ForecastDay dayData={data} first={true} />);
+  const renderForecastDay = (
+    data: DayData = dayData,
+    expanded: boolean = true
+  ) => {
+    render(<ForecastDay dayData={data} first={expanded} />);
   };
 
   test("displays date as title", () => {
@@ -84,6 +88,70 @@ describe("Forecast Day Component", () => {
       expect(
         screen.getByRole("heading", { name: tileTitle })
       ).toBeInTheDocument();
+    });
+  });
+
+  test("when not expanded, does not display tile for each three hourly forecast", () => {
+    const tileTitles: Array<string> = dayData.threeHourlyForecasts.map(
+      (forecast) => {
+        return `${forecast.start} - ${forecast.end}`;
+      }
+    );
+
+    renderForecastDay(dayData, false);
+
+    tileTitles.forEach((tileTitle) => {
+      expect(
+        screen.queryByRole("heading", { name: tileTitle })
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  test("expands to show three hourly forecast on clicking button, where forecast is not showing", () => {
+    const tileTitles: Array<string> = dayData.threeHourlyForecasts.map(
+      (forecast) => {
+        return `${forecast.start} - ${forecast.end}`;
+      }
+    );
+
+    renderForecastDay(dayData, false);
+
+    tileTitles.forEach((tileTitle) => {
+      expect(
+        screen.queryByRole("heading", { name: tileTitle })
+      ).not.toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByRole("button"));
+
+    tileTitles.forEach((tileTitle) => {
+      expect(
+        screen.getByRole("heading", { name: tileTitle })
+      ).toBeInTheDocument();
+    });
+  });
+
+  test("hides three hourly forecast on clicking button, where forecast is showing", () => {
+    const tileTitles: Array<string> = dayData.threeHourlyForecasts.map(
+      (forecast) => {
+        return `${forecast.start} - ${forecast.end}`;
+      }
+    );
+
+    renderForecastDay();
+
+    tileTitles.forEach((tileTitle) => {
+      expect(
+        screen.getByRole("heading", { name: tileTitle })
+      ).toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByRole("button"));
+
+    tileTitles.forEach((tileTitle) => {
+      expect(
+        screen.queryByRole("heading", { name: tileTitle })
+      ).not.toBeInTheDocument();
     });
   });
 });
