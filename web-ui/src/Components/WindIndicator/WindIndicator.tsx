@@ -133,7 +133,7 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
         <div
           className="windSpeeds"
           style={{
-            marginTop: compact ? "0" : "45px",
+            marginTop: compact ? "0" : "25px",
           }}
         >
           <div>{`${speed} mph`}</div>

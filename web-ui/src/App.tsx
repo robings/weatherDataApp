@@ -7,7 +7,6 @@ import { WeatherForecastResponse } from "./constants/WeatherForecastResponse";
 import { appStrings } from "./constants/app.strings";
 import { ReactComponent as Sun } from "./svg/sun.svg";
 import SiteSelector from "./Components/SiteSelector/SiteSelector";
-import ForecastDay from "./Components/ForecastDay/ForecastDay";
 import Forecast from "./Components/Forecast/Forecast";
 
 const App = function App() {
@@ -39,7 +38,6 @@ const App = function App() {
       <header>
         <Sun />
         <h1>Weather Forecast</h1>
-        {/* <button onClick={loadWeatherForecast}>{appStrings.refresh}</button> */}
       </header>
       {error && (
         <div className="error">

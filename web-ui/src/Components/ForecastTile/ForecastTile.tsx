@@ -1,6 +1,7 @@
 import WeatherSVG from "../WeatherSVG/WeatherSVG";
 import WindIndicator from "../WindIndicator/WindIndicator";
 import { ReactComponent as PrecipitationSVG } from "../../svg/precipitation.svg";
+import { ReactComponent as VisibilitySVG } from "../../svg/visibility.svg";
 import { useState } from "react";
 import { ThreeHourlyForecast } from "../../constants/WeatherForecastResponse";
 import { temperatureColours } from "../../constants/temperatureColours";
@@ -49,13 +50,6 @@ const ForecastTile = function ForecastTile(props: {
     "Not found";
   const feelsLikeTemperatureForDisplay = `${feelsLikeTemperature}°`;
 
-  const precipitationProbability = forecastElements.find(
-    (e) => e.type === "Precipitation Probability"
-  ) ?? { type: "Precipitation Probability", units: "%", value: "Not found" };
-  const precipitationProbabilityForDisplay = `${
-    precipitationProbability.value ?? "Not found"
-  }${precipitationProbability.units ?? ""}`;
-
   const windInformation = {
     speed:
       forecastElements.find((e) => e.type === "Wind Speed")?.value ??
@@ -67,6 +61,24 @@ const ForecastTile = function ForecastTile(props: {
       forecastElements.find((e) => e.type === "Wind Direction")?.value ??
       "Not found",
   };
+
+  const precipitationProbability = forecastElements.find(
+    (e) => e.type === "Precipitation Probability"
+  ) ?? { type: "Precipitation Probability", units: "%", value: "Not found" };
+  const precipitationProbabilityForDisplay = `${
+    precipitationProbability.value ?? "Not found"
+  }${precipitationProbability.units ?? ""}`;
+
+  const visibility =
+    forecastElements.find((e) => e.type === "Visibility")?.value ?? "Not found";
+
+  const humidity = forecastElements.find(
+    (e) => e.type === "Screen Relative Humidity"
+  ) ?? { type: "Screen Relative Humidity", units: "%", value: "Not found" };
+
+  const UVIndex =
+    forecastElements.find((e) => e.type === "Max UV Index")?.value ??
+    "Not found";
 
   const toggleSize = () => {
     const valueToSet = !compactValue;
@@ -91,8 +103,8 @@ const ForecastTile = function ForecastTile(props: {
             </div>
           </div>
           <div className="quarters">
-            <div className="precipitation">
-              <div className="precipitationPercentage">
+            <div className="otherData">
+              <div className="otherLineOneText">
                 {precipitationProbabilityForDisplay}
               </div>
               <PrecipitationSVG style={{ width: "20px", height: "20px" }} />
@@ -151,12 +163,6 @@ const ForecastTile = function ForecastTile(props: {
               </div>
             </div>
           </div>
-          <div className="precipitation">
-            <PrecipitationSVG />
-            <div className="precipitationPercentage">
-              {precipitationProbabilityForDisplay}
-            </div>
-          </div>
           <div className="indicatorContainer">
             <WindIndicator
               speed={windInformation.speed}
@@ -164,6 +170,28 @@ const ForecastTile = function ForecastTile(props: {
               windDirection={windInformation.windDirection}
               compact={false}
             />
+          </div>
+          <div className="otherContainer">
+            <div className="otherData">
+              <PrecipitationSVG />
+              <div className="otherLineOneText">
+                {precipitationProbabilityForDisplay}
+              </div>
+            </div>
+            <div className="otherData">
+              <VisibilitySVG />
+              <div className="otherLineOneText">{visibility}</div>
+            </div>
+            <div className="otherData">
+              <div className="otherLineTwoText">Max UV Index: {UVIndex}</div>
+            </div>
+            <div className="otherData">
+              <div className="otherLineTwoText">
+                {"Humidity: "}
+                {humidity.value ?? "Not found"}
+                {humidity.units ?? ""}
+              </div>
+            </div>
           </div>
           <h4>{timeSpan}</h4>
         </div>
