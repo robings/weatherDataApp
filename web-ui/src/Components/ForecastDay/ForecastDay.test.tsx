@@ -54,7 +54,7 @@ describe("Forecast Day Component", () => {
   };
 
   const renderForecastDay = (data: DayData = dayData) => {
-    render(<ForecastDay dayData={data} />);
+    render(<ForecastDay dayData={data} first={true} />);
   };
 
   test("displays date as title", () => {

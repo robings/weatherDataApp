@@ -26,7 +26,7 @@ const Forecast = function Forecast(props: {
           {weatherForecastData.dayData.map((day, index) => {
             return (
               <div key={`${day.date}-${index}`}>
-                <ForecastDay dayData={day} />
+                <ForecastDay dayData={day} first={index === 0} />
               </div>
             );
           })}

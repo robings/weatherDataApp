@@ -51,8 +51,7 @@ header h1 {
   float: left;
 }
 
-form button, a {
-  float: right;
+form button, a, .forecastDay button {
   cursor: pointer;
   padding: 9px 7px;
   border: 1px solid;
@@ -64,7 +63,11 @@ form button, a {
   text-decoration: none;
 }
 
-form button:hover, a:hover {
+form button, a {
+  float: right;
+}
+
+form button:hover, a:hover, .forecastDay button:hover {
   color: var(--background-colour);
   background-color: var(--table-header-bg-colour);
 }
@@ -184,6 +187,12 @@ th {
 .forecastDay {
   overflow: auto;
   margin-bottom: 25px;
+}
+
+.forecastDay button {
+  font-size: 0.75em;
+  margin-left: 0.25em;
+  padding: 0 2px;
 }
 
 .newForecast {
