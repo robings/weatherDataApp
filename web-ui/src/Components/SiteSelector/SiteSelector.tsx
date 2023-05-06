@@ -14,15 +14,25 @@ const selectStyles: StylesConfig<SelectOption> = {
     width: "50%",
     display: "inline-block",
   }),
+  control: (styles, { isFocused }) => {
+    return {
+      ...styles,
+      boxShadow: isFocused ? "0 0 0 1px #CA6702" : "none",
+      borderColor: isFocused ? "#CA6702" : "hsl(0, 0%, 80%)",
+      "&:hover": {
+        borderColor: isFocused ? "#CA6702" : "hsl(0, 0%, 80%)",
+      },
+    };
+  },
   option: (styles, { isSelected }) => {
     return {
       ...styles,
-      color: "black",
+      color: "#000000",
       backgroundColor: isSelected ? "transparent" : "transparent",
       ":hover": {
         ...styles[":hover"],
-        color: "white",
-        backgroundColor: "orange",
+        color: "#FFFFFF",
+        backgroundColor: "#CA6702",
       },
     };
   },
