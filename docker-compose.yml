@@ -13,3 +13,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    volumes:
+      - "./web-ui:/app"
+      - "/app/node_modules"
+    environment:
+      - WATCHPACK_POLLING=true
