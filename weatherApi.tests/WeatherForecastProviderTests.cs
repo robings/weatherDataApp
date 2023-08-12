@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using RichardSzalay.MockHttp;
 using weatherApi.Infrastructure;
@@ -17,7 +17,7 @@ namespace weatherApi.tests
 	public class WeatherForecastProviderTest
 	{
 		private MockHttpMessageHandler _mockHttpMessageHandler;
-		private Mock<IHttpClientFactory> _mockHttpClientFactory;
+		private IHttpClientFactory _mockHttpClientFactory;
 		private WeatherForecastProvider _weatherForecastProvider;
 		private WeatherForecastOptions _options;
 		private string _sampleWeatherForecast;
@@ -50,15 +50,15 @@ namespace weatherApi.tests
             _mockSiteListRequest = _mockHttpMessageHandler.When(HttpMethod.Get, $"{_options.BaseURL}val/wxfcs/all/json/sitelist?key={_options.Key}")
                 .Respond(HttpStatusCode.OK, "application/json", _sampleSiteList);
 
-            _mockHttpClientFactory = new Mock<IHttpClientFactory>();
-			_mockHttpClientFactory.Setup(x => x.CreateClient(It.IsAny<string>()))
+            _mockHttpClientFactory = Substitute.For<IHttpClientFactory>();
+			_mockHttpClientFactory.CreateClient(Arg.Any<string>())
 				.Returns(new HttpClient(_mockHttpMessageHandler)
 				{
 					BaseAddress = new Uri(_options.BaseURL)
 				});
 
             var cacheStorage = new CacheStorage();
-			_weatherForecastProvider = new WeatherForecastProvider(iOptions, _clock, _mockHttpClientFactory.Object.CreateClient(), cacheStorage);
+			_weatherForecastProvider = new WeatherForecastProvider(iOptions, _clock, _mockHttpClientFactory.CreateClient(), cacheStorage);
 		}
 
 		[Test]

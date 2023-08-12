@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Options;
-using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using weatherApi.Controllers;
 using weatherApi.Infrastructure;
@@ -16,10 +16,10 @@ namespace weatherApi.tests
 	public class WeatherForecastControllerTests
 	{
         private WeatherForecastOptions _options;
-		private Mock<IWeatherForecastConvertor> _mockWeatherForecastConvertor;
-        private Mock<ISiteListConvertor> _mockSiteListConvertor;
-		private Mock<IWeatherForecastProvider> _mockWeatherForecastProvider;
-        private Mock<ISiteListSearcher> _mockSiteListSearcher;
+		private IWeatherForecastConvertor _mockWeatherForecastConvertor;
+        private ISiteListConvertor _mockSiteListConvertor;
+		private IWeatherForecastProvider _mockWeatherForecastProvider;
+        private ISiteListSearcher _mockSiteListSearcher;
 
 		private WeatherForecastController _weatherForecastController;
 
@@ -36,18 +36,18 @@ namespace weatherApi.tests
 
             var iOptions = Options.Create<WeatherForecastOptions>(_options);
 
-            _mockWeatherForecastConvertor = new Mock<IWeatherForecastConvertor>();
-			_mockWeatherForecastProvider = new Mock<IWeatherForecastProvider>();
+            _mockWeatherForecastConvertor = Substitute.For<IWeatherForecastConvertor>();
+			_mockWeatherForecastProvider = Substitute.For<IWeatherForecastProvider>();
 
-            _mockSiteListConvertor = new Mock<ISiteListConvertor>();
-            _mockSiteListSearcher = new Mock<ISiteListSearcher>();
+            _mockSiteListConvertor = Substitute.For<ISiteListConvertor>();
+            _mockSiteListSearcher = Substitute.For<ISiteListSearcher>();
 
 			_weatherForecastController = new WeatherForecastController(
 				iOptions,
-				_mockWeatherForecastProvider.Object,
-				_mockWeatherForecastConvertor.Object,
-                _mockSiteListConvertor.Object,
-                _mockSiteListSearcher.Object);
+				_mockWeatherForecastProvider,
+				_mockWeatherForecastConvertor,
+                _mockSiteListConvertor,
+                _mockSiteListSearcher);
         }
 
 		[Test]
@@ -61,7 +61,7 @@ namespace weatherApi.tests
 
             var locationId = "2";
 
-            _mockWeatherForecastConvertor.Setup(m => m.Convert(It.IsAny<WeatherForecastResponse>(), locationId))
+            _mockWeatherForecastConvertor.Convert(Arg.Any<WeatherForecastResponse>(), locationId)
 				.Returns(UIWeatherForecast);
 
 			var response = await _weatherForecastController.GetForecast(locationId);
@@ -83,7 +83,7 @@ namespace weatherApi.tests
                 DateTimeOfForecast = DateTime.Now.Date.ToShortDateString(),
             };
 
-            _mockWeatherForecastConvertor.Setup(m => m.Convert(It.IsAny<WeatherForecastResponse>(), _options.LocationId))
+            _mockWeatherForecastConvertor.Convert(Arg.Any<WeatherForecastResponse>(), _options.LocationId)
                 .Returns(UIWeatherForecast);
 
             var response = await _weatherForecastController.GetForecast(null);
@@ -117,7 +117,7 @@ namespace weatherApi.tests
             };
 
 
-            _mockSiteListConvertor.Setup(m => m.ConvertSiteList(It.IsAny<SiteListResponse>()))
+            _mockSiteListConvertor.ConvertSiteList(Arg.Any<SiteListResponse>())
                 .Returns(UISiteList);
 
             var response = await _weatherForecastController.GetSiteList("search term");
@@ -135,13 +135,13 @@ namespace weatherApi.tests
         {
             var searchTerm = "search";
 
-            _mockSiteListSearcher.Setup(m => m.SearchSiteList(It.IsAny<SiteListResponse>(), searchTerm))
+            _mockSiteListSearcher.SearchSiteList(Arg.Any<SiteListResponse>(), searchTerm)
                 .Returns(new SiteListResponse());
 
             var response = await _weatherForecastController.GetSiteList(searchTerm);
 
             Assert.That(response, Is.TypeOf<Ok<SiteListResponseForUI>>());
-            _mockSiteListSearcher.Verify(m => m.SearchSiteList(It.IsAny<SiteListResponse>(), searchTerm), Times.Once());
+            _mockSiteListSearcher.Received(1).SearchSiteList(Arg.Any<SiteListResponse>(), searchTerm);
         }
 
         [Test]
