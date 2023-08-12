@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using weatherApi.Models;
 
-namespace weatherApi
+namespace weatherApi.Infrastructure
 {
-    public static class WeatherForecastConvertor
+    public class WeatherForecastConvertor : IWeatherForecastConvertor
     {
+        private IClock _clock;
+
+        public WeatherForecastConvertor(IClock clock)
+        {
+            _clock = clock;
+        }
+
         static ReferenceData reference = new();
 
-        public static WeatherForecastResponseForUI Convert(WeatherForecastResponse forecast, string locationId)
+        public WeatherForecastResponseForUI Convert(WeatherForecastResponse forecast, string locationId)
         {
-            List<DayData> dayData = forecast.SiteRep.DV.Location.Period.Select((period) => {
+            List<DayData> dayData = forecast.SiteRep.DV.Location.Period.Select((period) =>
+            {
                 return new DayData
                 {
                     Date = period.value,
-                    ThreeHourlyForecasts = GetThreeHourlyForecasts(period.Rep, forecast.SiteRep.Wx),
+                    ThreeHourlyForecasts = GetThreeHourlyForecasts(period.Rep, forecast.SiteRep.Wx, period.value),
                 };
             }).ToList();
 
@@ -30,10 +38,14 @@ namespace weatherApi
             return weatherForecastForUI;
         }
 
-        internal static List<ThreeHourlyForecast> GetThreeHourlyForecasts(List<Rep> reps, Wx wx)
+        private List<ThreeHourlyForecast> GetThreeHourlyForecasts(List<Rep> reps, Wx wx, string date)
         {
-            return reps.Select((rep) => {
-                ( string startTime, string endTime ) = GetStartAndEndTime(rep.Name);
+            var convertedDate = DateTime.Parse(date).Date;
+            var currentDateTime = _clock.Now();
+
+            var threeHourlyForecasts = reps.Select((rep) =>
+            {
+                (string startTime, string endTime) = GetStartAndEndTime(rep.Name);
 
                 return new ThreeHourlyForecast
                 {
@@ -42,9 +54,13 @@ namespace weatherApi
                     ForecastElements = GetForecastElements(rep, wx),
                 };
             }).ToList();
+
+            var forecastsInThePast = threeHourlyForecasts.Where(rep => DetermineIfForecastInPast(rep, currentDateTime, convertedDate));
+
+            return threeHourlyForecasts.Where(rep => forecastsInThePast.All(forecast => forecast != rep)).ToList();
         }
 
-        internal static List<ForecastElement> GetForecastElements(Rep rep, Wx wx)
+        private List<ForecastElement> GetForecastElements(Rep rep, Wx wx)
         {
             var forecastElementsList = new List<ForecastElement>();
 
@@ -62,7 +78,8 @@ namespace weatherApi
             return forecastElementsList;
         }
 
-        internal static ForecastElement GetForecastElement(Rep rep, Wx wx, string parameter) {
+        private ForecastElement GetForecastElement(Rep rep, Wx wx, string parameter)
+        {
             var forecastElement = new ForecastElement
             {
                 Type = wx.Param.Find(param => param.name == parameter).ReadableName,
@@ -85,7 +102,7 @@ namespace weatherApi
             return forecastElement;
         }
 
-        internal static (string startTime, string endTime) GetStartAndEndTime(string timeInMinutes)
+        private (string startTime, string endTime) GetStartAndEndTime(string timeInMinutes)
         {
             var startTimeInMins = int.Parse(timeInMinutes);
             var startTime = startTimeInMins == 0 ? startTimeInMins : startTimeInMins / 60;
@@ -108,6 +125,15 @@ namespace weatherApi
             }
 
             return (startTimeDisplay, endTimeDisplay);
+        }
+
+        private bool DetermineIfForecastInPast(ThreeHourlyForecast forecast, DateTime currentDateTime, DateTime forecastDate)
+        {
+            var endTimeString = forecast.End == "00:00" ? "23:59:59" : forecast.End;
+            var endTime = DateTime.Parse(endTimeString);
+            var endDateTime = new DateTime(forecastDate.Year, forecastDate.Month, forecastDate.Day, endTime.Hour, endTime.Minute, endTime.Second);
+
+            return endDateTime < currentDateTime;
         }
     }
 }

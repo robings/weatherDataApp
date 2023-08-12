@@ -1,16 +1,29 @@
 :root {
-  --background-colour: #0078D7;
-  --default-text-colour: #FFFFFF;
-  --forecast-border: #EEEEEE;
+  --white: #FFFFFF;
+  --black: #000000;
+  --forecast-border: #CCCCCC;
   --temperature-widget-text-colour: #222222;
-  --table-header-bg-colour: #0063B1;
+  --wind-indicator-border: #CCCCEE;
+  --burnt-orange: #CA6702;
+  --dark-slate-grey: #1C2527;
   --error: #E81123;
 }
 
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("./fonts/IBMPlexMono-Regular.ttf");
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url("./fonts/IBMPlexSans-Regular.ttf");
+}
+
 body {
-  background-color: var(--background-colour);
+  background-color: var(--white);
   font-size: 16px;
-  color: var(--default-text-colour);
+  color: var(--dark-slate-grey);
+  font-family: "IBMPlexSans"
 }
 
 .App {
@@ -21,7 +34,7 @@ body {
 header {
   margin-top: 5px;
   overflow: auto;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid var(--forecast-border);
   border-radius: 0.25em;
   padding: 4px 4px 8px 4px;
 }
@@ -30,6 +43,7 @@ header svg {
   float: left;
   width: 50px;
   height: 50px;
+  margin-right: 0.5em;
 }
 
 header h1 {
@@ -38,12 +52,10 @@ header h1 {
   float: left;
 }
 
-header button, a {
-  float: right;
+form button, a, .forecastDay button {
   cursor: pointer;
-  padding: 3px 7px;
-  margin-top: 10px;
-  border: 1px solid;
+  padding: 9px 7px;
+  border: 1px solid var(--forecast-border);
   border-radius: 0.25em;
   background-color: inherit;
   color: inherit;
@@ -52,104 +64,268 @@ header button, a {
   text-decoration: none;
 }
 
-header button:hover, a:hover {
-  color: var(--background-colour);
-  background-color: var(--default-text-colour);
+form button, a {
+  float: right;
+}
+
+form button:hover, a:hover, .forecastDay button:hover {
+  color: var(--white);
+  background-color: var(--burnt-orange);
+  border-color: var(--burnt-orange);
+}
+
+form {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--forecast-border);
+  margin-bottom: 10px;
+}
+
+label {
+  display: inline-block;
+  padding-right: 10px;
 }
 
 .error {
   margin-top: 10px;
   width: fit-content;
-  color: var(--default-text-colour);
+  color: var(--black);
   background-color: var(--error);
   padding: 10px;
   border: 1px solid;
   border-radius: 0.25em;
+  color: var(--white);
 }
 
 .component {
   overflow: auto;
 }
 
-.forecast {
-  padding: 5px;
-  border: 1px solid var(--forecast-border);
-  border-radius: 0.5em;
-  margin: 2px 0;
-  overflow: auto;
-
-}
-
-.forecast div {
-  float: left;
-  overflow: auto;
-  margin-right: 10px;
-}
-
-.forecast div:first-child {
-  float: none;
-}
-
-.forecast div:first-child > * {
-  float: left;
-}
-
-.forecast div:first-child svg {
-  width: 32px;
-  height: 32px;
-  margin:  0 0 3px 3px;
-}
-
-.dataH3 {
-  margin: 0 0 3px 0;
-  padding-top: 3px;
-}
-
-.forecast div.nonCompact svg {
-  width: 48px;
-  height: 48px;
-}
-
-.temperatureWidget {
-  padding: 10px;
-  border-radius: 0.5em;
-  border: 3px solid;
-  background-color: var(--default-text-colour);
-  color: var(--temperature-widget-text-colour);
-  width: fit-content;
-}
-
-.temperatureWidget div, .windSpeeds div {
-  float: none;
-}
-
-.smallText {
-  font-size: 0.75em;
-}
-
 .windSpeeds {
   float: left;
-  border-top: 1px solid var(--default-text-colour);
-  border-bottom: 1px solid var(--default-text-colour);
-  padding: 5px;
+  border-top: 1px solid var(--wind-indicator-border);
+  border-bottom: 1px solid var(--wind-indicator-border);
+  padding: 5px 0 5px 5px;
 }
 
-.otherInfo div {
-  float: none;
+.forecastTable {
+  padding-bottom: 30px;
 }
 
 table {
-  border: 1px solid var(--default-text-colour);
+  border: 1px solid var(--black);
   border-collapse: collapse;
   padding: 5px;
 }
 
 th, td {
-  border: 1px solid var(--default-text-colour);
+  border: 1px solid var(--black);
   padding: 3px;
 }
 
 th {
-  background-color: var(--table-header-bg-colour);
+  background-color: var(--burnt-orange);
+  color: var(--white);
 }
 
+.forecastDay {
+  overflow: auto;
+  margin-bottom: 25px;
+}
+
+.forecastDay button {
+  font-size: 0.75em;
+  margin-left: 0.25em;
+  border-color: var(--forecast-border);
+  padding: 0 2px;
+}
+
+.forecast {
+  width: 110px;
+  height: 110px;
+  background-color: var(--white);
+  color: var(--dark-slate-grey);
+  border: 1px solid var(--forecast-border);
+  border-radius: 0.5em;
+  overflow: auto;
+  cursor: pointer;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.forecast:hover {
+  border-color: var(--dark-slate-grey);
+}
+
+.forecast .quarters {
+  width: 50%;
+  height: 44%;
+  float: left;
+}
+
+.forecast svg {
+  width: 32px;
+  height: 32px;
+  margin: 7px;
+}
+
+.forecast .tempContainer {
+  overflow: auto;
+  width: 100%;
+}
+
+.forecast .temp {
+  padding-top: 7px;
+  padding-right: 10px;
+  font-size: 1.5em;
+  float: right;
+}
+
+.forecast .otherData svg {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 14px 0 0 0;
+}
+
+.forecast.expandedTile .otherData svg {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 7px;
+}
+
+.forecast .otherData .otherLineOneText {
+  float: left;
+  padding-top: 21px;
+  padding-left: 7px;
+  font-size: 0.5em;
+}
+
+.forecast .indicatorContainer {
+  float: right;
+  padding-top: 7px;
+  padding-right: 7px;
+}
+
+.forecast .indicatorContainer svg {
+  width: 28px;
+  height: 28px;
+  margin: 0px;
+}
+
+.forecast .windNos {
+  height: 100%;
+  float: left;
+}
+
+.forecast .windSpeed {
+  padding-top: 7px;
+  font-size: 1em;
+  float: right;
+}
+
+.forecast .gusts {
+  font-size: 0.5em;
+  float: right;
+}
+
+.forecast h4 {
+  font-size: 0.5em;
+  float: right;
+  padding-right: 3px;
+  padding-bottom: 2px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.expandedTile {
+  width: 250px;
+  height: 250px;
+  border-radius: 1em;
+  border-width: 2px;
+}
+
+.expandedTile svg {
+  width: 48px;
+  height: 48px;
+  margin: 7px;
+}
+
+.expandedTile .otherData {
+  float: left;
+}
+
+.expandedTile .otherData .otherLineOneText {
+  padding-top: 16px;
+  padding-left: 0;
+  font-size: 0.75em;
+}
+
+.expandedTile .otherData .otherLineTwoText {
+  float: left;
+  padding-top: 0;
+  padding-left: 12px;
+  font-size: 0.75em;
+}
+
+.expandedTile .temp {
+  font-size: 2em;
+}
+
+.expandedTile .summaryContainer {
+  width: 100%;
+  overflow: auto;
+}
+
+.expandedTile .summary {
+  float: left;
+  overflow: auto;
+}
+
+.expandedTile .summaryText {
+  float: right;
+  max-width: 115px;
+  padding-top: 18px;
+}
+
+.expandedTile .indicatorContainer {
+  padding-top: 0;
+}
+
+.expandedTile .indicatorContainer svg {
+  width: 100px;
+  height: 100px;
+}
+
+.expandedTile .otherContainer {
+  width: 100%;
+  float: left;
+  margin-bottom: 7px;
+}
+
+.expandedTile h4 {
+  font-size: 0.75em;
+  padding-right: 10px;
+}
+
+.expandedTile .feelsLike {
+  font-size: 1em;
+  float: right;
+  padding-right: 10px;
+}
+
+.bigTempContainer {
+  float: right;
+}
+
+.contains {
+  margin-top: 10px;
+  background-color: var(--white);
+  font-size: 0.75em;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid var(--forecast-border);
+  padding: 5px 0;
+}

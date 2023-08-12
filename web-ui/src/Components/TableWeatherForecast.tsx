@@ -71,7 +71,7 @@ const TableWeatherForecast = function TableWeatherForecast(props: {
     <div>
       <Link to="/">{appStrings.graphicalFormat}</Link>
       {weatherForecastData && (
-        <>
+        <div className="forecastTable">
           <h2>
             {`${weatherForecastData.location} ${getDate(
               weatherForecastData.dateTimeOfForecast
@@ -87,7 +87,7 @@ const TableWeatherForecast = function TableWeatherForecast(props: {
               </div>
             );
           })}
-        </>
+        </div>
       )}
     </div>
   );

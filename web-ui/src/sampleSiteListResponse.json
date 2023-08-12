@@ -1,0 +1,20 @@
+{
+  "sites": [
+    {
+      "id": 1,
+      "name": "Cardiff"
+    },
+    {
+      "id": 2,
+      "name": "Cardiff City F.C."
+    },
+    {
+      "id": 3,
+      "name": "Cardiff International Airport"
+    },
+    {
+      "id": 4,
+      "name": "Cardiff Youth Hostel"
+    }
+  ]
+}

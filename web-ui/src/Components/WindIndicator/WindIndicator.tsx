@@ -38,8 +38,8 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
     <div className="component">
       <svg
         id="compass"
-        width={compact ? "50" : "100"}
-        height={compact ? "50" : "100"}
+        width={compact ? "30" : "100"}
+        height={compact ? "30" : "100"}
         viewBox="0 0 100 100"
         style={{ fontSize: "20", float: "left" }}
       >
@@ -49,57 +49,61 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
           cx="50"
           cy="50"
           strokeWidth={1}
-          stroke="currentColor"
-          fill="#0063B1"
+          stroke="#ccccee"
+          fill="transparent"
         />
-        <g id="compassCrossLayerOne" transform="rotate(45 50 50)">
-          <path
-            d="M 50 25 L 55 45 L 75 50 L 55 55 L 50 75 L 45 55 L 25 50 L 45 45 Z"
-            fill="#BDC3C7"
-            stroke="#95A5A6"
-            strokeWidth={1}
-          />
-          <line
-            x1="50"
-            y1="25"
-            x2="50"
-            y2="75"
-            stroke="#95A5A6"
-            strokeWidth={1}
-          />
-          <line
-            x1="25"
-            y1="50"
-            x2="75"
-            y2="50"
-            stroke="#95A5A6"
-            strokeWidth={1}
-          />
-        </g>
-        <g id="compassCross">
-          <path
-            d="M 50 20 L 55 45 L 80 50 L 55 55 L 50 80 L 45 55 L 20 50 L 45 45 Z"
-            fill="#BDC3C7"
-            stroke="#F7630C"
-            strokeWidth={1}
-          />
-          <line
-            x1="50"
-            y1="21"
-            x2="50"
-            y2="79"
-            stroke="#95A5A6"
-            strokeWidth={1}
-          />
-          <line
-            x1="21"
-            y1="50"
-            x2="79"
-            y2="50"
-            stroke="#95A5A6"
-            strokeWidth={1}
-          />
-        </g>
+        {!compact && (
+          <>
+            <g id="compassCrossLayerOne" transform="rotate(45 50 50)">
+              <path
+                d="M 50 25 L 55 45 L 75 50 L 55 55 L 50 75 L 45 55 L 25 50 L 45 45 Z"
+                fill="#0063B1"
+                stroke="#95A5A6"
+                strokeWidth={1}
+              />
+              <line
+                x1="50"
+                y1="25"
+                x2="50"
+                y2="75"
+                stroke="#95A5A6"
+                strokeWidth={1}
+              />
+              <line
+                x1="25"
+                y1="50"
+                x2="75"
+                y2="50"
+                stroke="#95A5A6"
+                strokeWidth={1}
+              />
+            </g>
+            <g id="compassCross">
+              <path
+                d="M 50 20 L 55 45 L 80 50 L 55 55 L 50 80 L 45 55 L 20 50 L 45 45 Z"
+                fill="#0063B1"
+                stroke="#F7630C"
+                strokeWidth={1}
+              />
+              <line
+                x1="50"
+                y1="21"
+                x2="50"
+                y2="79"
+                stroke="#95A5A6"
+                strokeWidth={1}
+              />
+              <line
+                x1="21"
+                y1="50"
+                x2="79"
+                y2="50"
+                stroke="#95A5A6"
+                strokeWidth={1}
+              />
+            </g>
+          </>
+        )}
         <g id="text">
           <text x="50" y="20" textAnchor="middle" fill="currentColor">
             N
@@ -116,22 +120,26 @@ const WindIndicator = function WindIndicator(props: WindIndicatorProps) {
         </g>
         <path
           id="compassPointer"
-          d="M 49 50 L 50 10 L 51 50 Z"
+          d={`M ${compact ? "46" : "49"} 50 L 50 10 L ${
+            compact ? "54" : "51"
+          } 50 Z`}
           fill="#FF0000"
           stroke="#EE0000"
           strokeWidth={1}
           transform={`rotate(${transformDegrees} 50 50)`}
         />
       </svg>
-      <div
-        className="windSpeeds"
-        style={{
-          marginTop: compact ? "0" : "30px",
-        }}
-      >
-        <div>{`${speed} mph`}</div>
-        <div>{`${appStrings.windIndicator.gust}: ${gustSpeed} mph`}</div>
-      </div>
+      {!compact && (
+        <div
+          className="windSpeeds"
+          style={{
+            marginTop: compact ? "0" : "25px",
+          }}
+        >
+          <div>{`${speed} mph`}</div>
+          <div>{`${appStrings.windIndicator.gust}: ${gustSpeed} mph`}</div>
+        </div>
+      )}
     </div>
   );
 };
